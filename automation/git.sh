@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd ..
 git_add_commit_push() {
   git add .
   echo Enter Message:
