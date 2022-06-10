@@ -14,6 +14,13 @@ RSpec.describe FavoriteFood, type: :model do
     )
   end
 
+  describe 'Associations' do
+    it '1, should belongs_to store_customer' do
+      store_customer = FavoriteFood.reflect_on_association(:store_customer)
+      expect(store_customer.macro).to eq(:belongs_to)
+    end
+  end
+
   describe 'Attributes' do
     describe 'name' do
       it '1, must be a string' do
