@@ -20,7 +20,7 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
       expect(store_customer.first_name).to_not be nil
     end
     it 'must be greater than 1 but less than 50' do
-      expect(store_customer.first_name.length).to (be >= 5).and(be <= 50)
+      expect(store_customer.first_name.length).to (be >= 1).and(be <= 50)
     end
   end
   describe 'last_name' do
@@ -31,7 +31,7 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
       expect(store_customer.last_name).to_not be nil
     end
     it 'must be greater than 1 but less than 50' do
-      expect(store_customer.last_name.length).to (be >= 5).and(be <= 50)
+      expect(store_customer.last_name.length).to (be >= 1).and(be <= 50)
     end
   end
 
