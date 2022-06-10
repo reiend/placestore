@@ -1,6 +1,8 @@
 class StoreCustomer < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  belongs_to :store
+
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
 
@@ -14,4 +16,5 @@ class StoreCustomer < ApplicationRecord
          :rememberable,
          :jwt_authenticatable,
          jwt_revocation_strategy: self
+
 end
