@@ -1,49 +1,10 @@
 GIT
-  remote: https://github.com/rspec/rspec-core.git
-  revision: 814c1c1ecf79d2191718b2795b6d12d9d522f60b
-  branch: main
+  remote: https://github.com/faker-ruby/faker.git
+  revision: 425581295d59839e1c4c19a0f4482886d1e9f373
+  branch: master
   specs:
-    rspec-core (3.12.0.pre)
-      rspec-support (= 3.12.0.pre)
-
-GIT
-  remote: https://github.com/rspec/rspec-expectations.git
-  revision: 1bc30dc41665ade783340d71e1d8f30bf3c9b995
-  branch: main
-  specs:
-    rspec-expectations (3.12.0.pre)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (= 3.12.0.pre)
-
-GIT
-  remote: https://github.com/rspec/rspec-mocks.git
-  revision: a2fc2f6bcfffbc7821b7974527d065c8f88560ff
-  branch: main
-  specs:
-    rspec-mocks (3.12.0.pre)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (= 3.12.0.pre)
-
-GIT
-  remote: https://github.com/rspec/rspec-rails.git
-  revision: c187d036bf4a49054c8485bc6a55f03d2af99581
-  branch: main
-  specs:
-    rspec-rails (6.0.0.pre)
-      actionpack (>= 6.1)
-      activesupport (>= 6.1)
-      railties (>= 6.1)
-      rspec-core (= 3.12.0.pre)
-      rspec-expectations (= 3.12.0.pre)
-      rspec-mocks (= 3.12.0.pre)
-      rspec-support (= 3.12.0.pre)
-
-GIT
-  remote: https://github.com/rspec/rspec-support.git
-  revision: 594aa52c39bf8b5b75a1c9a40315b72cd88adc2b
-  branch: main
-  specs:
-    rspec-support (3.12.0.pre)
+    faker (2.21.0)
+      i18n (>= 1.8.11, < 2)
 
 GEM
   remote: https://rubygems.org/
@@ -144,6 +105,11 @@ GEM
     dry-core (0.7.1)
       concurrent-ruby (~> 1.0)
     erubi (1.10.0)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     fast_jsonapi (1.5)
       activesupport (>= 4.2)
     globalid (1.0.0)
@@ -223,6 +189,23 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rspec-core (3.11.0)
+      rspec-support (~> 3.11.0)
+    rspec-expectations (3.11.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.11.0)
+    rspec-mocks (3.11.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.11.0)
+    rspec-rails (6.0.0.rc1)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
+      railties (>= 6.1)
+      rspec-core (~> 3.11)
+      rspec-expectations (~> 3.11)
+      rspec-mocks (~> 3.11)
+      rspec-support (~> 3.11)
+    rspec-support (3.11.0)
     strscan (3.0.3)
     thor (1.2.1)
     timeout (0.3.0)
@@ -248,16 +231,14 @@ DEPENDENCIES
   debug
   devise
   devise-jwt
+  factory_bot_rails
+  faker!
   fast_jsonapi
   pg
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.3)
-  rspec-core!
-  rspec-expectations!
-  rspec-mocks!
-  rspec-rails!
-  rspec-support!
+  rspec-rails (~> 6.0.0.pre)
   tzinfo-data
 
 RUBY VERSION
