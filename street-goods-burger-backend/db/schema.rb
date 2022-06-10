@@ -20,7 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_122756) do
     t.string "last_name", default: "", null: false
     t.string "role", default: "store_customer", null: false
     t.boolean "is_ban", default: false, null: false
-    t.integer "warnings", default: 0, null: false
+    t.integer "warning", default: 0, null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

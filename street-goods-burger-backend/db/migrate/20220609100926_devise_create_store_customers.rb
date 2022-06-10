@@ -9,7 +9,7 @@ class DeviseCreateStoreCustomers < ActiveRecord::Migration[7.0]
       t.string :last_name, null: false, default: ''
       t.string :role, null: false, default: 'store_customer'
       t.boolean :is_ban, null: false, default: false
-      t.integer :warnings, null: false, default: 0
+      t.integer :warning, null: false, default: 0
       t.string :encrypted_password, null: false, default: ''
 
       ## Recoverable
