@@ -13,7 +13,7 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
     )
   end
 
-  describe 'associations' do
+  describe 'Associations' do
     it '1, should belongs_to store' do
       store = StoreCustomer.reflect_on_association(:store)
       expect(store.macro).to eq(:belongs_to)
@@ -25,7 +25,7 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
     end
   end
 
-  describe 'attributes' do
+  describe 'Attributes' do
     describe 'first_name' do
       it '1, must be a String' do
         expect(store_customer.first_name).to be_a String
@@ -33,8 +33,8 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
       it '2, must be not nil' do
         expect(store_customer.first_name).to_not be nil
       end
-      it '3, must be greater than 1 but less than 50' do
-        expect(store_customer.first_name.length).to (be >= 1).and(be <= 50)
+      it '3, must be greater than 0 but less than 65' do
+        expect(store_customer.first_name.length).to (be >= 1).and(be <= 64)
       end
     end
     describe 'last_name' do
@@ -44,8 +44,8 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
       it '2, must be not nil' do
         expect(store_customer.last_name).to_not be nil
       end
-      it '3, must be greater than 1 but less than 50' do
-        expect(store_customer.last_name.length).to (be >= 1).and(be <= 50)
+      it '3, must be greater than 0 but less than 65' do
+        expect(store_customer.last_name.length).to (be >= 1).and(be <= 64)
       end
     end
 
