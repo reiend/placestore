@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Store, type: :model do
   let(:store) do
     Store.new(
-      store_name: Faker::Name.first_name,
-      address: Faker::Name.last_name
+      store_name: Faker::Company.name,
+      address: Faker::Address.street_address
     )
   end
 
