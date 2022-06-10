@@ -14,7 +14,7 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
   end
   describe 'first_name' do
     it 'must be a String' do
-      expect(store_customer.first_name).to be String
+      expect(store_customer.first_name).to be_a String
     end
     it 'must be not nil' do
       expect(store_customer.first_name).to_not be nil
@@ -25,7 +25,7 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
   end
   describe 'last_name' do
     it 'must be a String' do
-      expect(store_customer.last_name).to be String
+      expect(store_customer.last_name).to be_a String
     end
     it 'must be not nil' do
       expect(store_customer.last_name).to_not be nil
