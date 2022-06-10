@@ -10,34 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_10_112807) do
+ActiveRecord::Schema[7.0].define(version: 20_220_610_121_618) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "store_customers", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "first_name", default: "", null: false
-    t.string "last_name", default: "", null: false
-    t.string "role", default: "store_customer", null: false
-    t.boolean "is_ban", default: false, null: false
-    t.integer "warning", default: 0, null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "jti"
-    t.index ["email"], name: "index_store_customers_on_email", unique: true
-    t.index ["jti"], name: "index_store_customers_on_jti"
-    t.index ["reset_password_token"], name: "index_store_customers_on_reset_password_token", unique: true
+  create_table 'store_customers', force: :cascade do |t|
+    t.string 'email', default: '', null: false
+    t.string 'first_name', default: '', null: false
+    t.string 'last_name', default: '', null: false
+    t.string 'role', default: 'store_customer', null: false
+    t.boolean 'is_ban', default: false, null: false
+    t.integer 'warning', default: 0, null: false
+    t.string 'encrypted_password', default: '', null: false
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
+    t.datetime 'remember_created_at'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'jti'
+    t.bigint 'store_id', null: false
+    t.index ['email'], name: 'index_store_customers_on_email', unique: true
+    t.index ['jti'], name: 'index_store_customers_on_jti'
+    t.index ['reset_password_token'], name: 'index_store_customers_on_reset_password_token', unique: true
+    t.index ['store_id'], name: 'index_store_customers_on_store_id'
   end
 
-  create_table "stores", force: :cascade do |t|
-    t.string "store_name", default: "", null: false
-    t.string "address", default: "", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'stores', force: :cascade do |t|
+    t.string 'store_name', default: '', null: false
+    t.string 'address', default: '', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
+  add_foreign_key 'store_customers', 'stores'
 end
