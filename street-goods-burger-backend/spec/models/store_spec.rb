@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe "Store\'s Model", type: :model do
@@ -8,14 +10,14 @@ RSpec.describe "Store\'s Model", type: :model do
     )
   end
 
-  describe 'associations' do
+  describe 'Associations' do
     it '1, should have many store_customers' do
       store_customers = Store.reflect_on_association(:store_customers)
       expect(store_customers.macro).to eq(:has_many)
     end
   end
 
-  describe 'attributes' do
+  describe 'Attributes' do
     describe 'store_name' do
       it '1, must be a string' do
         expect(store.store_name).to be_a String
@@ -23,7 +25,7 @@ RSpec.describe "Store\'s Model", type: :model do
       it '2, must be not nil' do
         expect(store.store_name).to_not be_nil
       end
-      it '3, must be greater than 1 and less than 128' do
+      it '3, must be greater than 0 and less than 65' do
         expect(store.store_name.length).to (be >= 1).and(be <= 64)
       end
     end
@@ -35,7 +37,7 @@ RSpec.describe "Store\'s Model", type: :model do
       it '2, must be not nil' do
         expect(store.address).to_not be_nil
       end
-      it '3, must be greater than 1 and less than 128' do
+      it '3, must be greater than 0 and less than 129' do
         expect(store.address.length).to (be >= 1).and(be <= 128)
       end
     end
