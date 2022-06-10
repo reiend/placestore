@@ -36,7 +36,7 @@ RSpec.describe FavoriteFood, type: :model do
 
     describe 'price' do
       it '1, must be a some type of Decimal' do
-        expect(favorite_food.price).to be_a BigDecimal
+        expect(favorite_food.price.to_d).to be_a BigDecimal
       end
       it '2, must be not nil' do
         expect(favorite_food.price).to_not be_nil
