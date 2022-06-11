@@ -23,25 +23,25 @@ RSpec.describe "PersonalDiscount's Model", type: :model do
 
   describe 'Attributes' do
     describe 'valid_date' do
-      it 'must be a datetime' do
+      it '1, must be a datetime' do
         expect(personal_discount.valid_date.class).to eq('Time')
       end
-      it 'must be not nil' do
+      it '2, must be not nil' do
         expect(personal_discount.valid_date).to_not be_nil
       end
-      it 'must be greater than or equal the current time ' do
+      it '3, must be greater than or equal the current time ' do
         expect(personal_discount.valid_date).to be > DateTime.now
       end
     end
 
     describe 'discount' do
-      it 'must be a bigint' do
+      it '1, must be a bigint' do
         expect(personal_discount.discount.to_d).to be_a BigDecimal
       end
-      it 'must be not nil' do
+      it '2, must be not nil' do
         expect(personal_discount.discount).to_not be_nil
       end
-      it 'must be greater than or equal than 0' do
+      it '3, must be greater than or equal than 0' do
         expect(personal_discount.discount).to be >= 0.00
       end
     end
