@@ -62,11 +62,8 @@ RSpec.describe "FavoriteFood\'s Model", type: :model do
       it '1, must be a string' do
         expect(favorite_food.description).to be_a String
       end
-      it '2, must be not nil' do
-        expect(favorite_food.description).to_not be_nil
-      end
-      it '3, must be greater than 0 but less than 257' do
-        expect(favorite_food.description.length).to (be >= 1).and(be <= 256)
+      it '2, must be greater or equal than 0 but less than 257' do
+        expect(favorite_food.description.length).to (be >= 0).and(be <= 256)
       end
     end
 
@@ -77,20 +74,14 @@ RSpec.describe "FavoriteFood\'s Model", type: :model do
       it '2, must be not nil' do
         expect(favorite_food.is_available).to_not be_nil
       end
-      it '3, must be greater than 0 but less than 257' do
-        expect(favorite_food.description.length).to (be >= 1).and(be <= 256)
-      end
     end
 
     describe 'like' do
       it '1, must be a Integer' do
         expect(favorite_food.like).to be_a_kind_of(Integer)
       end
-      it '2, must be not nil' do
-        expect(favorite_food.is_available).to_not be_nil
-      end
-      it '3, must be greater than 0' do
-        expect(favorite_food.description.length).to be >= 1
+      it '2, must be greater or equal than 0' do
+        expect(favorite_food.like).to be >= 0
       end
     end
   end

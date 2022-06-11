@@ -38,10 +38,7 @@ RSpec.describe "PersonalDiscount's Model", type: :model do
       it '1, must be a bigint' do
         expect(personal_discount.discount.to_d).to be_a BigDecimal
       end
-      it '2, must be not nil' do
-        expect(personal_discount.discount).to_not be_nil
-      end
-      it '3, must be greater than or equal than 0' do
+      it '2, must be greater than or equal than 0' do
         expect(personal_discount.discount).to be >= 0.00
       end
     end
