@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe StoreTransaction, type: :model do
+RSpec.describe "StoreTransaction's Model", type: :model do
   let(:store_transaction) do
     StoreTransaction.new(
       status: 'process'

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Cart, type: :model do
+RSpec.describe "Cart's Model", type: :model do
   let(:cart) do
     faker_quantity = Faker::Number.between(from: 1, to: 100)
     Cart.new(
