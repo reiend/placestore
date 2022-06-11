@@ -12,6 +12,11 @@ RSpec.describe StoreTransaction, type: :model do
       store_transaction = StoreTransaction.reflect_on_association(:store_customer)
       expect(store_transaction.macro).to eq(:belongs_to)
     end
+
+    it '2, should have one cart' do
+      store_transaction = StoreTransaction.reflect_on_association(:cart)
+      expect(store_transaction.macro).to eq(:has_one)
+    end
   end
 
   describe 'Attributes' do
