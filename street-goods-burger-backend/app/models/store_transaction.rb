@@ -1,0 +1,2 @@
+class StoreTransaction < ApplicationRecord
+end

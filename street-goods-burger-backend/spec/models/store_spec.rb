@@ -12,8 +12,8 @@ RSpec.describe "Store\'s Model", type: :model do
 
   describe 'Associations' do
     it '1, should have many store_customer' do
-      store_customer = Store.reflect_on_association(:store_customers)
-      expect(store_customer.macro).to eq(:has_many)
+      store = Store.reflect_on_association(:store_customers)
+      expect(store.macro).to eq(:has_many)
 
 
     end

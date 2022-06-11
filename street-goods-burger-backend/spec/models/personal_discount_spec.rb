@@ -16,8 +16,8 @@ RSpec.describe "PersonalDiscount's Model", type: :model do
 
   describe 'Associations' do
     it '1, should belongs_to store_customer' do
-      store_customer = PersonalDiscount.reflect_on_association(:store_customer)
-      expect(store_customer.macro).to eq(:belongs_to)
+      personal_discount = PersonalDiscount.reflect_on_association(:store_customer)
+      expect(personal_discount.macro).to eq(:belongs_to)
     end
   end
 
