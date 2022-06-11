@@ -22,8 +22,8 @@ RSpec.describe StoreTransaction, type: :model do
       it '2, must be not nil' do
         expect(store_transaction.status).to be_a String
       end
-      it '3, must be greater than or equal than 15' do
-        expect(store_transaction.status.length).to be >= 15
+      it '3, must be greater than 0 and less than 16' do
+        expect(store_transaction.status.length).to (be >= 1).and(be <= 15)
       end
     end
   end
