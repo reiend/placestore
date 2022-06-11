@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_11_153754) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_11_160715) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,7 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_11_153754) do
   end
 
   create_table "personal_discounts", force: :cascade do |t|
-    t.datetime "valid_date", default: "2022-06-12 15:35:58", null: false
+    t.datetime "valid_date", default: "2022-06-12 16:06:45", null: false
     t.bigint "discount", default: 5, null: false
     t.string "food_name", default: "", null: false
     t.string "food_category", default: "", null: false
@@ -70,6 +70,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_11_153754) do
     t.datetime "updated_at", null: false
     t.bigint "store_customer_id", null: false
     t.index ["store_customer_id"], name: "index_personal_discounts_on_store_customer_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "text_body", default: "", null: false
+    t.string "reviewer", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "food_id", null: false
+    t.index ["food_id"], name: "index_reviews_on_food_id"
   end
 
   create_table "store_customers", force: :cascade do |t|
@@ -118,6 +127,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_11_153754) do
   add_foreign_key "food_orders", "carts"
   add_foreign_key "foods", "stores"
   add_foreign_key "personal_discounts", "store_customers"
+  add_foreign_key "reviews", "foods"
   add_foreign_key "store_customers", "stores"
   add_foreign_key "store_transactions", "store_customers"
 end

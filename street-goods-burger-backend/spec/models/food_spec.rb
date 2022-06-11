@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Food, type: :model do
+RSpec.describe "Food's Model", type: :model do
   let(:food) do
     Food.new(
       name: Faker::Food.dish,
@@ -19,6 +19,10 @@ RSpec.describe Food, type: :model do
     it '1, should belongs_to store' do
       food = Food.reflect_on_association(:store)
       expect(food.macro).to eq(:belongs_to)
+    end
+    it '3, should have many reviews' do
+      food = Food.reflect_on_association(:reviews)
+      expect(food.macro).to eq(:has_many)
     end
   end
 
