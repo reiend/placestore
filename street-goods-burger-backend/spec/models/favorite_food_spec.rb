@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe "favorite_food\'s Model", type: :model do
+RSpec.describe "FavoriteFood\'s Model", type: :model do
   let(:favorite_food) do
     FavoriteFood.new(
       name: Faker::Food.dish,
