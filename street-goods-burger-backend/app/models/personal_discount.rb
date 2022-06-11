@@ -1,0 +1,2 @@
+class PersonalDiscount < ApplicationRecord
+end
