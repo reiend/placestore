@@ -89,7 +89,7 @@ RSpec.describe "favorite_food\'s Model", type: :model do
       it '2, must be not nil' do
         expect(favorite_food.is_available).to_not be_nil
       end
-      it '3, must be greater than or equal 0' do
+      it '3, must be greater than 0' do
         expect(favorite_food.description.length).to be >= 1
       end
     end
