@@ -16,8 +16,8 @@ RSpec.describe "favorite_food\'s Model", type: :model do
 
   describe 'Associations' do
     it '1, should belongs_to store_customer' do
-      store_customer = FavoriteFood.reflect_on_association(:store_customer)
-      expect(store_customer.macro).to eq(:belongs_to)
+      favorite_food = FavoriteFood.reflect_on_association(:store_customer)
+      expect(favorite_food.macro).to eq(:belongs_to)
     end
   end
 
