@@ -6,7 +6,7 @@ RSpec.describe "PersonalDiscount's Model", type: :model do
   let(:personal_discount) do
     PersonalDiscount.new(
       valid_date: Faker::Time.between(
-        from: DateTime.now - 1, to: DateTime.now
+        from: DateTime.now + 24.hour, to: DateTime.now + 48.hour
       ),
       discount: Faker::Number.between(from: 1.00, to: 99.99).round(2),
       food_name: Faker::Food.dish,
