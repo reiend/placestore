@@ -44,7 +44,7 @@ RSpec.describe "FoodOrder's Model", type: :model do
 
     describe 'price' do
       it '1, must be a decimal' do
-        expect(food_order.price).to be_a BigDecimal
+        expect(food_order.price.to_d).to be_a BigDecimal
       end
       it '2, must be not nil' do
         expect(food_order.price).to_not be_nil
