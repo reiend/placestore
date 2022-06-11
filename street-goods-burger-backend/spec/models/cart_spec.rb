@@ -14,6 +14,10 @@ RSpec.describe "Cart's Model", type: :model do
       cart = Cart.reflect_on_association(:store_transaction)
       expect(cart.macro).to eq(:belongs_to)
     end
+    it '2, should have many food_order' do
+      cart = Cart.reflect_on_association(:food_orders)
+      expect(cart.macro).to eq(:has_many)
+    end
   end
 
   describe 'Attributes' do
