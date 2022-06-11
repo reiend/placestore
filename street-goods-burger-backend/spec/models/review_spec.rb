@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Review, type: :model do
+RSpec.describe "Review's Model", type: :model do
   let(:review) do
     Review.new(
       text_body: 'Lorem ipsum',

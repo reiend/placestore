@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Food, type: :model do
+RSpec.describe "Food's Model", type: :model do
   let(:food) do
     Food.new(
       name: Faker::Food.dish,
