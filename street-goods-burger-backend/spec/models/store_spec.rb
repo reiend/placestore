@@ -15,6 +15,11 @@ RSpec.describe "Store\'s Model", type: :model do
       store = Store.reflect_on_association(:store_customers)
       expect(store.macro).to eq(:has_many)
     end
+
+    it '2, should have many food' do
+      store = Store.reflect_on_association(:foods)
+      expect(store.macro).to eq(:has_many)
+    end
   end
 
   describe 'Attributes' do
