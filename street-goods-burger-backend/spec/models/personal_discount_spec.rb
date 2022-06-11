@@ -54,7 +54,7 @@ RSpec.describe "PersonalDiscount's Model", type: :model do
         expect(personal_discount.food_name).to_not be_nil
       end
       it '3, must be greater than 0 but less than 65' do
-        expect(personal_discount.food_name).to (be >= 1).and(be <= 64)
+        expect(personal_discount.food_name.length).to (be >= 1).and(be <= 64)
       end
     end
 
@@ -66,7 +66,7 @@ RSpec.describe "PersonalDiscount's Model", type: :model do
         expect(personal_discount.food_category).to_not be_nil
       end
       it '3, must be greater than 0 but less than 65' do
-        expect(personal_discount.food_category).to (be >= 1).and(be <= 64)
+        expect(personal_discount.food_category.length).to (be >= 1).and(be <= 64)
       end
     end
   end
