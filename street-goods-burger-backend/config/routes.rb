@@ -12,4 +12,5 @@ Rails.application.routes.draw do
     sessions: 'store_customer/sessions',
     registrations: 'store_customer/registrations'
   }
+
 end

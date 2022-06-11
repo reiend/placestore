@@ -20,6 +20,10 @@ RSpec.describe Food, type: :model do
       food = Food.reflect_on_association(:store)
       expect(food.macro).to eq(:belongs_to)
     end
+    it '3, should have many reviews' do
+      food = Food.reflect_on_association(:reviews)
+      expect(food.macro).to eq(:has_many)
+    end
   end
 
   describe 'Attributes' do
