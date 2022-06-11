@@ -16,13 +16,13 @@ RSpec.describe StoreTransaction, type: :model do
 
   describe 'Attributes' do
     describe 'status' do
-      it 'must be a string' do
+      it '1, must be a string' do
         expect(store_transaction.status).to be_a String
       end
-      it 'must be not nil' do
+      it '2, must be not nil' do
         expect(store_transaction.status).to be_a String
       end
-      it 'must be greater than or equal than 15' do
+      it '3, must be greater than or equal than 15' do
         expect(store_transaction.status.length).to be >= 15
       end
     end
