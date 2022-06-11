@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_10_152954) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_11_160715) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "carts", force: :cascade do |t|
+    t.integer "quantity", default: 1, null: false
+    t.bigint "total_price", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "store_transaction_id", null: false
+    t.index ["store_transaction_id"], name: "index_carts_on_store_transaction_id"
+  end
 
   create_table "favorite_foods", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -25,6 +34,51 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_152954) do
     t.datetime "updated_at", null: false
     t.bigint "store_customer_id", null: false
     t.index ["store_customer_id"], name: "index_favorite_foods_on_store_customer_id"
+  end
+
+  create_table "food_orders", force: :cascade do |t|
+    t.string "food_name", default: "", null: false
+    t.string "food_category", default: "", null: false
+    t.integer "quantity", default: 1, null: false
+    t.bigint "price", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "cart_id", null: false
+    t.index ["cart_id"], name: "index_food_orders_on_cart_id"
+  end
+
+  create_table "foods", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.bigint "price", default: 0, null: false
+    t.string "category", default: "", null: false
+    t.string "description", default: "", null: false
+    t.integer "like", default: 0, null: false
+    t.bigint "discount", default: 0, null: false
+    t.boolean "is_available", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "store_id", null: false
+    t.index ["store_id"], name: "index_foods_on_store_id"
+  end
+
+  create_table "personal_discounts", force: :cascade do |t|
+    t.datetime "valid_date", default: "2022-06-12 16:06:45", null: false
+    t.bigint "discount", default: 5, null: false
+    t.string "food_name", default: "", null: false
+    t.string "food_category", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "store_customer_id", null: false
+    t.index ["store_customer_id"], name: "index_personal_discounts_on_store_customer_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "text_body", default: "", null: false
+    t.string "reviewer", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "food_id", null: false
+    t.index ["food_id"], name: "index_reviews_on_food_id"
   end
 
   create_table "store_customers", force: :cascade do |t|
@@ -53,6 +107,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_152954) do
     t.index ["store_id"], name: "index_store_customers_on_store_id"
   end
 
+  create_table "store_transactions", force: :cascade do |t|
+    t.string "status", default: "pending", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "store_customer_id", null: false
+    t.index ["store_customer_id"], name: "index_store_transactions_on_store_customer_id"
+  end
+
   create_table "stores", force: :cascade do |t|
     t.string "store_name", default: "", null: false
     t.string "address", default: "", null: false
@@ -60,6 +122,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_152954) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "carts", "store_transactions"
   add_foreign_key "favorite_foods", "store_customers"
+  add_foreign_key "food_orders", "carts"
+  add_foreign_key "foods", "stores"
+  add_foreign_key "personal_discounts", "store_customers"
+  add_foreign_key "reviews", "foods"
   add_foreign_key "store_customers", "stores"
+  add_foreign_key "store_transactions", "store_customers"
 end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe FavoriteFood, type: :model do
+RSpec.describe "FavoriteFood\'s Model", type: :model do
   let(:favorite_food) do
     FavoriteFood.new(
       name: Faker::Food.dish,
@@ -14,6 +14,13 @@ RSpec.describe FavoriteFood, type: :model do
     )
   end
 
+  describe 'Associations' do
+    it '1, should belongs_to store_customer' do
+      favorite_food = FavoriteFood.reflect_on_association(:store_customer)
+      expect(favorite_food.macro).to eq(:belongs_to)
+    end
+  end
+
   describe 'Attributes' do
     describe 'name' do
       it '1, must be a string' do
@@ -23,19 +30,19 @@ RSpec.describe FavoriteFood, type: :model do
         expect(favorite_food.name).to_not be_nil
       end
       it '3, must be greater than 0 but less than 65' do
-        expect(favorite_food.name).to (be >= 1).and(be <= 64)
+        expect(favorite_food.name.length).to (be >= 1).and(be <= 64)
       end
     end
 
     describe 'price' do
       it '1, must be a some type of Decimal' do
-        expect(favorite_food.price).to be_a BigDecimal
+        expect(favorite_food.price.to_d).to be_a BigDecimal
       end
       it '2, must be not nil' do
         expect(favorite_food.price).to_not be_nil
       end
       it '3, must be greater than 0' do
-        expect(favorite_food.name).to be >= 1
+        expect(favorite_food.name.length).to be >= 1
       end
     end
 
@@ -47,7 +54,7 @@ RSpec.describe FavoriteFood, type: :model do
         expect(favorite_food.category).to_not be_nil
       end
       it '3, must be greater than 0 but less than 65' do
-        expect(favorite_food.category).to (be >= 1).and(be <= 64)
+        expect(favorite_food.category.length).to (be >= 1).and(be <= 64)
       end
     end
 
@@ -55,11 +62,8 @@ RSpec.describe FavoriteFood, type: :model do
       it '1, must be a string' do
         expect(favorite_food.description).to be_a String
       end
-      it '2, must be not nil' do
-        expect(favorite_food.description).to_not be_nil
-      end
-      it '3, must be greater than 0 but less than 257' do
-        expect(favorite_food.description).to (be >= 1).and(be <= 256)
+      it '2, must be greater or equal than 0 but less than 257' do
+        expect(favorite_food.description.length).to (be >= 0).and(be <= 256)
       end
     end
 
@@ -70,20 +74,14 @@ RSpec.describe FavoriteFood, type: :model do
       it '2, must be not nil' do
         expect(favorite_food.is_available).to_not be_nil
       end
-      it '3, must be greater than 0 but less than 257' do
-        expect(favorite_food.description).to (be >= 1).and(be <= 256)
-      end
     end
 
     describe 'like' do
       it '1, must be a Integer' do
         expect(favorite_food.like).to be_a_kind_of(Integer)
       end
-      it '2, must be not nil' do
-        expect(favorite_food.is_available).to_not be_nil
-      end
-      it '3, must be greater than or equal 0' do
-        expect(favorite_food.description).to be >= 1
+      it '2, must be greater or equal than 0' do
+        expect(favorite_food.like).to be >= 0
       end
     end
   end

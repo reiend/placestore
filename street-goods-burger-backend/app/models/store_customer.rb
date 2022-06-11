@@ -3,6 +3,8 @@ class StoreCustomer < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   belongs_to :store
   has_many :favorite_foods
+  has_many :personal_discounts
+  has_many :store_transactions
 
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
