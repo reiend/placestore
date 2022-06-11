@@ -24,8 +24,6 @@ RSpec.describe "PersonalDiscount's Model", type: :model do
   describe 'Attributes' do
     describe 'valid_date' do
       it '1, must be a datetime' do
-        puts personal_discount.valid_date.class
-
         expect(personal_discount.valid_date).to be_an_instance_of ActiveSupport::TimeWithZone
       end
       it '2, must be not nil' do
