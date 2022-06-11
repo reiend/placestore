@@ -6,7 +6,7 @@ RSpec.describe Food, type: :model do
   let(:food) do
     Food.new(
       name: Faker::Food.dish,
-      price: Faker::Commercial.price,
+      price: Faker::Commerce.price,
       category: 'food',
       description: Faker::Food.description,
       is_available: Faker::Boolean.boolean(true_ratio: 0.5),
@@ -47,7 +47,7 @@ RSpec.describe Food, type: :model do
       end
 
       it '3, must be greater than 0 and less than 65' do
-        expect(food.category.length).to(be >= 1).and(be <= 54)
+        expect(food.category.length).to (be >= 1).and(be <= 54)
       end
     end
 
@@ -57,7 +57,7 @@ RSpec.describe Food, type: :model do
       end
 
       it '2, must be greater or equal than 0 and less than 257' do
-        expect(food.description.length).to(be >= 0).and(be <= 256)
+        expect(food.description.length).to (be >= 0).and(be <= 256)
       end
     end
 
@@ -71,7 +71,7 @@ RSpec.describe Food, type: :model do
       end
 
       it '3, must be greater than 0' do
-        expect(food.name).to(be > 0)
+        expect(food.price).to(be > 0)
       end
     end
 
