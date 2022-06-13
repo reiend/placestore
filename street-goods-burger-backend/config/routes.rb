@@ -8,9 +8,8 @@ Rails.application.routes.draw do
     sign_in: 'sign_in',
     sign_out: 'sign_out',
     registration: 'sign_up'
-  }, constrollers: {
-    sessions: 'store_customer/sessions',
-    registrations: 'store_customer/registrations'
+  }, controllers: {
+    sessions: 'store_customers/sessions',
+    registrations: 'store_customers/registrations'
   }
-
 end

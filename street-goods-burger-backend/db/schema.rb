@@ -62,7 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_11_160715) do
   end
 
   create_table "personal_discounts", force: :cascade do |t|
-    t.datetime "valid_date", default: "2022-06-12 16:06:45", null: false
+    t.datetime "valid_date", default: "2022-06-14 04:10:29", null: false
     t.bigint "discount", default: 5, null: false
     t.string "food_name", default: "", null: false
     t.string "food_category", default: "", null: false
