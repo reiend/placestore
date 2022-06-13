@@ -6,9 +6,6 @@ class StoreCustomer < ApplicationRecord
   has_many :personal_discounts
   has_many :store_transactions
 
-  devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :validatable
-
   include Devise::JWT::RevocationStrategies::JTIMatcher
 
   devise :database_authenticatable,
