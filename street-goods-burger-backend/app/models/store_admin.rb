@@ -1,4 +1,6 @@
 class StoreAdmin < ApplicationRecord
+  belongs_to :store
+
   include Devise::JWT::RevocationStrategies::JTIMatcher
 
   devise :database_authenticatable,
