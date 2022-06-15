@@ -28,4 +28,67 @@ class StoreCustomer < ApplicationRecord
          :rememberable,
          :jwt_authenticatable,
          jwt_revocation_strategy: self
+
+  def add_to_cart(store_transaction_id:, ordered_food:)
+    store_transaction = store_transactions.find(store_transaction_id)
+    has_no_cart = store_transaction.cart.nil?
+
+    # carted food information
+    carted_food_quantity = ordered_food[:quantity]
+    carted_food_price = ordered_food[:price]
+    total_price_food_carted = carted_food_quantity * carted_food_price
+
+    if has_no_cart
+
+      # create new cart if store customer store transaction has no cart
+      Cart.create!(
+        quantity: carted_food_quantity,
+        total_price: total_price_food_carted,
+        store_transaction_id:
+      )
+      {
+        status: 200,
+        message: 'successfully added food to cart',
+        data: {
+          store_transaction_id:,
+          food_carted: ordered_food
+        }
+      }
+
+    # store_customer_cart = Cart.create!(quantity: 0, total_price: 0.00, store_transaction_id:);
+    else
+
+      # current store customer carted food information
+      current_carted_food_quantity = store_transaction.cart[:quantity]
+      current_carted_food_total_price = store_transaction.cart[:total_price]
+
+      # add food to store customer cart
+      food_carted = store_transaction.cart.food_orders.create!(ordered_food)
+
+      # update cart information based on added food
+      store_transaction
+        .cart
+        .update(
+          quantity: (current_carted_food_quantity + carted_food_quantity).to_i,
+          total_price: (current_carted_food_total_price + total_price_food_carted).to_d
+        )
+
+      {
+        status: 200,
+        message: 'successfully added food to cart',
+        data: {
+          store_transaction_id:,
+          food_carted:
+        }
+      }
+
+    end
+
+  # if can't find StoreTransaction id return nil
+  rescue ActiveRecord::RecordNotFound
+    {
+      status: 422,
+      message: "can't find that transaction"
+    }
+  end
 end
