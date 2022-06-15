@@ -37,7 +37,14 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
 
   describe 'features' do
     it "1, invalid inputs shouldn't add food to cart" do
-      expect(store_customer.add_to_cart(store_transasction_id: -5)[:status]).to be == 422
+      add_to_cart_info = store_customer.add_to_cart(store_transaction_id: -5, ordered_food: {})
+      expect(add_to_cart_info[:status]).to be == 422
+    end
+
+    it '2, should raise an error if no food order to adding to art' do
+      expect do
+        store_customer.add_to_cart(store_transaction_id: -5).to raise_error(ActiveRecord::ArgumentError)
+      end
     end
   end
 
