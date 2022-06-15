@@ -35,6 +35,12 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
     end
   end
 
+  describe 'features' do
+    it "1, invalid inputs shouldn't add food to cart" do
+      expect(store_customer.add_to_cart(id: -5)[:status]).to be == 422
+    end
+  end
+
   describe 'Attributes' do
     describe 'first_name' do
       it '1, must be a String' do
