@@ -84,11 +84,49 @@ class StoreCustomer < ApplicationRecord
 
     end
 
-  # if can't find StoreTransaction id return nil
-  rescue ActiveRecord::RecordNotFound
+    # if can't find StoreTransaction id return nil
+  rescue ActiveRecord::RecordNotFound => e
     {
       status: 422,
-      message: "can't find that transaction"
+      message: "can't find that transaction",
+      errors: e.message
+    }
+  rescue NoMethodError => e
+    {
+      status: 422,
+      message: "can't do calculations based on data provided",
+      errors: e.message
+    }
+  end
+
+  def mark_favorite_food(food_info:)
+    p persisted?
+    favorite_food = FavoriteFood.create!(food_info)
+
+    {
+      status: 200,
+      message: 'successfully mark food as favorite',
+      data: {
+        favorite_food:
+      }
+    }
+  rescue ActiveRecord::RecordInvalid => e
+    {
+      status: 422,
+      message: 'please enter valid food attribute ',
+      error: e.message
+    }
+  rescue ActiveModel::UnknownAttributeError => e
+    {
+      status: 422,
+      message: 'please enter valid food attribute ',
+      error: e.message
+    }
+  rescue NoMethodError => e
+    {
+      status: 422,
+      message: "can't do calculations based on data provided",
+      error: e.message
     }
   end
 end
