@@ -35,6 +35,37 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
     end
   end
 
+  describe 'Features' do
+    describe 'add_to_cart' do
+      it "1, invalid inputs shouldn't add food to cart" do
+        add_to_cart_info = store_customer.add_to_cart(store_transaction_id: -5, ordered_food: {})
+        expect(add_to_cart_info[:status]).to be == 422
+      end
+
+      it '2, should raise an error if no food order adding to art' do
+        expect do
+          store_customer.add_to_cart(store_transaction_id: -5).to raise_error(ActiveRecord::ArgumentError)
+        end
+      end
+    end
+
+    describe 'mark_favorite_food' do
+      it "1, invalid inputs shouldn't add to favorite food " do
+        marked_favorite_food_info = store_customer
+                                    .mark_favorite_food(
+                                      food_info: {
+                                        name: 'rqrqcrqqcr',
+                                        price: 242.24,
+                                        category: 'qwrq',
+                                        description: 'qwrq',
+                                        store_customer_id: store_customer[:id]
+                                      }
+                                    )
+        expect(marked_favorite_food_info[:status]).to be == 422
+      end
+    end
+  end
+
   describe 'Attributes' do
     describe 'first_name' do
       it '1, must be a String' do

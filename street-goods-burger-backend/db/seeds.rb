@@ -8,4 +8,4 @@
 #
 #
 
-Store.create!(store_name: 'Street Goods Burger')
+Store.create!(store_name: 'Street Goods Burger', address: 'address')

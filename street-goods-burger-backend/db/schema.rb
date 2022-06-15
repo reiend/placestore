@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
 
   create_table "carts", force: :cascade do |t|
     t.integer "quantity", default: 1, null: false
-    t.bigint "total_price", default: 0, null: false
+    t.decimal "total_price", default: "0.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "store_transaction_id", null: false
@@ -62,7 +62,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
   end
 
   create_table "personal_discounts", force: :cascade do |t|
-    t.datetime "valid_date", default: "2022-06-14 07:42:07", null: false
+    t.datetime "valid_date", default: "2022-06-16 12:07:00", null: false
+
     t.bigint "discount", default: 5, null: false
     t.string "food_name", default: "", null: false
     t.string "food_category", default: "", null: false
