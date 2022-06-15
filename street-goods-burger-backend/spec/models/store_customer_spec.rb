@@ -41,7 +41,7 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
       expect(add_to_cart_info[:status]).to be == 422
     end
 
-    it '2, should raise an error if no food order to adding to art' do
+    it '2, should raise an error if no food order adding to art' do
       expect do
         store_customer.add_to_cart(store_transaction_id: -5).to raise_error(ActiveRecord::ArgumentError)
       end
