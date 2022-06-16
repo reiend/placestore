@@ -56,8 +56,8 @@ class StoreCustomer < ApplicationRecord
         }
       }
 
-    # store_customer_cart = Cart.create!(quantity: 0, total_price: 0.00, store_transaction_id:);
     else
+      # uses existing cart here
 
       # current store customer carted food information
       current_carted_food_quantity = store_transaction.cart[:quantity]
