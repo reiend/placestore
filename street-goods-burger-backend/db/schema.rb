@@ -62,8 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
   end
 
   create_table "personal_discounts", force: :cascade do |t|
-    t.datetime "valid_date", default: "2022-06-16 12:07:00", null: false
-
+    t.datetime "valid_date", default: "2022-06-17 08:25:16", null: false
     t.bigint "discount", default: 5, null: false
     t.string "food_name", default: "", null: false
     t.string "food_category", default: "", null: false
@@ -75,11 +74,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
 
   create_table "reviews", force: :cascade do |t|
     t.string "text_body", default: "", null: false
-    t.string "reviewer", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "food_id", null: false
+    t.bigint "store_customer_id", null: false
     t.index ["food_id"], name: "index_reviews_on_food_id"
+    t.index ["store_customer_id"], name: "index_reviews_on_store_customer_id"
   end
 
   create_table "store_admins", force: :cascade do |t|
@@ -150,6 +150,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
   add_foreign_key "foods", "stores"
   add_foreign_key "personal_discounts", "store_customers"
   add_foreign_key "reviews", "foods"
+  add_foreign_key "reviews", "store_customers"
   add_foreign_key "store_admins", "stores"
   add_foreign_key "store_customers", "stores"
   add_foreign_key "store_transactions", "store_customers"
