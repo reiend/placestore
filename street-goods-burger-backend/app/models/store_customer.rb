@@ -17,6 +17,7 @@ class StoreCustomer < ApplicationRecord
   has_many :favorite_foods
   has_many :personal_discounts
   has_many :store_transactions
+  has_many :reviews
 
   include Devise::JWT::RevocationStrategies::JTIMatcher
 
@@ -100,7 +101,6 @@ class StoreCustomer < ApplicationRecord
   end
 
   def mark_favorite_food(food_info:)
-    p persisted?
     favorite_food = FavoriteFood.create!(food_info)
 
     {

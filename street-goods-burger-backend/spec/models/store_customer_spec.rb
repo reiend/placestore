@@ -33,6 +33,11 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
       store_customer = StoreCustomer.reflect_on_association(:store_transactions)
       expect(store_customer.macro).to eq(:has_many)
     end
+
+    it '5, should have many review' do
+      store_customer = StoreCustomer.reflect_on_association(:reviews)
+      expect(store_customer.macro).to eq(:has_many)
+    end
   end
 
   describe 'Features' do
