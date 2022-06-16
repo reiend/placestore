@@ -70,7 +70,7 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
       end
     end
 
-    describe 'mark_favorite_food' do
+    describe 'create_food_review' do
       it "1, invalid inputs shouldn't add to favorite food " do
         food_review_info = store_customer.create_food_review(food_review_info: { chef: 'unkwown' })
         expect(food_review_info[:status]).to (be == 404).or(be == 422)
