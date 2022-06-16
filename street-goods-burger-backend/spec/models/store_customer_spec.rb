@@ -76,6 +76,13 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
         expect(food_review_info[:status]).to (be == 404).or(be == 422)
       end
     end
+
+    describe 'view_favorite_foods' do
+      it '1, must be able to successfully view list of favorite food ' do
+        view_favorite_foods_info = store_customer.view_favorite_foods
+        expect(view_favorite_foods_info[:status]).to be == 200
+      end
+    end
   end
 
   describe 'Attributes' do
