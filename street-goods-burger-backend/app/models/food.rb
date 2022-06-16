@@ -9,7 +9,5 @@ class Food < ApplicationRecord
   validates :like, numericality: { only_integer: true, greater_than: -1 }
   validates :is_available, inclusion: { in: [true, false] }
   validates :discount, presence: true, numericality: { greater_than: 0.00 }
-  validates :quantity, numericality: { only_integer: true, greater_than: 0 }
-
 
 end
