@@ -131,10 +131,9 @@ class StoreCustomer < ApplicationRecord
   end
 
   def create_food_review(food_review_info:)
-    food_id = food_review_info[:food_id]
-    review = food_review_info[:text_body]
+    has_food = Food.find(food_review_info[:food_id])
 
-    if Food.find(food_id)
+    if has_food
       food_review = reviews.create!(food_review_info)
 
       {
@@ -170,6 +169,16 @@ class StoreCustomer < ApplicationRecord
       status: 422,
       message: 'please enter valid food review information ',
       error: e.message
+    }
+  end
+
+  def view_favorite_foods
+    {
+      status: 200,
+      message: 'successfully fetch store customer reviews',
+      data: {
+        store_customer_reviews: reviews.all
+      }
     }
   end
 end
