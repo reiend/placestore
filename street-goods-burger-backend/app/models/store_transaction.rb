@@ -1,11 +1,6 @@
-class StoreTransaction < ApplicationRecord
-  belongs_to :store_customer
-  has_one :cart
+# frozen_string_literal: true
 
-  validates :status,
-            presence: true,
-            inclusion: {
-              in: %w[pending processing canceled],
-              message: 'Invalid status value'
-            }
+# StoreTransaction Template
+class StoreTransaction < ApplicationRecord
+  include StoreTransactionValidations
 end

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# FavoriteFood Template
 class FavoriteFood < ApplicationRecord
   belongs_to :store_customer
 
