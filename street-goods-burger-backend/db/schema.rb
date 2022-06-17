@@ -25,7 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
 
   create_table "favorite_foods", force: :cascade do |t|
     t.string "name", default: "", null: false
-    t.bigint "price", default: 0, null: false
+    t.decimal "price", default: "0.0", null: false
     t.string "category", default: "", null: false
     t.string "description", default: "", null: false
     t.integer "like", default: 0, null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
     t.string "food_name", default: "", null: false
     t.string "food_category", default: "", null: false
     t.integer "quantity", default: 1, null: false
-    t.bigint "price", default: 0, null: false
+    t.decimal "price", default: "0.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "cart_id", null: false
@@ -49,11 +49,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
 
   create_table "foods", force: :cascade do |t|
     t.string "name", default: "", null: false
-    t.bigint "price", default: 0, null: false
+    t.decimal "price", default: "0.0", null: false
     t.string "category", default: "", null: false
     t.string "description", default: "", null: false
     t.integer "like", default: 0, null: false
-    t.bigint "discount", default: 0, null: false
+    t.decimal "discount", default: "0.0", null: false
     t.boolean "is_available", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -62,8 +62,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
   end
 
   create_table "personal_discounts", force: :cascade do |t|
-    t.datetime "valid_date", default: "2022-06-17 09:41:21", null: false
-    t.bigint "discount", default: 5, null: false
+    t.datetime "valid_date", default: "2022-06-17 12:22:19", null: false
+    t.decimal "discount", default: "0.0", null: false
     t.string "food_name", default: "", null: false
     t.string "food_category", default: "", null: false
     t.datetime "created_at", null: false
