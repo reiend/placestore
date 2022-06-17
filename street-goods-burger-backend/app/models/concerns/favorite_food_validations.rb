@@ -2,7 +2,7 @@
 
 # FavoriteFoodValidation module
 module FavoriteFoodValidation
-  extend ActiveConcern::Concern
+  extend ActiveSupport::Concern
   include ActiveModel::Validations
 
   include do
