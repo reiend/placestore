@@ -1,11 +1,6 @@
-class Cart < ApplicationRecord
-  belongs_to :store_transaction
-  has_many :food_orders
+# frozen_string_literal: true
 
-  validates :quantity,
-            presence: true,
-            numericality: { only_integer: true, greater_than: -1 }
-  validates :total_price,
-            presence: true,
-            numericality: { greater_than: -0.99 }
+# Cart Template
+class Cart < ApplicationRecord
+  include CartValidations
 end

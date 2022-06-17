@@ -1,6 +1,6 @@
-class Review < ApplicationRecord
-  belongs_to :food
-  belongs_to :store_customer
+# frozen_string_literal: true
 
-  validates :text_body, length: { minimum: 1, maximum: 256 }
+# Review Template
+class Review < ApplicationRecord
+  include ReviewValidations
 end

@@ -1,9 +1,6 @@
-class Store < ApplicationRecord
-  has_many :store_customers
-  has_many :store_admins
-  has_many :foods
+# frozen_string_literal: true
 
-  validates :store_name, :address, presence: true, uniqueness: true
-  validates :store_name, length: { minimum: 1, maximum: 64 }
-  validates :address,    length: { minimum: 1, maximum: 128 }
+# Store Template
+class Store < ApplicationRecord
+  include StoreValidations
 end
