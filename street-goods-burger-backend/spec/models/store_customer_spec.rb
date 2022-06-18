@@ -110,7 +110,6 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
           expect(create_store_transaction_info[:status]).to be == 200
         end
       end
-
     end
   end
 
