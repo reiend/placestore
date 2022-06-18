@@ -35,8 +35,15 @@ RSpec.describe "StoreAdmin's Model", type: :model do
         view_registered_store_customers_info = store_admin
                                                .give_store_customer_discount(
                                                  personal_discount_info: { store_id: -1 }
-                                                 )
+                                               )
         expect(view_registered_store_customers_info[:status]).to (be == 400).or(be == 422)
+      end
+    end
+
+    describe 'view_store_customer_food_orders' do
+      it '1, invalid inputs shouldn\'t allow to view store customer food orders' do
+        view_store_customer_food_orders_info = store_admin.view_store_customer_food_orders(store_customer_id: -5)
+        expect(view_store_customer_food_orders_info[:status]).to (be == 400).or(be == 422)
       end
     end
   end
