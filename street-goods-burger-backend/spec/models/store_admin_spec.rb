@@ -29,5 +29,14 @@ RSpec.describe "StoreAdmin's Model", type: :model do
         expect(view_registered_store_customers_info[:status]).to be == 400
       end
     end
+
+    describe 'give_store_customer_discount' do
+      it '1, invalid inputs shouldn\'t create personal discount' do
+        view_registered_store_customers_info = store_admin
+                                               .give_store_customer_discount(
+                                                 personal_discount_info: { store_id: -1 }
+        expect(view_registered_store_customers_info[:status]).to (be == 400).or(be == 422)
+      end
+    end
   end
 end

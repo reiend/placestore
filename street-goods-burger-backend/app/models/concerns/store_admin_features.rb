@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # StoreAdminFeatures module
-
 module StoreAdminFeatures
   def view_store_transactions(store_id:)
     store_transactions = StoreTransaction.where(store_id:).map do |transaction|
@@ -36,6 +35,12 @@ module StoreAdminFeatures
         store_transactions:
       }
     }
+  rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 400,
+      message: 'cannot find that store',
+      error: e.message
+    }
   end
 
   def view_registered_store_customers(store_id:)
@@ -55,6 +60,40 @@ module StoreAdminFeatures
       status: 400,
       message: 'cannot find that store',
       error: e.message
+    }
+  end
+
+  def give_store_customer_discount(personal_discount_info:)
+    food_name = personal_discount_info[:food_name]
+    food_category = personal_discount_info[:food_category]
+    discount = personal_discount_info[:discount]
+    valid_date = DateTime.now + personal_discount_info[:hour].hour
+    store_customer_id = personal_discount_info[:store_customer_id]
+
+    PersonalDiscount.create!(
+      food_name:,
+      food_category:,
+      discount:,
+      valid_date:,
+      store_customer_id:
+    )
+  rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 400,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue ActiveRecord::RecordInvalid => e
+    {
+      status: 422,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue NoMethodError => e
+    {
+      status: 422,
+      message: "can't do calculations based on data provided",
+      errors: e.message
     }
   end
 end
