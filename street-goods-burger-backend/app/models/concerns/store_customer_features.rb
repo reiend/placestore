@@ -132,7 +132,7 @@ module StoreCustomerFeatures
     }
   rescue ActiveRecord::RecordNotFound => e
     {
-      status: 404,
+      status: 400,
       message: 'cannot find requested resource',
       error: e.message
     }
@@ -167,6 +167,41 @@ module StoreCustomerFeatures
     {
       status: 422,
       message: "password doesn't match"
+    }
+  end
+
+  def cancel_order(store_transaction_id:)
+    store_transaction = store_transactions.find(store_transaction_id)
+    store_transaction_status = store_transaction[:status]
+
+    case store_transaction_status
+    when 'pending'
+      store_transaction.update!(status: 'canceled')
+      {
+        status: 200,
+        message: 'successfully canceled order'
+      }
+    when 'canceled'
+      {
+        status: 200,
+        message: 'order is already been canceled'
+      }
+    when 'processing'
+      {
+        status: 200,
+        message: 'sorry, you cannot cancel this transaction, your order is being process'
+      }
+    else
+      {
+        status: 400,
+        message: 'invalid transaction'
+      }
+    end
+  rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 422,
+      message: 'cannot find that store transaction',
+      error: e.message
     }
   end
 end
