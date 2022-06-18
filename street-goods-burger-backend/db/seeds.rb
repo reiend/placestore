@@ -12,6 +12,15 @@ Store.create!(store_name: 'Street Goods Burger', address: 'address')
 
 Store
   .first
+  .store_admins
+  .create!(
+    email: 'admin@gmail.com',
+    password: 'admin12345',
+    password_confirmation: 'admin12345'
+  )
+
+Store
+  .first
   .store_customers
   .create!(
     first_name: 'store1',

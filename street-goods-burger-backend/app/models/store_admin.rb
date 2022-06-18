@@ -3,4 +3,5 @@
 # StoreAdmin template
 class StoreAdmin < ApplicationRecord
   include StoreAdminValidations
+  include StoreAdminFeatures
 end

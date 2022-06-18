@@ -1,10 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe "StoreAdmin's Model", type: :model do
+  let(:store_admin) do
+    StoreAdmin.new(
+      email: Faker::Internet.safe_email,
+      password: Faker::Internet.password,
+      role: 'store_admin'
+    )
+  end
   describe 'Associations' do
     it '1, should belongs_to store' do
       store_admin = StoreAdmin.reflect_on_association(:store)
       expect(store_admin.macro).to eq(:belongs_to)
+    end
+  end
+
+  describe 'Features' do
+    describe 'view_store_transactions'
+    it '1, successfully view store transactions' do
+      view_store_transactions_info = store_admin.view_store_transactions
+
+      p view_store_transactions_info
     end
   end
 end
