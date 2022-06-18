@@ -3,7 +3,7 @@
 # StoreCustomerFeatures's module
 module StoreCustomerFeatures
   def add_to_cart(store_transaction_id:, ordered_food:)
-    store_transaction = self.store_transactions.find(store_transaction_id)
+    store_transaction = store_transactions.find(store_transaction_id)
     has_no_cart = self.store_transaction.cart.nil?
 
     # carted food information
@@ -72,6 +72,19 @@ module StoreCustomerFeatures
     }
   end
 
+  def create_store_transaction
+    store_transaction = StoreTransaction.new(store_customer_id: id)
+    store_transaction.save
+
+    {
+      status: 200,
+      message: 'successfully create a store transaction',
+      data: {
+        store_transaction:
+      }
+    }
+  end
+
   def mark_favorite_food(food_info:)
     favorite_food = FavoriteFood.create!(food_info)
 
@@ -132,7 +145,7 @@ module StoreCustomerFeatures
     }
   rescue ActiveRecord::RecordNotFound => e
     {
-      status: 404,
+      status: 400,
       message: 'cannot find requested resource',
       error: e.message
     }
@@ -151,6 +164,57 @@ module StoreCustomerFeatures
       data: {
         store_customer_reviews: reviews.all
       }
+    }
+  end
+
+  def change_password(password:)
+    new_password = password[:new_password]
+    new_password_confirmation = password[:new_password_confirmation]
+
+    if new_password == new_password_confirmation
+      return {
+        status: 200,
+        message: 'successfully change password'
+      }
+    end
+    {
+      status: 422,
+      message: "password doesn't match"
+    }
+  end
+
+  def cancel_order(store_transaction_id:)
+    store_transaction = store_transactions.find(store_transaction_id)
+    store_transaction_status = store_transaction[:status]
+
+    case store_transaction_status
+    when 'pending'
+      store_transaction.update!(status: 'canceled')
+      {
+        status: 200,
+        message: 'successfully canceled order'
+      }
+    when 'canceled'
+      {
+        status: 200,
+        message: 'order is already been canceled'
+      }
+    when 'processing'
+      {
+        status: 200,
+        message: 'sorry, you cannot cancel this transaction, your order is being process'
+      }
+    else
+      {
+        status: 400,
+        message: 'invalid transaction'
+      }
+    end
+  rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 422,
+      message: 'cannot find that store transaction',
+      error: e.message
     }
   end
 end

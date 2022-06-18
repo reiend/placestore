@@ -73,7 +73,7 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
     describe 'create_food_review' do
       it "1, invalid inputs shouldn't add to favorite food " do
         food_review_info = store_customer.create_food_review(food_review_info: { chef: 'unkwown' })
-        expect(food_review_info[:status]).to (be == 404).or(be == 422)
+        expect(food_review_info[:status]).to (be == 400).or(be == 422)
       end
     end
 
@@ -82,6 +82,35 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
         view_favorite_foods_info = store_customer.view_favorite_foods
         expect(view_favorite_foods_info[:status]).to be == 200
       end
+    end
+
+    describe 'change_password' do
+      it '1, password doens\'t match shouldn\'t change password' do
+        change_password_info = store_customer
+                               .change_password(
+                                 password: {
+                                   new_password: 'new_store_customer_password',
+                                   new_password_confirmation: 'different_new_password'
+                                 }
+
+                               )
+        expect(change_password_info[:status]).to be == 422
+      end
+
+      describe 'cancel_order' do
+        it '1, store transaction must exist' do
+          cancel_order_info = store_customer.cancel_order(store_transaction_id: -1)
+          expect(cancel_order_info[:status]).to be == 422
+        end
+      end
+
+      describe 'create_store_transaction' do
+        it '1, successfully create store transaction' do
+          create_store_transaction_info = store_customer.create_store_transaction
+          expect(create_store_transaction_info[:status]).to be == 200
+        end
+      end
+
     end
   end
 
