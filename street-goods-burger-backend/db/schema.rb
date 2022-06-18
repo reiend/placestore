@@ -62,7 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
   end
 
   create_table "personal_discounts", force: :cascade do |t|
-    t.datetime "valid_date", default: "2022-06-17 12:22:19", null: false
+    t.datetime "valid_date", default: "2022-06-19 06:12:03", null: false
     t.decimal "discount", default: "0.0", null: false
     t.string "food_name", default: "", null: false
     t.string "food_category", default: "", null: false
@@ -134,7 +134,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "store_customer_id", null: false
+    t.bigint "store_id", null: false
     t.index ["store_customer_id"], name: "index_store_transactions_on_store_customer_id"
+    t.index ["store_id"], name: "index_store_transactions_on_store_id"
   end
 
   create_table "stores", force: :cascade do |t|
@@ -154,4 +156,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
   add_foreign_key "store_admins", "stores"
   add_foreign_key "store_customers", "stores"
   add_foreign_key "store_transactions", "store_customers"
+  add_foreign_key "store_transactions", "stores"
 end
