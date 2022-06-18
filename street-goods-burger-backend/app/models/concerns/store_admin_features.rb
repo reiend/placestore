@@ -3,8 +3,8 @@
 # StoreAdminFeatures module
 
 module StoreAdminFeatures
-  def view_store_transactions
-    store_transactions = StoreTransaction.all.map do |transaction|
+  def view_store_transactions(store_id:)
+    store_transactions = StoreTransaction.where(store_id:).map do |transaction|
       store_transaction_id = transaction[:id]
 
       # get store transaction corressponding cart
@@ -45,10 +45,16 @@ module StoreAdminFeatures
 
     {
       status: 200,
-      message: 'successfully fetche registered store customer',
+      message: 'successfully fetch registered store customer',
       data: {
         store_customers: registered_customers
       }
+    }
+  rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 400,
+      message: 'cannot find that store',
+      error: e.message
     }
   end
 end
