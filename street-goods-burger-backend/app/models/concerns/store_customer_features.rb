@@ -204,6 +204,11 @@ module StoreCustomerFeatures
         status: 200,
         message: 'sorry, you cannot cancel this transaction, your order is being process'
       }
+    when 'delivered'
+      {
+        status: 200,
+        message: 'food was already been delivered '
+      }
     else
       {
         status: 400,
