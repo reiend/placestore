@@ -96,4 +96,38 @@ module StoreAdminFeatures
       errors: e.message
     }
   end
+
+  def view_store_customer_food_orders(store_customer_id:)
+    food_orders = StoreCustomer.find(store_customer_id).store_transactions.all.map do |store_transaction|
+      store_transaction.cart.food_orders
+    end
+
+    {
+      status: 200,
+      message: 'successfully fetch store customer food orders',
+      data: {
+        store_customer_id:,
+        store_customer_email: StoreCustomer.find(store_customer_id)[:email],
+        food_orders:
+      }
+    }
+  rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 400,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue ActiveRecord::RecordInvalid => e
+    {
+      status: 422,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue NoMethodError => e
+    {
+      status: 422,
+      message: "can't do calculations based on data provided",
+      errors: e.message
+    }
+  end
 end
