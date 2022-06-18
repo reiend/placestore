@@ -73,7 +73,7 @@ module StoreCustomerFeatures
   end
 
   def create_store_transaction
-    store_transaction = StoreTransaction.new(store_customer_id: id)
+    store_transaction = StoreTransaction.new(store_customer_id: id, store_id:)
     store_transaction.save
 
     {
