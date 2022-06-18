@@ -83,6 +83,20 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
         expect(view_favorite_foods_info[:status]).to be == 200
       end
     end
+
+    describe 'change_password' do
+      it '1, password doens\'t match shouldn\'t change password' do
+        change_password_info = store_customer
+                               .change_password(
+                                 password: {
+                                   new_password: 'new_store_customer_password',
+                                   new_password_confirmation: 'different_new_password'
+                                 }
+
+                               )
+        expect(change_password_info[:status]).to be == 422
+      end
+    end
   end
 
   describe 'Attributes' do
