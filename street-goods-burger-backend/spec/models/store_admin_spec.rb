@@ -35,6 +35,7 @@ RSpec.describe "StoreAdmin's Model", type: :model do
         view_registered_store_customers_info = store_admin
                                                .give_store_customer_discount(
                                                  personal_discount_info: { store_id: -1 }
+                                                 )
         expect(view_registered_store_customers_info[:status]).to (be == 400).or(be == 422)
       end
     end
