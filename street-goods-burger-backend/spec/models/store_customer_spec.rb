@@ -103,6 +103,14 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
           expect(cancel_order_info[:status]).to be == 422
         end
       end
+
+      describe 'create_store_transaction' do
+        it '1, successfully create store transaction' do
+          create_store_transaction_info = store_customer.create_store_transaction
+          expect(create_store_transaction_info[:status]).to be == 200
+        end
+      end
+
     end
   end
 
