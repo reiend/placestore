@@ -18,15 +18,15 @@ RSpec.describe "StoreAdmin's Model", type: :model do
   describe 'Features' do
     describe 'view_store_transactions' do
       it '1, successfully view store transactions' do
-        view_store_transactions_info = store_admin.view_store_transactions
+        view_store_transactions_info = store_admin.view_store_transactions(store_id: 1)
         expect(view_store_transactions_info[:status]).to be == 200
       end
     end
 
     describe 'view_registered_store_customers' do
       it '1, successfully view registered store customers' do
-        view_registered_store_customers_info = store_admin.vew_registered_store_customers
-        expect(view_registered_store_customers_info[:status]).to be == 200
+        view_registered_store_customers_info = store_admin.view_registered_store_customers(store_id: -1)
+        expect(view_registered_store_customers_info[:status]).to be == 400
       end
     end
   end
