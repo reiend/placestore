@@ -72,6 +72,19 @@ module StoreCustomerFeatures
     }
   end
 
+  def create_store_transaction
+    store_transaction = StoreTransaction.new(store_customer_id: id)
+    store_transaction.save
+
+    {
+      status: 200,
+      message: 'successfully create a store transaction',
+      data: {
+        store_transaction:
+      }
+    }
+  end
+
   def mark_favorite_food(food_info:)
     favorite_food = FavoriteFood.create!(food_info)
 
