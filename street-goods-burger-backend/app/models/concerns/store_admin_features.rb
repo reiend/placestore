@@ -32,7 +32,23 @@ module StoreAdminFeatures
     {
       status: 200,
       message: 'successfully fetch store transactions',
-      store_transactions:
+      data: {
+        store_transactions:
+      }
+    }
+  end
+
+  def view_registered_store_customers(store_id:)
+    registered_customers = Store.find(store_id).store_customers.all.filter do |store_customer|
+      store_customer if store_customer.confirmed?
+    end
+
+    {
+      status: 200,
+      message: 'successfully fetche registered store customer',
+      data: {
+        store_customers: registered_customers
+      }
     }
   end
 end
