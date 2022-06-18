@@ -4,7 +4,7 @@
 module StoreCustomerFeatures
   def add_to_cart(store_transaction_id:, ordered_food:)
     store_transaction = store_transactions.find(store_transaction_id)
-    has_no_cart = self.store_transaction.cart.nil?
+    has_no_cart = store_transaction.cart.nil?
 
     # carted food information
     carted_food_quantity = ordered_food[:quantity]
