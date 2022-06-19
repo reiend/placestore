@@ -46,5 +46,12 @@ RSpec.describe "StoreAdmin's Model", type: :model do
         expect(view_store_customer_food_orders_info[:status]).to (be == 400).or(be == 422)
       end
     end
+
+    describe 'give_warning_store_customer' do
+      it '1, if can\'t find store customerm dont give warning' do
+        give_warning_store_customer_info = store_admin.give_warning_store_customer(store_customer_id: 1)
+        expect(give_warning_store_customer_info[:status]).to (be == 400).or(be == 422)
+      end
+    end
   end
 end

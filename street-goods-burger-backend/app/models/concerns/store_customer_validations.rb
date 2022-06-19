@@ -17,6 +17,8 @@ module StoreCustomerValidations
     validates :password,
               length: { minimum: 6 }
 
+    validates :warning, numericality: { only_integer: true, greater_than: -1, less_than: 4 }
+
     belongs_to :store
     has_many :favorite_foods
     has_many :personal_discounts
