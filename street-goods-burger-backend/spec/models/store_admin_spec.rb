@@ -74,5 +74,12 @@ RSpec.describe "StoreAdmin's Model", type: :model do
         expect(add_new_food_info[:status]).to (be == 400).or(be == 422)
       end
     end
+
+    describe 'update_food' do
+      it '1, if can\'t find food don\'t make an update' do
+        update_food_info = store_admin.update_food(food_id: -1, food_info: { name: Faker::Food.dish })
+        expect(update_food_info[:status]).to (be == 400).or(be == 422)
+      end
+    end
   end
 end
