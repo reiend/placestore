@@ -53,5 +53,12 @@ RSpec.describe "StoreAdmin's Model", type: :model do
         expect(give_warning_store_customer_info[:status]).to (be == 400).or(be == 422)
       end
     end
+
+    describe 'ban_store_customer' do
+      it '1, invalid store customer id shouldn\'t ban store customer' do
+        ban_store_customer_id = store_admin.ban_store_customer(store_customer_id: 1)
+        expect(ban_store_customer_id[:status]).to (be == 400).or(be == 422)
+      end
+    end
   end
 end
