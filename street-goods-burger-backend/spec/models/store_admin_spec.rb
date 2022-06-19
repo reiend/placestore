@@ -62,9 +62,16 @@ RSpec.describe "StoreAdmin's Model", type: :model do
     end
 
     describe 'give_food_discount' do
-      it '1, invalid  food id shouldn\'t give food a discountk' do
+      it '1, invalid  food id shouldn\'t give food a discount' do
         give_food_discount_id = store_admin.give_food_discount(food_id: 1, food_discount_percent: 50)
         expect(give_food_discount_id[:status]).to (be == 400).or(be == 422)
+      end
+    end
+
+    describe 'add_new_food' do
+      it '1, if required food info are not provided don\'t create new food' do
+        add_new_food_info = store_admin.add_new_food(food_info: { name: Faker::Food.dish })
+        expect(add_new_food_info[:status]).to (be == 400).or(be == 422)
       end
     end
   end
