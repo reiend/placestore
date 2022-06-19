@@ -81,5 +81,12 @@ RSpec.describe "StoreAdmin's Model", type: :model do
         expect(update_food_info[:status]).to (be == 400).or(be == 422)
       end
     end
+
+    describe 'update_food' do
+      it '1, if can\'t find food don\'t shouldn\'t delete anything' do
+        remove_food_info = store_admin.remove_food(food_id: -1)
+        expect(remove_food_info[:status]).to (be == 400).or(be == 422)
+      end
+    end
   end
 end
