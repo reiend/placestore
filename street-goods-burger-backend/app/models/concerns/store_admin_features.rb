@@ -130,4 +130,51 @@ module StoreAdminFeatures
       errors: e.message
     }
   end
+
+  def give_warning_store_customer(store_customer_id:)
+    store_customer = StoreCustomer.find(store_customer_id)
+    store_customer_warning = store_customer[:warning]
+    warning_limit = 3
+
+    # customer warning equal to 3 then receive a warning ban store customer
+    if store_customer_warning >= warning_limit
+      store_customer.update_columns(is_ban: true)
+      return {
+        status: 200,
+        message: 'store customer already have 3 warnings, banning store customer',
+        data: {
+          store_customer:
+        }
+      }
+
+    end
+
+    # give store customer warning
+    store_customer.update_columns(warning: store_customer_warning + 1)
+    {
+      status: 200,
+      message: 'successfully given store customer a warning',
+      data: {
+        store_customer:
+      }
+    }
+  rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 400,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue ActiveRecord::RecordInvalid => e
+    {
+      status: 422,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue NoMethodError => e
+    {
+      status: 422,
+      message: "can't do calculations based on data provided",
+      errors: e.message
+    }
+  end
 end
