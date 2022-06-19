@@ -60,5 +60,12 @@ RSpec.describe "StoreAdmin's Model", type: :model do
         expect(ban_store_customer_id[:status]).to (be == 400).or(be == 422)
       end
     end
+
+    describe 'give_food_discount' do
+      it '1, invalid  food id shouldn\'t give food a discountk' do
+        give_food_discount_id = store_admin.give_food_discount(food_id: 1, food_discount_percent: 50)
+        expect(give_food_discount_id[:status]).to (be == 400).or(be == 422)
+      end
+    end
   end
 end
