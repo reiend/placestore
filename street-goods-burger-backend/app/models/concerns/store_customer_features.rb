@@ -14,46 +14,50 @@ module StoreCustomerFeatures
     if has_no_cart
 
       # create new cart if store customer store transaction has no cart
-      Cart.create!(
+      cart = Cart.create!(
         quantity: carted_food_quantity,
         total_price: total_price_food_carted,
         store_transaction_id:
       )
+
+      cart.food_orders.create!(ordered_food)
+
+
       {
         status: 200,
         message: 'successfully added food to cart',
         data: {
           store_transaction_id:,
-          food_carted: ordered_food
+          food_carted: ordered_food,
         }
       }
 
     else
-      # uses existing cart here
+      # # uses existing cart here
 
-      # current store customer carted food information
-      current_carted_food_quantity = store_transaction.cart[:quantity]
-      current_carted_food_total_price = store_transaction.cart[:total_price]
+      # # current store customer carted food information
+      # current_carted_food_quantity = store_transaction.cart[:quantity]
+      # current_carted_food_total_price = store_transaction.cart[:total_price]
 
-      # add food to store customer cart
-      food_carted = store_transaction.cart.food_orders.create!(ordered_food)
+      # # add food to store customer cart
+      # food_carted = store_transaction.cart.food_orders.create!(ordered_food)
 
-      # update cart information based on added food
-      store_transaction
-        .cart
-        .update(
-          quantity: (current_carted_food_quantity + carted_food_quantity).to_i,
-          total_price: (current_carted_food_total_price + total_price_food_carted).to_d
-        )
+      # # update cart information based on added food
+      # store_transaction
+      #   .cart
+      #   .update(
+      #     quantity: (current_carted_food_quantity + carted_food_quantity).to_i,
+      #     total_price: (current_carted_food_total_price + total_price_food_carted).to_d
+      #   )
 
-      {
-        status: 200,
-        message: 'successfully added food to cart',
-        data: {
-          store_transaction_id:,
-          food_carted:
-        }
-      }
+      # {
+      #   status: 200,
+      #   message: 'successfully added food to cart',
+      #   data: {
+      #     store_transaction_id:,
+      #     food_carted:
+      #   }
+      # }
 
     end
 
