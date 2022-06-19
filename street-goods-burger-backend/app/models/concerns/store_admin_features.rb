@@ -177,4 +177,48 @@ module StoreAdminFeatures
       errors: e.message
     }
   end
+
+  def ban_store_customer(store_customer_id:)
+    store_customer = StoreCustomer.find(store_customer_id)
+
+    store_customer_is_ban = store_customer[:is_ban]
+
+    # inform if store customer already been ban
+    if store_customer_is_ban
+      return {
+        status: 200,
+        message: 'store customer is already been banned',
+        data: {
+          store_customer:
+        }
+      }
+    end
+
+    store_customer.update_columns(is_ban: true)
+    {
+      status: 200,
+      message: 'successfully banned store customer',
+      data: {
+        store_customer:
+      }
+    }
+  rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 400,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue ActiveRecord::RecordInvalid => e
+    {
+      status: 422,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue NoMethodError => e
+    {
+      status: 422,
+      message: "can't do calculations based on data provided",
+      errors: e.message
+    }
+  end
 end
