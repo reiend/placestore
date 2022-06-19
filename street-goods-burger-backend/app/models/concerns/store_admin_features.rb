@@ -221,4 +221,36 @@ module StoreAdminFeatures
       errors: e.message
     }
   end
+
+  def give_food_discount(food_id:, food_discount_percent:)
+    food = Food.find(food_id)
+    food.update_columns(discount: food_discount_percent)
+
+    {
+      status: 200,
+      message: 'successfully give food a discount',
+      data: {
+        store_id: food.store[:id],
+        food:
+      }
+    }
+  rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 400,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue ActiveRecord::RecordInvalid => e
+    {
+      status: 422,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue NoMethodError => e
+    {
+      status: 422,
+      message: "can't do calculations based on data provided",
+      errors: e.message
+    }
+  end
 end
