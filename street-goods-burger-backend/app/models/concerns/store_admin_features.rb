@@ -313,4 +313,34 @@ module StoreAdminFeatures
       errors: e.message
     }
   end
+
+  def remove_food(food_id:)
+    food = store.foods.find(food_id).delete
+
+    {
+      status: 200,
+      message: 'successfully removed food',
+      data: {
+        food:
+      }
+    }
+  rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 400,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue ActiveRecord::RecordInvalid => e
+    {
+      status: 422,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue NoMethodError => e
+    {
+      status: 422,
+      message: "can't do calculations based on data provided",
+      errors: e.message
+    }
+  end
 end
