@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'StoreCustomer Request', type: :request do
+RSpec.describe 'StoreCustomer/Info Controller', type: :request do
   before(:each) do
     @store = FactoryBot.create :store
     @store_customer = @store.store_customers.create!(
@@ -20,6 +20,7 @@ RSpec.describe 'StoreCustomer Request', type: :request do
       let(:current_store_customer_info) do
         JSON.parse(response.body)['data']['store_customer']
       end
+
       before(:each) do
         get '/store_customer/info'
       end
@@ -48,5 +49,4 @@ RSpec.describe 'StoreCustomer Request', type: :request do
       end
     end
   end
-
 end
