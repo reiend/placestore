@@ -1,20 +1,23 @@
 Rails.application.routes.draw do
-
   devise_for :store_customers, path: '', path_names: {
-    sign_in: 'store_customer/sign_in',
-    sign_out: 'store_customer/sign_out',
-    registration: 'store_customer/sign_up'
+    sign_in: 'store_customer/signin',
+    sign_out: 'store_customer/signout',
+    registration: 'store_customer/signup'
   }, controllers: {
     sessions: 'store_customers/sessions',
     registrations: 'store_customers/registrations'
   }
 
   devise_for :store_admins, path: '', path_names: {
-    sign_in: 'store_admin/sign_in',
-    sign_out: 'store_admin/sign_out',
-    registration: 'store_admin/sign_up'
+    sign_in: 'store_admin/signin',
+    sign_out: 'store_admin/signout',
+    registration: 'store_admin/signup'
   }, controllers: {
     sessions: 'store_admins/sessions',
     registrations: 'store_admins/registrations'
   }
+
+  namespace :store_customer do
+    get 'info', to: 'store_customer#index'
+  end
 end
