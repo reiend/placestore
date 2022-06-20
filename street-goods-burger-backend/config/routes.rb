@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # store customer route authentication
   devise_for :store_customers, path: '', path_names: {
     sign_in: 'store_customer/signin',
     sign_out: 'store_customer/signout',
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
     registrations: 'store_customers/registrations'
   }
 
+  # store admin route authentication
   devise_for :store_admins, path: '', path_names: {
     sign_in: 'store_admin/signin',
     sign_out: 'store_admin/signout',
@@ -22,5 +24,6 @@ Rails.application.routes.draw do
     put 'cancel_order', to: 'cancel_order#update'
     put 'change_password', to: 'change_password#update'
     post 'add_to_cart', to: 'add_to_cart#create'
+    post 'create_food_review', to: 'create_food_review#create'
   end
 end
