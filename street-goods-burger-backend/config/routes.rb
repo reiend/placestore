@@ -25,5 +25,6 @@ Rails.application.routes.draw do
     put 'change_password', to: 'change_password#update'
     post 'add_to_cart', to: 'add_to_cart#create'
     post 'create_food_review', to: 'create_food_review#create'
+    post 'mark_favorite_food', to: 'mark_favorite_food#create'
   end
 end

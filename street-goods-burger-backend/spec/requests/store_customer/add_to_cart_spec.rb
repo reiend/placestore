@@ -15,7 +15,7 @@ RSpec.describe 'StoreCustomer/AddToCart Controller', type: :request do
     sign_in @store_customer
   end
 
-  describe 'Put' do
+  describe 'Post' do
     describe 'store_customer/add_to_cart' do
       let(:add_to_cart_info) do
         JSON.parse(response.body)
