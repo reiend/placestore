@@ -13,16 +13,9 @@ class StoreCustomers::SessionsController < Devise::SessionsController
   end
 
   def respond_to_on_destroy
-    unless current_user
-      render json: {
-        status: 200,
-        message: 'signout out successfully'
-      }, status: :ok
-      return nil
-    end
     render json: {
-      status: 401,
-      message: "Couldn't find an active session."
-    }, status: :unauthorized
+      status: 200,
+      message: 'signout out successfully'
+    }, status: :ok
   end
 end
