@@ -21,5 +21,6 @@ Rails.application.routes.draw do
     get 'info', to: 'info#index'
     put 'cancel_order', to: 'cancel_order#update'
     put 'change_password', to: 'change_password#update'
+    post 'add_to_cart', to: 'add_to_cart#create'
   end
 end
