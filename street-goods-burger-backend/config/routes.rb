@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   }
 
   namespace :store_customer do
-    get 'info', to: 'store_customer#index'
+    get 'info', to: 'info#index'
+
+    put 'cancel_order', to: 'cancel_order#update'
   end
 end
