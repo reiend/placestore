@@ -22,50 +22,59 @@ module StoreCustomerFeatures
 
       cart.food_orders.create!(ordered_food)
 
+      {
+        status: 200,
+        message: 'successfully added food to cart',
+        data: {
+          store_transaction_id:,
+          cart_total_price: cart[:total_price],
+          cart_total_quantity: cart[:total_price],
+          food_carted: ordered_food
+        }
+      }
+
+    else
+      # uses existing cart here
+
+      # current store customer carted food information
+      current_carted_food_quantity = store_transaction.cart[:quantity]
+      current_carted_food_total_price = store_transaction.cart[:total_price]
+
+      # add food to store customer cart
+      food_carted = store_transaction.cart.food_orders.create!(ordered_food)
+
+      # update cart information based on added food
+      store_transaction
+        .cart
+        .update(
+          quantity: (current_carted_food_quantity + carted_food_quantity).to_i,
+          total_price: (current_carted_food_total_price + total_price_food_carted).to_d
+        )
 
       {
         status: 200,
         message: 'successfully added food to cart',
         data: {
           store_transaction_id:,
-          food_carted: ordered_food,
+          cart_total_price: store_transaction.cart[:total_price],
+          cart_total_quantity: store_transaction.cart[:total_price],
+          food_carted:
         }
       }
-
-    else
-      # # uses existing cart here
-
-      # # current store customer carted food information
-      # current_carted_food_quantity = store_transaction.cart[:quantity]
-      # current_carted_food_total_price = store_transaction.cart[:total_price]
-
-      # # add food to store customer cart
-      # food_carted = store_transaction.cart.food_orders.create!(ordered_food)
-
-      # # update cart information based on added food
-      # store_transaction
-      #   .cart
-      #   .update(
-      #     quantity: (current_carted_food_quantity + carted_food_quantity).to_i,
-      #     total_price: (current_carted_food_total_price + total_price_food_carted).to_d
-      #   )
-
-      # {
-      #   status: 200,
-      #   message: 'successfully added food to cart',
-      #   data: {
-      #     store_transaction_id:,
-      #     food_carted:
-      #   }
-      # }
 
     end
 
     # if can't find StoreTransaction id return nil
+  rescue ActiveRecord::RecordInvalid => e
+    {
+      status: 400,
+      message: 'please enter valid food attribute ',
+      error: e.message
+    }
   rescue ActiveRecord::RecordNotFound => e
     {
       status: 422,
-      message: "can't find that transaction",
+      message: "please enter valid food attribute",
       errors: e.message
     }
   rescue NoMethodError => e
