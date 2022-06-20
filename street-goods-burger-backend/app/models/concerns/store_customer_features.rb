@@ -74,7 +74,7 @@ module StoreCustomerFeatures
   rescue ActiveRecord::RecordNotFound => e
     {
       status: 422,
-      message: "please enter valid food attribute",
+      message: 'please enter valid food attribute',
       errors: e.message
     }
   rescue NoMethodError => e
