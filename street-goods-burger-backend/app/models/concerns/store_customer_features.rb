@@ -98,8 +98,8 @@ module StoreCustomerFeatures
     }
   end
 
-  def mark_favorite_food(food_info:)
-    favorite_food = FavoriteFood.create!(food_info)
+  def mark_favorite_food(store_customer_id:, food_info:)
+    favorite_food = StoreCustomer.where(id: store_customer_id)[0].favorite_foods.create!(food_info)
 
     {
       status: 200,

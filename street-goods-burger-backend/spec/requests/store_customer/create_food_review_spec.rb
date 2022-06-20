@@ -15,7 +15,7 @@ RSpec.describe 'StoreCustomer/CreateFoodReview Controller', type: :request do
     sign_in @store_customer
   end
 
-  describe 'Put' do
+  describe 'Post' do
     describe 'store_customer/create_food_review' do
       let(:create_food_review_info) do
         JSON.parse(response.body)

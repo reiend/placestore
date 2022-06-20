@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe 'StoreCustomer\'s Model', type: :model do
   let(:store_customer) do
     StoreCustomer.new(
+      id: 1,
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       email: Faker::Internet.safe_email,
@@ -58,12 +59,12 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
       it "1, invalid inputs shouldn't add to favorite food " do
         marked_favorite_food_info = store_customer
                                     .mark_favorite_food(
+                                      store_customer_id: store_customer[:id],
                                       food_info: {
                                         name: 'burger',
                                         price: 242.24,
                                         category: 'category',
-                                        ingredients: 'secret',
-                                        store_customer_id: store_customer[:id]
+                                        ingredients: 'secret'
                                       }
                                     )
         expect(marked_favorite_food_info[:status]).to be == 422
@@ -110,6 +111,7 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
           expect(create_store_transaction_info[:status]).to be == 200
         end
       end
+
     end
   end
 
