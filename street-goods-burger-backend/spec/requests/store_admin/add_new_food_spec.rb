@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'StoreAdmin/GiveWarningStoreCustomer Controller', type: :request do
+RSpec.describe 'StoreAdmin/AddNewFood Controller', type: :request do
   before(:each) do
     @store = FactoryBot.create :store
     @store_admin = @store.store_admins.create!(
@@ -13,21 +13,21 @@ RSpec.describe 'StoreAdmin/GiveWarningStoreCustomer Controller', type: :request 
     sign_in @store_admin
   end
 
-  describe 'Put' do
-    describe 'store_admin/give_warning_store_customer' do
-      let(:give_warning_store_customer_info) do
+  describe 'Post' do
+    describe 'store_admin/add_new_food' do
+      let(:add_new_food_info) do
         JSON.parse(response.body)
       end
       before(:each) do
-        put '/store_admin/give_warning_store_customer', params: {
-          data: {
-            store_customer_id: -5
+        post '/store_admin/add_new_food', params: {
+          food_info: {
+            ingredients: 'secret'
           }
         }
       end
 
       it '1, invalid params info should raise an error' do
-        expect(give_warning_store_customer_info['status']).to (be == 400).or(be == 422)
+        expect(add_new_food_info['status']).to (be == 400).or(be == 422)
       end
     end
   end
