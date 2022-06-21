@@ -224,7 +224,7 @@ module StoreCustomerFeatures
   rescue ActiveRecord::RecordInvalid => e
     {
       status: 422,
-      message: 'please enter valid food review information ',
+      message: 'please enter valid params ',
       error: e.message
     }
   rescue ActiveRecord::RecordNotFound => e
@@ -310,6 +310,37 @@ module StoreCustomerFeatures
       status: 422,
       message: 'cannot find that store transaction',
       error: e.message
+    }
+  end
+
+  def like_food(food_id:)
+    food_info = store.foods.find(food_id)
+    current_food_likes = food_info[:like]
+
+    food_info.update_columns(like: current_food_likes + 1)
+
+    {
+      status: 200,
+      message: 'successfully like food',
+      food_like_info: food_info
+    }
+  rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 400,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue ActiveRecord::RecordInvalid => e
+    {
+      status: 422,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue NoMethodError => e
+    {
+      status: 422,
+      message: "can't do calculations based on data provided",
+      errors: e.message
     }
   end
 end
