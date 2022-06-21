@@ -15,6 +15,12 @@ class StoreCustomer::CreateFoodReviewController < StoreCustomer::StoreCustomerCo
                        )
 
     render json: food_review_info
+  rescue ActionController::ParameterMissing => e
+    render json: {
+      status: 400,
+      message: 'invalid parameters',
+      errors: e.message
+    }
   end
 
   private

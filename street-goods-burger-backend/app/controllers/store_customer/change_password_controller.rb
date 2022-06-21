@@ -13,6 +13,12 @@ class StoreCustomer::ChangePasswordController < StoreCustomer::StoreCustomerCont
                              }
                            )
     render json: change_password_info
+  rescue ActionController::ParameterMissing => e
+    render json: {
+      status: 400,
+      message: 'invalid parameters',
+      errors: e.message
+    }
   end
 
   private

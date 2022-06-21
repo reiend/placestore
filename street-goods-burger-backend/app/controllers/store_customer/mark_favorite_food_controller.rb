@@ -11,6 +11,12 @@ class StoreCustomer::MarkFavoriteFoodController < StoreCustomer::StoreCustomerCo
                            food_info: food_info_params
                          )
     render json: favorite_food_info
+  rescue ActionController::ParameterMissing => e
+    render json: {
+      status: 400,
+      message: 'invalid parameters',
+      errors: e.message
+    }
   end
 
   private
