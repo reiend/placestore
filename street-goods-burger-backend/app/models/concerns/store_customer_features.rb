@@ -11,6 +11,26 @@ module StoreCustomerFeatures
     carted_food_price = ordered_food[:price]
     total_price_food_carted = carted_food_quantity * carted_food_price
 
+    case store_transaction[:status]
+    when 'delivered'
+      return {
+        status: 422,
+        message: 'this transaction has already been delivered'
+      }
+
+    when 'processing'
+      return {
+        status: 422,
+        message: 'this transaction is in process'
+      }
+
+    when 'canceled'
+      return {
+        status: 422,
+        message: 'this transaction has already been canceled'
+      }
+    end
+
     if has_no_cart
 
       # create new cart if store customer store transaction has no cart
