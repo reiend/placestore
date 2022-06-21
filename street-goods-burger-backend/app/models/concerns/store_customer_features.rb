@@ -11,6 +11,7 @@ module StoreCustomerFeatures
     end
 
     store_transaction_info = store_transactions.last
+
     store_transaction_id = store_transaction_info[:id]
     has_no_cart = store_transaction_info.cart.nil?
 
@@ -24,6 +25,12 @@ module StoreCustomerFeatures
       return {
         status: 422,
         message: 'this transaction has already been delivered'
+      }
+
+    when 'pre_process'
+      return {
+        status: 422,
+        message: 'store transaction is on pre process, please create new store transaction'
       }
 
     when 'processing'
