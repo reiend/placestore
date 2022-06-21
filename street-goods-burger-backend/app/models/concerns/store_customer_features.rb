@@ -278,6 +278,12 @@ module StoreCustomerFeatures
         status: 200,
         message: 'successfully canceled order'
       }
+    when 'pre_process'
+      store_transaction.update!(status: 'canceled')
+      {
+        status: 200,
+        message: 'successfully canceled order'
+      }
     when 'canceled'
       {
         status: 200,

@@ -10,21 +10,16 @@ module StoreAdminFeatures
       cart_info = JSON.parse(Cart.where(store_transaction_id:).to_json)[0]
       cart_info_id = cart_info['id']
 
-      # get food orders from that cart
-      food_order_info = FoodOrder.all.where(cart_id: cart_info_id)
-
       {
         id: store_transaction_id,
         status: transaction[:status],
+        store_customer_email: transaction.store_customer[:email],
         created_at: transaction[:created_at],
         updated_at: transaction[:updated_at],
         cart_info: {
           id: cart_info_id,
           total_price: cart_info['total_price'],
-          quantity: cart_info['quantity'],
-          created_at: cart_info['created_at'],
-          updated_at: cart_info['updated_at'],
-          food_order_info:
+          quantity: cart_info['quantity']
         }
       }
     end
