@@ -118,6 +118,13 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
           expect(like_food_info[:status]).to (be == 400).or(be == 422)
         end
       end
+
+      describe 'process_food_order' do
+        it '1, invalid food id should raise an error' do
+          process_food_order_info = store_customer.process_food_order(store_transaction_id: -5)
+          expect(process_food_order_info[:status]).to (be == 400).or(be == 422)
+        end
+      end
     end
   end
 
