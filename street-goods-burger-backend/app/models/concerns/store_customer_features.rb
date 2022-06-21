@@ -2,16 +2,24 @@
 
 # StoreCustomerFeatures's module
 module StoreCustomerFeatures
-  def add_to_cart(store_transaction_id:, ordered_food:)
-    store_transaction = store_transactions.find(store_transaction_id)
-    has_no_cart = store_transaction.cart.nil?
+  def add_to_cart(ordered_food:)
+    if store_transactions.length.zero?
+      return {
+        status: 422,
+        message: 'please create store transaction first'
+      }
+    end
+
+    store_transaction_info = store_transactions.last
+    store_transaction_id = store_transaction_info[:id]
+    has_no_cart = store_transaction_info.cart.nil?
 
     # carted food information
     carted_food_quantity = ordered_food[:quantity]
     carted_food_price = ordered_food[:price]
     total_price_food_carted = carted_food_quantity * carted_food_price
 
-    case store_transaction[:status]
+    case store_transaction_info[:status]
     when 'delivered'
       return {
         status: 422,
@@ -48,7 +56,7 @@ module StoreCustomerFeatures
         data: {
           store_transaction_id:,
           cart_total_price: cart[:total_price],
-          cart_total_quantity: cart[:total_price],
+          cart_total_quantity: cart[:quantity],
           food_carted: ordered_food
         }
       }
@@ -57,14 +65,14 @@ module StoreCustomerFeatures
       # uses existing cart here
 
       # current store customer carted food information
-      current_carted_food_quantity = store_transaction.cart[:quantity]
-      current_carted_food_total_price = store_transaction.cart[:total_price]
+      current_carted_food_quantity = store_transaction_info.cart[:quantity]
+      current_carted_food_total_price = store_transaction_info.cart[:total_price]
 
       # add food to store customer cart
-      food_carted = store_transaction.cart.food_orders.create!(ordered_food)
+      food_carted = store_transaction_info.cart.food_orders.create!(ordered_food)
 
       # update cart information based on added food
-      store_transaction
+      store_transaction_info
         .cart
         .update(
           quantity: (current_carted_food_quantity + carted_food_quantity).to_i,
@@ -76,8 +84,8 @@ module StoreCustomerFeatures
         message: 'successfully added food to cart',
         data: {
           store_transaction_id:,
-          cart_total_price: store_transaction.cart[:total_price],
-          cart_total_quantity: store_transaction.cart[:total_price],
+          cart_total_price: store_transaction_info.cart[:total_price],
+          cart_total_quantity: store_transaction_info.cart[:quantity],
           food_carted:
         }
       }
