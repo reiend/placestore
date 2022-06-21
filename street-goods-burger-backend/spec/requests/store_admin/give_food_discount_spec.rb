@@ -13,7 +13,7 @@ RSpec.describe 'StoreAdmin/GiveFoodDiscount Controller', type: :request do
     sign_in @store_admin
   end
 
-  describe 'Post' do
+  describe 'Put' do
     describe 'store_admin/give_food_discount' do
       let(:give_food_discount_info) do
         JSON.parse(response.body)

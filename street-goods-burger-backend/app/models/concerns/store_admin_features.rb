@@ -228,7 +228,7 @@ module StoreAdminFeatures
   end
 
   def give_food_discount(food_id:, food_discount_percent:)
-    food = Food.find(food_id)
+    food = store.foods.find(food_id)
     food.update_columns(discount: food_discount_percent)
 
     {
