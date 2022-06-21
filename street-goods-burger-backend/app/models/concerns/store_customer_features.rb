@@ -343,4 +343,62 @@ module StoreCustomerFeatures
       errors: e.message
     }
   end
+
+  def process_food_order(store_transaction_id:)
+    store_transaction = store_transactions.find(store_transaction_id)
+
+    store_transaction_status = store_transaction[:status]
+
+    case store_transaction_status
+    when 'pending'
+      store_transaction.update!(status: 'pre_process')
+      {
+        status: 200,
+        message: 'successfully pre process order'
+      }
+    when 'pre_process'
+      {
+        status: 200,
+        message: 'food order is already in pre process'
+      }
+    when 'canceled'
+      {
+        status: 200,
+        message: 'order is already been canceled'
+      }
+    when 'processing'
+      {
+        status: 200,
+        message: 'sorry, you cannot cancel this transaction, your order is being process'
+      }
+    when 'delivered'
+      {
+        status: 200,
+        message: 'food was already been delivered '
+      }
+    else
+      {
+        status: 400,
+        message: 'invalid transaction'
+      }
+    end
+  rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 400,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue ActiveRecord::RecordInvalid => e
+    {
+      status: 422,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue NoMethodError => e
+    {
+      status: 422,
+      message: "can't do calculations based on data provided",
+      errors: e.message
+    }
+  end
 end
