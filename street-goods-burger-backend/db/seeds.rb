@@ -10,33 +10,39 @@
 
 Store.create!(store_name: 'Street Goods Burger', address: 'address')
 
-Store
-  .first
-  .store_admins
-  .create!(
-    email: 'admin@gmail.com',
-    password: 'admin12345',
-    password_confirmation: 'admin12345'
-  )
+admin = Store
+        .first
+        .store_admins
+        .create!(
+          email: 'admin@gmail.com',
+          password: 'admin12345',
+          password_confirmation: 'admin12345'
+        )
 
-Store
-  .first
-  .store_customers
-  .create!(
-    first_name: 'store1',
-    last_name: 'customer1',
-    email: 'store_customer1@gmail.com',
-    password: '1234567',
-    password_confirmation: '1234567'
-  )
+admin.confirm
 
-Store
-  .first
-  .store_customers
-  .create!(
-    first_name: 'store2',
-    last_name: 'customer2',
-    email: 'store_customer2@gmail.com',
-    password: '1234567',
-    password_confirmation: '1234567'
-  )
+store_customer_one = Store
+                     .first
+                     .store_customers
+                     .create!(
+                       first_name: 'store1',
+                       last_name: 'customer1',
+                       email: 'store_customer1@gmail.com',
+                       password: '1234567',
+                       password_confirmation: '1234567'
+                     )
+
+store_customer_one.confirm
+
+store_customer_second = Store
+                        .first
+                        .store_customers
+                        .create!(
+                          first_name: 'store2',
+                          last_name: 'customer2',
+                          email: 'store_customer2@gmail.com',
+                          password: '1234567',
+                          password_confirmation: '1234567'
+                        )
+
+store_customer_second.confirm

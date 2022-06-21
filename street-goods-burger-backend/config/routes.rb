@@ -29,4 +29,8 @@ Rails.application.routes.draw do
     post 'mark_favorite_food', to: 'mark_favorite_food#create'
     post 'create_store_transaction', to: 'create_store_transaction#create'
   end
+
+  namespace :store_admin do
+    get 'view_store_transactions', to: 'view_store_transactions#index'
+  end
 end
