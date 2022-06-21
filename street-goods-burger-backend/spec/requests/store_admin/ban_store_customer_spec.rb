@@ -13,7 +13,7 @@ RSpec.describe 'StoreAdmin/BanStoreCustomer Controller', type: :request do
     sign_in @store_admin
   end
 
-  describe 'Post' do
+  describe 'Put' do
     describe 'store_admin/ban_store_customer' do
       let(:ban_store_customer_info) do
         JSON.parse(response.body)
