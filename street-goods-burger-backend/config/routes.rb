@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   namespace :store_admin do
     get 'view_store_transactions', to: 'view_store_transactions#index'
     get 'view_registered_store_customers', to: 'view_registered_store_customers#index'
+    get 'view_store_customer_food_orders', to: 'view_store_customer_food_orders#index'
     post 'give_store_customer_discount', to: 'give_store_customer_discount#create'
   end
 end
