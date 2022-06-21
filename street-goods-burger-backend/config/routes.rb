@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
     put 'cancel_order', to: 'cancel_order#update'
     put 'change_password', to: 'change_password#update'
+    put 'like_food', to: 'like_food#update'
 
     post 'add_to_cart', to: 'add_to_cart#create'
     post 'create_food_review', to: 'create_food_review#create'
