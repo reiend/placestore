@@ -13,6 +13,12 @@ class StoreAdmin::GiveFoodDiscountController < StoreAdmin::StoreAdminController
                               )
 
     render json: give_food_discount_info
+  rescue ActionController::ParameterMissing => e
+    render json: {
+      status: 400,
+      message: 'invalid parameters',
+      errors: e.message
+    }
   end
 
   private

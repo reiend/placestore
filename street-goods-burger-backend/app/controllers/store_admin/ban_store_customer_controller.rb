@@ -9,6 +9,12 @@ class StoreAdmin::BanStoreCustomerController < StoreAdmin::StoreAdminController
                               .ban_store_customer(store_customer_id:)
 
     render json: ban_store_customer_info
+  rescue ActionController::ParameterMissing => e
+    render json: {
+      status: 400,
+      message: 'invalid parameters',
+      errors: e.message
+    }
   end
 
   private

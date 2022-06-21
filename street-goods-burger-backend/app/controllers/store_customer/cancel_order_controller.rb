@@ -6,6 +6,12 @@ class StoreCustomer::CancelOrderController < StoreCustomer::StoreCustomerControl
     store_transaction_id = cancel_order_params[:store_transaction_id]
     cancel_order_info = current_store_customer.cancel_order(store_transaction_id:)
     render json: cancel_order_info
+  rescue ActionController::ParameterMissing => e
+    render json: {
+      status: 400,
+      message: 'invalid parameters',
+      errors: e.message
+    }
   end
 
   private

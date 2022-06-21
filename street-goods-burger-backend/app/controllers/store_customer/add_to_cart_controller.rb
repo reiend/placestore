@@ -10,6 +10,12 @@ class StoreCustomer::AddToCartController < StoreCustomer::StoreCustomerControlle
     )
 
     render json: add_to_cart_info
+  rescue ActionController::ParameterMissing => e
+    render json: {
+      status: 400,
+      message: 'invalid parameters',
+      errors: e.message
+    }
   end
 
   private
