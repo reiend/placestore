@@ -27,5 +27,6 @@ Rails.application.routes.draw do
     post 'add_to_cart', to: 'add_to_cart#create'
     post 'create_food_review', to: 'create_food_review#create'
     post 'mark_favorite_food', to: 'mark_favorite_food#create'
+    post 'create_store_transaction', to: 'create_store_transaction#create'
   end
 end
