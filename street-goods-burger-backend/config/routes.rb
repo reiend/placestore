@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
     put 'give_warning_store_customer', to: 'give_warning_store_customer#update'
     put 'ban_store_customer', to: 'ban_store_customer#update'
+    put 'give_food_discount', to: 'give_food_discount#update'
 
     post 'give_store_customer_discount', to: 'give_store_customer_discount#create'
   end
