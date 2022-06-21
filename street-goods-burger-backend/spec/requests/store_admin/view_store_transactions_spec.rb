@@ -26,7 +26,7 @@ RSpec.describe 'StoreAdmin/ViewStoreTransactions Controller', type: :request do
         expect(response).to have_http_status(:success)
       end
 
-      it '2, store customer data json should not be nil' do
+      it '2, store admin data json should not be nil' do
         expect(view_store_transactions_info).to_not be_nil
       end
     end
