@@ -12,7 +12,7 @@ module StoreTransactionValidations
     validates :status,
               presence: true,
               inclusion: {
-                in: %w[pending processing delivered canceled],
+                in: %w[pending pre_process processing delivered canceled],
                 message: 'Invalid status value'
               }
   end
