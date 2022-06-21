@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     get 'view_store_customer_food_orders', to: 'view_store_customer_food_orders#index'
 
     put 'give_warning_store_customer', to: 'give_warning_store_customer#update'
+    put 'ban_store_customer', to: 'ban_store_customer#update'
 
     post 'give_store_customer_discount', to: 'give_store_customer_discount#create'
   end
