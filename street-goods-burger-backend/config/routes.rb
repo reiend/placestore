@@ -44,5 +44,7 @@ Rails.application.routes.draw do
 
     post 'give_store_customer_discount', to: 'give_store_customer_discount#create'
     post 'add_new_food', to: 'add_new_food#create'
+
+    delete 'remove_food', to: 'remove_food#destroy'
   end
 end

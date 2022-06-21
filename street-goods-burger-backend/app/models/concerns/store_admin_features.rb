@@ -320,8 +320,12 @@ module StoreAdminFeatures
   end
 
   def remove_food(food_id:)
-    food = store.foods.find(food_id).delete
+    # if food has reviews delete reviews first
+    unless (store.foods.find(food_id).reviews.length.zero?) 
+      store.foods.find(food_id).reviews.where(food_id:).delete_all
+    end
 
+    food = store.foods.find(food_id).delete
     {
       status: 200,
       message: 'successfully removed food',
