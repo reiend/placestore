@@ -65,13 +65,23 @@ module StoreAdminFeatures
     valid_date = DateTime.now + personal_discount_info[:hour].hour
     store_customer_id = personal_discount_info[:store_customer_id]
 
-    PersonalDiscount.create!(
+    store_customer_discount_info = PersonalDiscount.create!(
       food_name:,
       food_category:,
       discount:,
       valid_date:,
       store_customer_id:
     )
+
+    {
+      status: 200,
+      successfully: "successfully given #{store.store_customers.find(store_customer_id)[:email]} a discount",
+      data: {
+        store_customer_discount_info:,
+        is_valid: DateTime.now < valid_date
+      }
+
+    }
   rescue ActiveRecord::RecordNotFound => e
     {
       status: 400,
