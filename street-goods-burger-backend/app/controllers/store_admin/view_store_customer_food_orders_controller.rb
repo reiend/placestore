@@ -7,6 +7,12 @@ class StoreAdmin::ViewStoreCustomerFoodOrdersController < StoreAdmin::StoreAdmin
     view_store_customer_food_orders_info = current_store_admin
                                            .view_store_customer_food_orders(store_customer_id:)
     render json: view_store_customer_food_orders_info
+  rescue ActionController::ParameterMissing => e
+    render json: {
+      status: 400,
+      message: 'invalid parameters',
+      errors: e.message
+    }
   end
 
   private

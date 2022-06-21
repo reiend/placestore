@@ -9,6 +9,12 @@ class StoreAdmin::GiveStoreCustomerDiscountController < StoreAdmin::StoreAdminCo
                                         .give_store_customer_discount(personal_discount_info:)
 
     render json: give_store_customer_discount_info
+  rescue ActionController::ParameterMissing => e
+    render json: {
+      status: 400,
+      message: 'invalid parameters',
+      errors: e.message
+    }
   end
 
   private
