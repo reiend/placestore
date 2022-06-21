@@ -22,8 +22,10 @@ Rails.application.routes.draw do
   namespace :store_customer do
     get 'info', to: 'info#index'
     get 'view_favorite_foods', to: 'view_favorite_foods#index'
+
     put 'cancel_order', to: 'cancel_order#update'
     put 'change_password', to: 'change_password#update'
+
     post 'add_to_cart', to: 'add_to_cart#create'
     post 'create_food_review', to: 'create_food_review#create'
     post 'mark_favorite_food', to: 'mark_favorite_food#create'
@@ -34,6 +36,9 @@ Rails.application.routes.draw do
     get 'view_store_transactions', to: 'view_store_transactions#index'
     get 'view_registered_store_customers', to: 'view_registered_store_customers#index'
     get 'view_store_customer_food_orders', to: 'view_store_customer_food_orders#index'
+
+    put 'give_warning_store_customer', to: 'give_warning_store_customer#update'
+
     post 'give_store_customer_discount', to: 'give_store_customer_discount#create'
   end
 end
