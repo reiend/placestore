@@ -175,7 +175,7 @@ module StoreCustomerFeatures
       status: 200,
       message: 'successfully fetch store customer reviews',
       data: {
-        store_customer_reviews: reviews.all
+        store_customer_reviews: favorite_foods.all
       }
     }
   end
