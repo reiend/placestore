@@ -106,15 +106,58 @@ module StoreCustomerFeatures
   end
 
   def create_store_transaction
-    store_transaction = StoreTransaction.new(store_customer_id: id, store_id:)
-    store_transaction.save
-
-    {
-      status: 200,
-      message: 'successfully create a store transaction',
-      data: {
-        store_transaction:
+    if store_transactions.length.zero?
+      store_transaction = StoreTransaction.new(store_customer_id: id, store_id:)
+      store_transaction.save
+      {
+        status: 200,
+        message: 'successfully create a store transaction',
+        data: {
+          store_transaction:
+        }
       }
+    else
+      current_store_transaction_status = store_transactions.last[:status]
+
+      if current_store_transaction_status == 'pending'
+        return {
+          status: 422,
+          message: 'store customer have a pending store transaction',
+          data: {
+            store_transaction: store_transactions.last
+          }
+        }
+      end
+
+      store_transaction = StoreTransaction.new(store_customer_id: id, store_id:)
+      store_transaction.save
+
+      {
+        status: 200,
+        message: 'successfully create a store transaction',
+        data: {
+          store_transaction:
+        }
+
+      }
+    end
+  rescue ActiveRecord::RecordInvalid => e
+    {
+      status: 400,
+      message: 'please enter valid food attribute ',
+      error: e.message
+    }
+  rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 422,
+      message: 'please enter valid food attribute',
+      errors: e.message
+    }
+  rescue NoMethodError => e
+    {
+      status: 422,
+      message: "can't do calculations based on data provided",
+      errors: e.message
     }
   end
 
