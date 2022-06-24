@@ -5,24 +5,43 @@ module StoreAdminFeatures
   def view_store_transactions(store_id:)
     store_transactions = StoreTransaction.where(store_id:).map do |transaction|
       store_transaction_id = transaction[:id]
+      transaction.cart
 
-      # get store transaction corressponding cart
-      cart_info = JSON.parse(Cart.where(store_transaction_id:).to_json)[0]
-      cart_info_id = cart_info['id']
+      if transaction.cart.nil?
 
-      {
-        id: store_transaction_id,
-        status: transaction[:status],
-        store_customer_email: transaction.store_customer[:email],
-        created_at: transaction[:created_at],
-        updated_at: transaction[:updated_at],
-        cart_info: {
-          id: cart_info_id,
-          total_price: cart_info['total_price'],
-          quantity: cart_info['quantity']
+        # get store transaction corressponding cart
+
+        {
+          id: store_transaction_id,
+          status: transaction[:status],
+          store_customer_email: transaction.store_customer[:email],
+          created_at: transaction[:created_at],
+          updated_at: transaction[:updated_at],
+          cart_info: {
+            message: 'no cart yet'
+          }
         }
-      }
+
+      else
+        # get store transaction corressponding cart
+        cart_info = transaction.cart
+        cart_info_id = cart_info[:id]
+
+        {
+          id: store_transaction_id,
+          status: transaction[:status],
+          store_customer_email: transaction.store_customer[:email],
+          created_at: transaction[:created_at],
+          updated_at: transaction[:updated_at],
+          cart_info: {
+            id: cart_info_id,
+            total_price: cart_info['total_price'],
+            quantity: cart_info['quantity']
+          }
+        }
+      end
     end
+
     {
       status: 200,
       message: 'successfully fetch store transactions',
@@ -321,9 +340,7 @@ module StoreAdminFeatures
 
   def remove_food(food_id:)
     # if food has reviews delete reviews first
-    unless (store.foods.find(food_id).reviews.length.zero?) 
-      store.foods.find(food_id).reviews.where(food_id:).delete_all
-    end
+    store.foods.find(food_id).reviews.where(food_id:).delete_all unless store.foods.find(food_id).reviews.length.zero?
 
     food = store.foods.find(food_id).delete
     {
