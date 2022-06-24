@@ -49,4 +49,8 @@ Rails.application.routes.draw do
 
     delete 'remove_food', to: 'remove_food#destroy'
   end
+
+  scope module: 'stores' do
+    get 'store/food', to: 'food#store_foods'
+  end
 end
