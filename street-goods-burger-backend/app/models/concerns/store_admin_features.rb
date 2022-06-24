@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# git push --set-upstream origin fix/feature/store_admin/view_store_transactions           frozen_string_literal: true
 
 # StoreAdminFeatures module
 module StoreAdminFeatures
@@ -122,7 +122,12 @@ module StoreAdminFeatures
   end
 
   def view_store_customer_food_orders(store_customer_id:)
-    food_orders = StoreCustomer.find(store_customer_id).store_transactions.all.map do |store_transaction|
+    # store transaction with cart
+    with_cart = StoreCustomer.find(store_customer_id).store_transactions.all.filter do |store_transaction|
+      !store_transaction.cart.nil?
+    end
+
+    food_orders = with_cart.map do |store_transaction|
       store_transaction.cart.food_orders
     end
 
@@ -135,24 +140,24 @@ module StoreAdminFeatures
         food_orders:
       }
     }
-  rescue ActiveRecord::RecordNotFound => e
-    {
-      status: 400,
-      message: 'invalid data provided',
-      error: e.message
-    }
-  rescue ActiveRecord::RecordInvalid => e
-    {
-      status: 422,
-      message: 'invalid data provided',
-      error: e.message
-    }
-  rescue NoMethodError => e
-    {
-      status: 422,
-      message: "can't do calculations based on data provided",
-      errors: e.message
-    }
+    # rescue ActiveRecord::RecordNotFound => e
+    # {
+    #   status: 400,
+    #   message: 'invalid data provided',
+    #   error: e.message
+    # }
+    # rescue ActiveRecord::RecordInvalid => e
+    # {
+    #   status: 422,
+    #   message: 'invalid data provided',
+    #   error: e.message
+    # }
+    # rescue NoMethodError => e
+    # {
+    #   status: 422,
+    #   message: "can't do calculations based on data provided",
+    #   errors: e.message
+    # }
   end
 
   def give_warning_store_customer(store_customer_id:)
