@@ -140,24 +140,24 @@ module StoreAdminFeatures
         food_orders:
       }
     }
-    # rescue ActiveRecord::RecordNotFound => e
-    # {
-    #   status: 400,
-    #   message: 'invalid data provided',
-    #   error: e.message
-    # }
-    # rescue ActiveRecord::RecordInvalid => e
-    # {
-    #   status: 422,
-    #   message: 'invalid data provided',
-    #   error: e.message
-    # }
-    # rescue NoMethodError => e
-    # {
-    #   status: 422,
-    #   message: "can't do calculations based on data provided",
-    #   errors: e.message
-    # }
+    rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 400,
+      message: 'invalid data provided',
+      error: e.message
+    }
+    rescue ActiveRecord::RecordInvalid => e
+    {
+      status: 422,
+      message: 'invalid data provided',
+      error: e.message
+    }
+    rescue NoMethodError => e
+    {
+      status: 422,
+      message: "can't do calculations based on data provided",
+      errors: e.message
+    }
   end
 
   def give_warning_store_customer(store_customer_id:)
