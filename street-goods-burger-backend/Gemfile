@@ -40,6 +40,9 @@ gem 'devise'
 gem 'devise-jwt'
 gem 'fast_jsonapi'
 
+gem 'dotenv'
+gem 'dotenv-rails'
+
 # for catching emails
 gem 'mailcatcher'
 
