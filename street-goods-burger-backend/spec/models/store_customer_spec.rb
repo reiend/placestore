@@ -128,7 +128,7 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
 
       describe 'update_deliver_address' do
         it '1, invalid deliver address params should raise an error' do
-          expect {store_customer.update_deliver_address() }.to raise_error(ArgumentError)
+          expect { store_customer.update_deliver_address }.to raise_error(ArgumentError)
         end
       end
     end
