@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     get 'view_store_transactions', to: 'view_store_transactions#index'
     get 'view_registered_store_customers', to: 'view_registered_store_customers#index'
     get 'view_store_customer_food_orders', to: 'view_store_customer_food_orders#index'
+    put 'process_order', to: 'process_order#update'
 
     put 'give_warning_store_customer', to: 'give_warning_store_customer#update'
     put 'ban_store_customer', to: 'ban_store_customer#update'
