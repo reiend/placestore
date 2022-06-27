@@ -53,4 +53,9 @@ Rails.application.routes.draw do
   scope module: 'stores' do
     get 'store/food', to: 'food#store_foods'
   end
+
+  scope module: 'payments' do
+    post 'paymongo/gcash/auth', to: 'paymongo#gcash_auth'
+    post 'paymongo/gcash/payment', to: 'paymongo#payment'
+  end
 end
