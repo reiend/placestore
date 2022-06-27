@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   namespace :store_customer do
     get 'info', to: 'info#index'
     get 'view_favorite_foods', to: 'view_favorite_foods#index'
+    get 'pre_process_orders', to: 'pre_process_order#index'
 
     put 'cancel_order', to: 'cancel_order#update'
     put 'change_password', to: 'change_password#update'

@@ -483,4 +483,14 @@ module StoreCustomerFeatures
       errors: e.message
     }
   end
+
+  def pre_process_order
+    {
+      status: 200,
+      message: 'successfully fetch pre process food transactions',
+      data: {
+        pre_process_orders: store_transactions.where(status: 'pre_process')
+      }
+    }
+  end
 end
