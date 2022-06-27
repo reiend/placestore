@@ -21,9 +21,7 @@ class Fake
         },
         type: 'gcash',
         currency: 'PHP'
-
       }
-
     }
   end
 
