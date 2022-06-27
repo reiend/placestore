@@ -125,6 +125,12 @@ RSpec.describe 'StoreCustomer\'s Model', type: :model do
           expect(process_food_order_info[:status]).to (be == 400).or(be == 422)
         end
       end
+
+      describe 'update_deliver_address' do
+        it '1, invalid deliver address params should raise an error' do
+          expect {store_customer.update_deliver_address() }.to raise_error(ArgumentError)
+        end
+      end
     end
   end
 
