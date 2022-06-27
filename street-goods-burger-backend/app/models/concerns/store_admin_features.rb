@@ -140,19 +140,19 @@ module StoreAdminFeatures
         food_orders:
       }
     }
-    rescue ActiveRecord::RecordNotFound => e
+  rescue ActiveRecord::RecordNotFound => e
     {
       status: 400,
       message: 'invalid data provided',
       error: e.message
     }
-    rescue ActiveRecord::RecordInvalid => e
+  rescue ActiveRecord::RecordInvalid => e
     {
       status: 422,
       message: 'invalid data provided',
       error: e.message
     }
-    rescue NoMethodError => e
+  rescue NoMethodError => e
     {
       status: 422,
       message: "can't do calculations based on data provided",
@@ -353,6 +353,60 @@ module StoreAdminFeatures
       message: 'successfully removed food',
       data: {
         food:
+      }
+    }
+  rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 400,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue ActiveRecord::RecordInvalid => e
+    {
+      status: 422,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue NoMethodError => e
+    {
+      status: 422,
+      message: "can't do calculations based on data provided",
+      errors: e.message
+    }
+  end
+
+  def process_order(store_customer_id:, store_transaction_id:)
+    store_customer = store.store_customers.find(store_customer_id)
+
+    store_transaction_info = store_customer.store_transactions.find(store_transaction_id)
+
+    case store_transaction_info[:status]
+    when 'delivered'
+      return {
+        status: 422,
+        message: 'this transaction has already been delivered'
+      }
+    when 'processing'
+      return {
+        status: 422,
+        message: 'this transaction is already in process'
+      }
+
+    when 'canceled'
+      return {
+        status: 422,
+        message: 'this transaction has already been canceled'
+      }
+    end
+
+    # process order
+    store_transaction_info.update_columns(status: 'processing')
+
+    {
+      status: 200,
+      message: 'successfully process order',
+      data: {
+        store_transaction: store_transaction_info
       }
     }
   rescue ActiveRecord::RecordNotFound => e
