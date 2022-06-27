@@ -408,4 +408,79 @@ module StoreCustomerFeatures
       errors: e.message
     }
   end
+
+  def update_deliver_address(deliver_address_params:)
+    store_transaction_info = store_transactions.last
+
+    if store_transaction_info.nil?
+      {
+        status: 422,
+        message: 'please create store transaction first'
+      }
+    end
+
+    has_no_cart = store_transaction_info.cart.nil?
+
+    if has_no_cart
+      return {
+        status: 422,
+        message: 'please create a cart first'
+      }
+
+    end
+
+    case store_transaction_info[:status]
+    when 'delivered'
+      {
+        status: 422,
+        message: 'this transaction has already been delivered'
+      }
+    when 'processing'
+
+      {
+        status: 422,
+        message: 'this transaction is in process'
+      }
+
+    when 'canceled'
+      {
+        status: 422,
+        message: 'this transaction has already been canceled'
+      }
+    else
+      # update address
+      store_transaction_info
+        .cart
+        .update_columns(deliver_address: deliver_address_params[:deliver_address])
+      {
+        status: 200,
+        message: 'successfully update deliver address for this cart',
+        data: store_transaction_info.cart
+      }
+    end
+  rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 400,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue ActiveRecord::RecordInvalid => e
+    {
+      status: 422,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue NoMethodError => e
+    {
+      status: 422,
+      message: "can't do calculations based on data provided",
+      errors: e.message
+    }
+  rescue ArgumentError => e
+    {
+      status: 422,
+      message: "'invalid data provided",
+      errors: e.message
+    }
+  end
 end

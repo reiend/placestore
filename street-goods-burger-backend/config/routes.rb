@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     put 'change_password', to: 'change_password#update'
     put 'like_food', to: 'like_food#update'
     put 'process_food_order', to: 'process_food_order#update'
+    put 'deliver_address', to: 'deliver_address#update'
 
     post 'add_to_cart', to: 'add_to_cart#create'
     post 'create_food_review', to: 'create_food_review#create'
@@ -52,5 +53,10 @@ Rails.application.routes.draw do
 
   scope module: 'stores' do
     get 'store/food', to: 'food#store_foods'
+  end
+
+  scope module: 'payments' do
+    post 'paymongo/gcash/auth', to: 'paymongo#gcash_auth'
+    post 'paymongo/gcash/payment', to: 'paymongo#payment'
   end
 end

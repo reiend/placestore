@@ -3,7 +3,6 @@ require 'net/http'
 require 'openssl'
 require 'json'
 require 'dotenv'
-require './lib/fake_credentials'
 
 Dotenv.load
 
@@ -22,8 +21,7 @@ class Paymongo
   end
 
   def payment(base_url:, params:)
-    response = request_response(base_url:, params:)
-    # return response
+    request_response(base_url:, params:)
   end
 
   def checkout_url
