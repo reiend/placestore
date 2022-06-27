@@ -428,4 +428,63 @@ module StoreAdminFeatures
       errors: e.message
     }
   end
+
+  def mark_deliver(store_customer_id:, store_transaction_id:)
+    store_customer = store.store_customers.find(store_customer_id)
+    store_transaction_info = store_customer.store_transactions.find(store_transaction_id)
+
+    case store_transaction_info[:status]
+    when 'delivered'
+      return {
+        status: 422,
+        message: 'this transaction has already been delivered'
+      }
+
+    when 'pre_process'
+      return {
+        status: 422,
+        message: 'store transaction is still on pre process'
+      }
+
+    when 'canceled'
+      return {
+        status: 422,
+        message: 'this transaction has already been canceled'
+      }
+    end
+
+    # deliver order
+    store_transaction_info.update_columns(status: 'delivered')
+    {
+      status: 200,
+      message: 'successfully delivered order',
+      data: {
+        store_transaction: store_transaction_info
+      }
+    }
+  rescue ActiveRecord::RecordNotFound => e
+    {
+      status: 400,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue ActiveRecord::RecordInvalid => e
+    {
+      status: 422,
+      message: 'invalid data provided',
+      error: e.message
+    }
+  rescue NoMethodError => e
+    {
+      status: 422,
+      message: "can't do calculations based on data provided",
+      errors: e.message
+    }
+  rescue ArgumentError => e
+    {
+      status: 422,
+      message: "'invalid data provided",
+      errors: e.message
+    }
+  end
 end
