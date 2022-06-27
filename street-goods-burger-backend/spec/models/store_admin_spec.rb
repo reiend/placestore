@@ -88,5 +88,19 @@ RSpec.describe "StoreAdmin's Model", type: :model do
         expect(remove_food_info[:status]).to (be == 400).or(be == 422)
       end
     end
+
+    describe 'process_order' do
+      it '1, invalid params should raise an error ' do
+        process_order_info = store_admin.process_order(store_customer_id: -1, store_transaction_id: -1)
+        expect(process_order_info[:status]).to (be == 400).or(be == 422)
+      end
+    end
+
+    describe 'deliver_order' do
+      it '1, invalid params should raise an error ' do
+        deliver_order_info = store_admin.mark_deliver(store_customer_id: -1, store_transaction_id: -1)
+        expect(deliver_order_info[:status]).to (be == 400).or(be == 422)
+      end
+    end
   end
 end
