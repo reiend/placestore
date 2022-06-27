@@ -7,7 +7,8 @@ RSpec.describe "Cart's Model", type: :model do
     faker_quantity = Faker::Number.between(from: 1, to: 100)
     Cart.new(
       quantity: faker_quantity,
-      total_price: faker_quantity * Faker::Commerce.price
+      total_price: faker_quantity * Faker::Commerce.price,
+      deliver_address: Faker::Address.city
     )
   end
 
@@ -48,6 +49,16 @@ RSpec.describe "Cart's Model", type: :model do
 
       it '3, must be greater than 0 ' do
         expect(cart.total_price).to be > 0
+      end
+    end
+
+    describe 'address' do
+      it '1, must be a Decimal' do
+        expect(cart.deliver_address).to be_a String
+      end
+
+      it '3, must be greater than -1 and less than 256' do
+        expect(cart.deliver_address.length).to (be >= 0).or(be <= 256)
       end
     end
   end
