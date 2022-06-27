@@ -15,5 +15,7 @@ module CartValidations
     validates :total_price,
               presence: true,
               numericality: { greater_than: -0.99 }
+
+    validates :deliver_address, length: { minimum: 0, maximum: 256 }
   end
 end

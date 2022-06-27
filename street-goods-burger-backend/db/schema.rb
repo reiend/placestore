@@ -15,6 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
   enable_extension "plpgsql"
 
   create_table "carts", force: :cascade do |t|
+    t.string "deliver_address", default: "", null: false
     t.integer "quantity", default: 1, null: false
     t.decimal "total_price", default: "0.0", null: false
     t.datetime "created_at", null: false
@@ -62,7 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
   end
 
   create_table "personal_discounts", force: :cascade do |t|
-    t.datetime "valid_date", default: "2022-06-19 06:12:03", null: false
+    t.datetime "valid_date", default: "2022-06-28 19:32:21", null: false
     t.decimal "discount", default: "0.0", null: false
     t.string "food_name", default: "", null: false
     t.string "food_category", default: "", null: false
