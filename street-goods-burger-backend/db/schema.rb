@@ -56,6 +56,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
     t.integer "like", default: 0, null: false
     t.decimal "discount", default: "0.0", null: false
     t.boolean "is_available", default: true, null: false
+    t.string "picture"
+    t.string "picture_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "store_id", null: false
@@ -63,7 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
   end
 
   create_table "personal_discounts", force: :cascade do |t|
-    t.datetime "valid_date", default: "2022-06-28 19:32:21", null: false
+    t.datetime "valid_date", default: "2022-07-02 21:06:09", null: false
     t.decimal "discount", default: "0.0", null: false
     t.string "food_name", default: "", null: false
     t.string "food_category", default: "", null: false

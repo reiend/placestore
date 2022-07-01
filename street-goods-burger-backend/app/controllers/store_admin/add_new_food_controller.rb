@@ -26,7 +26,8 @@ class StoreAdmin::AddNewFoodController < StoreAdmin::StoreAdminController
         :name,
         :category,
         :description,
-        :price
+        :price,
+        :picture
       )
   end
 end

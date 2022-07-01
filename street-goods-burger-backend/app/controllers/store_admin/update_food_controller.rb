@@ -10,6 +10,7 @@ class StoreAdmin::UpdateFoodController < StoreAdmin::StoreAdminController
     category = food_info[:category]
     description = food_info[:description]
     price = food_info[:price]
+    picture = food_info[:picture]
 
     update_food_info = current_store_admin
                        .update_food(
@@ -18,7 +19,8 @@ class StoreAdmin::UpdateFoodController < StoreAdmin::StoreAdminController
                            name:,
                            category:,
                            description:,
-                           price:
+                           price:,
+                           picture:
                          }
                        )
 
@@ -38,7 +40,7 @@ class StoreAdmin::UpdateFoodController < StoreAdmin::StoreAdminController
       .require(:food_info)
       .permit(
         :food_id,
-        { new_food_info: %i[name category description price] }
+        { new_food_info: %i[name category description price picture] }
       )
   end
 end
