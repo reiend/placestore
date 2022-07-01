@@ -19,11 +19,7 @@ RSpec.describe 'StoreAdmin/AddNewFood Controller', type: :request do
         JSON.parse(response.body)
       end
       before(:each) do
-        post '/store_admin/add_new_food', params: {
-          food_info: {
-            ingredients: 'secret'
-          }
-        }
+        post '/store_admin/add_new_food'
       end
 
       it '1, invalid params info should raise an error' do
