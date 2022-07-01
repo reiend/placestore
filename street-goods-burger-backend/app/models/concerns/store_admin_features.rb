@@ -284,7 +284,23 @@ module StoreAdminFeatures
   end
 
   def add_new_food(food_info:)
-    new_food = store.foods.create!(food_info)
+    name = food_info[:name]
+    price = food_info[:price]
+    picture_url = food_info[:picture]
+    category = food_info[:category]
+    description = food_info[:description]
+
+    # upload image to cloudinary
+    image_info = Cloudinary::Uploader.upload(picture_url)
+    new_food = store.foods.create!({
+                                     name:,
+                                     price:,
+                                     category:,
+                                     description:,
+                                     picture: image_info['url'],
+                                     picture_id: image_info['public_id']
+                                   })
+
     {
       status: 200,
       message: 'successfully add new food',
@@ -310,17 +326,42 @@ module StoreAdminFeatures
       message: "can't do calculations based on data provided",
       errors: e.message
     }
+  rescue ArgumentError => e
+    {
+      status: 422,
+      message: 'please enter valid params',
+      errors: e.message
+    }
   end
 
   def update_food(food_id:, food_info:)
     food = store.foods.find(food_id)
-    food.update_columns(food_info)
+
+    name = food_info[:name]
+    price = food_info[:price]
+    category = food_info[:category]
+    description = food_info[:description]
+    picture_url = food_info[:picture]
+
+    prev_picture_id = food[:picture_id]
+
+    # updated cloudinary image
+    image_info = Cloudinary::Uploader.upload(picture_url, public_id: prev_picture_id)
+
+    food.update_columns({
+                          name:,
+                          price:,
+                          category:,
+                          description:,
+                          picture: image_info['url'],
+                          picture_id: image_info['public_id']
+                        })
 
     {
       status: 200,
       message: 'successfully updated food information',
       data: {
-        food_info: food
+        food_info: store.foods.find(food_id)
       }
     }
   rescue ActiveRecord::RecordNotFound => e
