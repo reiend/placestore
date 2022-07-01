@@ -70,8 +70,7 @@ RSpec.describe "StoreAdmin's Model", type: :model do
 
     describe 'add_new_food' do
       it '1, if required food info are not provided don\'t create new food' do
-        add_new_food_info = store_admin.add_new_food(food_info: { name: Faker::Food.dish })
-        expect(add_new_food_info[:status]).to (be == 400).or(be == 422)
+        expect { store_admin.add_new_food }.to raise_error ArgumentError
       end
     end
 

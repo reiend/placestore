@@ -11,7 +11,9 @@ RSpec.describe "Food's Model", type: :model do
       description: Faker::Food.description,
       is_available: Faker::Boolean.boolean(true_ratio: 0.5),
       discount: Faker::Number.between(from: 1.00, to: 99.9).round(2),
-      like: Faker::Number.between(from: 1, to: 100)
+      like: Faker::Number.between(from: 1, to: 100),
+      picture: 'picture.jpeg',
+      picture_id: 'picture_id'
     )
   end
 
@@ -106,6 +108,18 @@ RSpec.describe "Food's Model", type: :model do
 
       it '2, must be greater or equal than 0' do
         expect(food.like).to be >= 0
+      end
+    end
+
+    describe 'picture' do
+      it '1, must be a String' do
+        expect(food.picture).to be_a String
+      end
+    end
+
+    describe 'picture_id' do
+      it '1, must be a String' do
+        expect(food.picture_id).to be_a String
       end
     end
   end
