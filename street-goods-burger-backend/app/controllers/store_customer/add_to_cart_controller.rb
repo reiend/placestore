@@ -5,6 +5,7 @@ class StoreCustomer::AddToCartController < StoreCustomer::StoreCustomerControlle
   def create
     ordered_food = add_to_cart_params[:ordered_food]
 
+    # render json: ordered_food
     add_to_cart_info = current_store_customer.add_to_cart(
       ordered_food:
     )
