@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/res/styles/app.css"],
+  "sourcesContent": ["@tailwind base;\n@tailwind utilities;\n@tailwind components;\n"],
+  "mappings": ";AAAA;AACA;AACA;",
+  "names": []
+}
