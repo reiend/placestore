@@ -9,7 +9,9 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "paths": {
-      "@components/*": ["./src/res/components/*"]
+      "@components/*": ["./src/res/components/*"],
+      "@schemas/*": ["./src/res/schemas/*"],
+      "@globals/*": ["./src/res/globals/*"]
     }
   }
 }

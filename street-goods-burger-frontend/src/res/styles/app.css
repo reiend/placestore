@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
+
+
+.street-goods-burger-logo {
+  width: 100px;
+  height: 100px;
+}
