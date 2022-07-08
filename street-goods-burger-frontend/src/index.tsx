@@ -1,6 +1,9 @@
 import React from "react";
-import ReactDom from "react-dom";
-import App from "./app";
+import ReactDOM from "react-dom";
+import App from "./App.tsx";
+import Element from "@libs/reiend/js/element.js";
 
+const app = Element().createElement("div").init();
+Element().queryElement("body").appendChild(app);
 
-ReactDom.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, app);

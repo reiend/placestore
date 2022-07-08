@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+.store-navbar {
+  @apply flex justify-between px-10 h-[15vh] items-center;
+}
+
+.store-navbar__logo {
+  width: 100px;
+  height: 100px;
+
+}

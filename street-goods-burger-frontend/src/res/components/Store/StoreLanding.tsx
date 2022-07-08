@@ -1,6 +1,6 @@
 import React from "react";
 
-import StoreLandingNavbar from "./StoreLandingNavbar";
+import StoreLandingNavbar from "./StoreLandingNavbar.tsx";
 
 const StoreLanding = () => {
   return (

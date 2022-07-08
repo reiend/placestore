@@ -1,17 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "jsx": "preserve",
-    "module": "ESNext",
-    "strict": true,
-    "moduleResolution": "node",
+    "target": "es2016",
+    "jsx": "react",
+    "module": "commonjs",
+    "rootDir": "src",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "strict": true,
     "skipLibCheck": true,
-    "paths": {
-      "@components/*": ["./src/res/components/*"],
-      "@schemas/*": ["./src/res/schemas/*"],
-      "@globals/*": ["./src/res/globals/*"]
-    }
+    "allowJs": true
   }
 }
