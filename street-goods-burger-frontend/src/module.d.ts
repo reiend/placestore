@@ -1,3 +1,5 @@
+// this will removed Tsserver linting error when doing an import
+
 declare module "*.jpeg" {
   const content: any;
   export default content;
