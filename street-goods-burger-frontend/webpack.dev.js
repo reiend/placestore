@@ -33,7 +33,7 @@ module.exports = {
       "@reiend/quirk": `@reiend/quirk/index.scss`,
 
       // libs
-      "@libs": `${ROOT_PATH.src}/lib`,
+      "@libs": `${ROOT_PATH.src}/libs`,
 
       // globals
       "@globals": `${ROOT_PATH.src}/res/globals`,
@@ -114,7 +114,7 @@ module.exports = {
   plugins: [
     // create root html
     new HtmlWebpackPlugin({
-      title: "quirk-scss-lib",
+      title: "title here",
       filename: "index.html",
     }),
     // new Dotenv(),
