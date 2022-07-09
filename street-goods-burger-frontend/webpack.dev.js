@@ -1,3 +1,4 @@
+/* eslint-disable */
 const path = require("path"); /* node path */
 const glob = require("glob");
 const HtmlWebpackPlugin = require("html-webpack-plugin"); /* for loading / create html */
@@ -16,9 +17,8 @@ const CustomExtractor = (content) => {
 module.exports = {
   mode: "development",
   entry: "./src/index.tsx",
-
   output: {
-    filename: "[name][contenthash].bundle.js",
+    filename: '[name][contenthash].bundle.js',
     path: path.resolve(__dirname, "./dist"),
     clean: true,
   },
@@ -123,9 +123,9 @@ module.exports = {
       filename: "[name].bundle.css",
     }),
     // unused style clean up
-    new PurgecssPlugin({
-      paths: glob.sync(`${ROOT_PATH.src}/**/*`, { nodir: true }),
-    }),
+    // new PurgecssPlugin({
+    //   paths: glob.sync(`${ROOT_PATH.src}/**/*`, { nodir: true }),
+    // }),
   ],
 
   devServer: {

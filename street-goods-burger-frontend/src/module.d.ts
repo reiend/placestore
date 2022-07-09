@@ -1,16 +1,16 @@
 // this will removed Tsserver linting error when doing an import
 
-declare module "*.jpeg" {
+declare module '*.jpeg' {
   const content: any;
   export default content;
 }
 
-declare module "*.tsx" {
+declare module '*.tsx' {
   const content: any;
   export default content;
 }
 
-declare module "*.js" {
+declare module '*.js' {
   const content: any;
   export default content;
 }
