@@ -1,5 +1,5 @@
-RSpec.describe 'StoreAdmin/AddNewFood Controller', type: :request do
-  describe 'Post' do
+RSpec.describe 'Store/FoodController', type: :request do
+  describe 'Get' do
     describe 'store/food' do
       before(:each) do
         store = Store.create(
