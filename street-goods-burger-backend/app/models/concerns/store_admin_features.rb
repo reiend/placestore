@@ -359,8 +359,8 @@ module StoreAdminFeatures
     {
       status: 200,
       message: 'successfully updated food information',
-      data: food_info: store.foods.find(food_id)
-      
+      data: store.foods.find(food_id)
+
     }
   rescue ActiveRecord::RecordNotFound => e
     {
