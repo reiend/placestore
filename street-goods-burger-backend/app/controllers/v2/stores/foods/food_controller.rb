@@ -10,6 +10,10 @@ module V2
         # for creating new food for the store
         # this includes uploading images after creating on cloudinary
         include Food::Create
+
+        # for editing current food on the store
+        # this includes replacing old images on cloudinary
+        include Food::Update
       end
     end
   end

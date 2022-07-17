@@ -97,6 +97,7 @@ Rails.application.routes.draw do
     scope module: 'stores' do
       scope module: 'foods' do
         post 'store/food/create', to: 'food#create'
+        put 'store/food/update', to: 'food#update'
       end
     end
   end
