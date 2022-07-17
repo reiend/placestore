@@ -84,17 +84,23 @@ Rails.application.routes.draw do
   }
   # end of authentication
 
+  # store
+  scope module: 'v2' do
+    scope module: 'stores' do
+      get 'store/foods', to: 'store#food_list'
+    end
+  end
+  # end of store
+
   # foods
   scope module: 'v2' do
     scope module: 'stores' do
       scope module: 'foods' do
-        get 'store/foods', to: 'food#index'
-
         post 'store/food/create', to: 'food#create'
       end
     end
   end
   # end of foods
-  #
+
   # end of v2
 end

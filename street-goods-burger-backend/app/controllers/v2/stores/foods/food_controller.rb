@@ -5,10 +5,7 @@ module V2
     module Foods
       # FoodController Template
       class FoodController < StoreController
-        before_action :authenticate_store_admin!, except: [:index]
-
-        # for viewing foods on store
-        include Food::Show
+        before_action :authenticate_store_admin!
 
         # for creating new food for the store
         # this includes uploading images after creating on cloudinary
