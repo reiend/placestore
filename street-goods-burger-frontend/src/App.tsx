@@ -1,6 +1,6 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import StoreLanding from '@components/Store/StoreLanding.tsx';
-// import '@libs/reiend/scss/index.scss';
+import '@libs/reiend/scss/index.scss';
 import '@styles/scss/app.scss';
 
 const App = () => {
