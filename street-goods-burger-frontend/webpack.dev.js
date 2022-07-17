@@ -1,21 +1,24 @@
-const path = require("path"); /* node path */
-const glob = require("glob");
-const HtmlWebpackPlugin = require("html-webpack-plugin"); /* for loading / create html */
-const MinicssExtractPlugin = require("mini-css-extract-plugin"); /* extracting css from js*/
-const PurgecssPlugin = require("purgecss-webpack-plugin"); /* for cleaning unused style */
-const Dotenv = require("dotenv-webpack");
+const path = require('path'); /* node path */
+const glob = require('glob');
+const HtmlWebpackPlugin = require('html-webpack-plugin'); /* for loading / create html */
+const MinicssExtractPlugin = require('mini-css-extract-plugin'); /* extracting css from js*/
+const PurgecssPlugin = require('purgecss-webpack-plugin'); /* for cleaning unused style */
+const tailwindcss = require('tailwindcss');
 
 const ROOT_PATH = {
   src: path.resolve(__dirname, `src`),
 };
 
-module.exports = {
-  mode: "development",
-  entry: "./src/index.js",
+const CustomExtractor = content => {
+  return content.match(/[A-z0-9-:\/\@\>]+/g) || [];
+};
 
+module.exports = {
+  mode: 'development',
+  entry: './src/index.tsx',
   output: {
-    filename: "[name][contenthash].bundle.js",
-    path: path.resolve(__dirname, "./dist"),
+    filename: '[name][contenthash].bundle.js',
+    path: path.resolve(__dirname, './dist'),
     clean: true,
   },
 
@@ -23,33 +26,28 @@ module.exports = {
     // for shorten imports
     alias: {
       // default root
-      "@components": `${ROOT_PATH.src}/res/components`,
+      '@components': `${ROOT_PATH.src}/res/components`,
 
       // for styling
-      "@reiend/quirk": `@reiend/quirk/index.scss`,
+      '@reiend/quirk': `@reiend/quirk/index.scss`,
 
       // libs
-      "@libs": `${ROOT_PATH.src}/lib`,
+      '@libs': `${ROOT_PATH.src}/libs`,
 
       // globals
-      "@globals": `${ROOT_PATH.src}/res/globals`,
+      '@globals': `${ROOT_PATH.src}/res/globals`,
 
       // globals
-      "@styles": `${ROOT_PATH.src}/res/styles/scss`,
+      '@styles': `${ROOT_PATH.src}/res/styles`,
 
       // assets
       // "@images": `${ROOT_PATH.src}/res/assets/images`,
 
       // globals
-      "@assets": `${ROOT_PATH.src}/../public/assets`,
+      '@assets': `${ROOT_PATH.src}/../public/assets`,
 
       // resolve naming conflicts using its file extention
-      extensions: [
-        ".jsx",
-        ".js",
-        ".json",
-        "...",
-      ] /* ... use default extention */,
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
   },
 
@@ -59,30 +57,50 @@ module.exports = {
       {
         // sass or scss
         test: /\.s[ac]ss$/i,
-        use: [MinicssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: [
+          MinicssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [[tailwindcss, 'postcss-preset-env', 'autoprefixer']],
+              },
+            },
+          },
+          'sass-loader',
+        ],
       },
       {
-        // transpiler
-        test: /\.m?(js|jsx)$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
-            targets: { esmodules: true },
-          },
+        test: /\.m?(ts|tsx)$/,
+        loader: 'esbuild-loader',
+        options: {
+          loader: 'tsx', // Remove this if you're not using JSX
+          target: 'es2015', // Syntax to compile to (see options below for possible values)
         },
       },
+      // {
+      //   // transpiler
+      //   test: /\.m?(js|jsx)$/,
+      //   exclude: /(node_modules|bower_components)/,
+      //   use: {
+      //     loader: "babel-loader",
+      //     options: {
+      //       presets: ["@babel/preset-env", "@babel/preset-react"],
+      //       targets: { esmodules: true },
+      //     },
+      //   },
+      // },
       //  pulling assets
       {
         test: /\.(png|svg|jpg|jpeg|gif|jfif)$/i,
-        type: "asset/resource",
+        type: 'asset/resource',
       },
 
       // pulling fonts
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: "asset/resource",
+        type: 'asset/resource',
       },
     ],
   },
@@ -90,27 +108,31 @@ module.exports = {
   plugins: [
     // create root html
     new HtmlWebpackPlugin({
-      title: "Street Goods Burger",
-      filename: "index.html",
+      title: 'title here',
+      filename: 'index.html',
     }),
-    new Dotenv(),
+    // new Dotenv(),
     // css extractor from js
     new MinicssExtractPlugin({
-      filename: "[name].bundle.css",
+      filename: '[name].bundle.css',
     }),
     // unused style clean up
     new PurgecssPlugin({
       paths: glob.sync(`${ROOT_PATH.src}/**/*`, { nodir: true }),
+      defaultExtractor: content =>
+        content.match(/[/@/:\w-/:/-/>]+(?<!:)/g) || [],
     }),
   ],
 
   devServer: {
     static: {
-      directory: path.join(__dirname, "dist"),
+      directory: path.join(__dirname, 'dist'),
     },
     open: true,
     hot: true,
     compress: true,
-    port: 9001,
+    port: 9002,
   },
 };
+
+// npx tsc --nit --rootDir src --jsx react

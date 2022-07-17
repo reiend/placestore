@@ -291,7 +291,7 @@ module StoreAdminFeatures
     description = food_info[:description]
 
     # upload image to cloudinary
-    image_info = Cloudinary::Uploader.upload(picture_url)
+    image_info = Cloudinary::Uploader.upload(picture_url, use_filename: true, folder: 'store/street-goods-burger')
     new_food = store.foods.create!({
                                      name:,
                                      price:,
@@ -304,9 +304,8 @@ module StoreAdminFeatures
     {
       status: 200,
       message: 'successfully add new food',
-      data: {
-        food: new_food
-      }
+      data:
+         new_food
     }
   rescue ActiveRecord::RecordNotFound => e
     {
@@ -360,9 +359,8 @@ module StoreAdminFeatures
     {
       status: 200,
       message: 'successfully updated food information',
-      data: {
-        food_info: store.foods.find(food_id)
-      }
+      data: store.foods.find(food_id)
+
     }
   rescue ActiveRecord::RecordNotFound => e
     {
@@ -392,9 +390,7 @@ module StoreAdminFeatures
     {
       status: 200,
       message: 'successfully removed food',
-      data: {
-        food:
-      }
+      data: food
     }
   rescue ActiveRecord::RecordNotFound => e
     {
