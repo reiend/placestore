@@ -98,6 +98,7 @@ Rails.application.routes.draw do
       scope module: 'foods' do
         post 'store/food/create', to: 'food#create'
         put 'store/food/update', to: 'food#update'
+        delete 'store/food/delete', to: 'food#destroy'
       end
     end
   end
