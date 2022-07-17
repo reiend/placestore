@@ -79,9 +79,18 @@ Rails.application.routes.draw do
     sign_out: 'store_admin/signout',
     registration: 'store_admin/signup'
   }, controllers: {
-    sessions: 'v2/store_admins/authentication/sessions',
-    registrations: 'v2/store_admins/authentication/registrations'
+    sessions: 'v2/stores/store_admins/authentication/sessions',
+    registrations: 'v2/stores/store_admins/authentication/registrations'
   }
+
+  scope module: 'v2' do
+    scope module: 'stores' do
+      scope module: 'foods' do
+        get 'store/foods', to: 'food#store_foods'
+      end
+    end
+  end
+
   # end of authentication
 
   # end of v2
