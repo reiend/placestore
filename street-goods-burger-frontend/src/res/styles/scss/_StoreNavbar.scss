@@ -1,0 +1,35 @@
+@use "~@libs/reiend/scss/core/responsive/breakpoints.scss" as *;
+
+.store-navbar {
+  @apply flex justify-center px-10 h-[15vh] items-center;
+  &__logo {
+    width: 100px;
+    height: 100px;
+    align-self: flex-end;
+  }
+
+  &__signin-button {
+    @apply border-[1px] border-blue-koi rounded-[0.2rem] text-blue-koi font-semibold hidden;
+    font-size: clamp(8px, 1rem + 0.5vw, 24px);
+    padding: 0.3em 2.8em;
+  }
+
+  &__signup-button {
+    @apply bg-blue-koi text-white rounded-[0.2rem] font-semibold hidden;
+    font-size: clamp(8px, 1rem + 0.5vw, 24px);
+    padding: 0.3em 2.8em;
+  }
+
+  // responsive
+
+  @include sm {
+    @apply justify-between;
+  }
+
+  &__signup-button,
+  &__signin-button {
+    @include sm {
+      display: block;
+    }
+  }
+}
