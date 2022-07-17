@@ -304,9 +304,8 @@ module StoreAdminFeatures
     {
       status: 200,
       message: 'successfully add new food',
-      data: {
-        food: new_food
-      }
+      data:
+         new_food
     }
   rescue ActiveRecord::RecordNotFound => e
     {
