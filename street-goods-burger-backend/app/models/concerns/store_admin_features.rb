@@ -291,7 +291,7 @@ module StoreAdminFeatures
     description = food_info[:description]
 
     # upload image to cloudinary
-    image_info = Cloudinary::Uploader.upload(picture_url)
+    image_info = Cloudinary::Uploader.upload(picture_url, use_filename: true, folder: 'store/street-goods-burger')
     new_food = store.foods.create!({
                                      name:,
                                      price:,
