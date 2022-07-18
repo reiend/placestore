@@ -3,7 +3,8 @@ import { render } from '@testing-library/react';
 import App from '@src/App.tsx';
 
 describe('App', () => {
-  type AppChildrenTypes = [string, string, string, string, string];
+  type AppChildrenTypes = readonly [string, string, string, string, string];
+  // list of children on app component
   const appChildren: AppChildrenTypes = [
     'header',
     'welcome',

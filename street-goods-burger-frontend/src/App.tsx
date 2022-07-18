@@ -3,10 +3,7 @@ import '@libs/reiend/scss/index.scss';
 import '@styles/scss/app.scss';
 
 const App = () => {
-  return (
-    <Fragment>
-    </Fragment>
-  );
+  return <Fragment></Fragment>;
 };
 
 export default App;
