@@ -25,8 +25,11 @@ module.exports = {
   resolve: {
     // for shorten imports
     alias: {
-      // default root
+      // default root component
       '@components': `${ROOT_PATH.src}/res/components`,
+
+      // src
+      "@src": `${ROOT_PATH.src}`,
 
       // for styling
       '@reiend/quirk': `@reiend/quirk/index.scss`,
@@ -40,8 +43,6 @@ module.exports = {
       // globals
       '@styles': `${ROOT_PATH.src}/res/styles`,
 
-      // assets
-      // "@images": `${ROOT_PATH.src}/res/assets/images`,
 
       // globals
       '@assets': `${ROOT_PATH.src}/../public/assets`,
