@@ -4,8 +4,8 @@ import StoreLanding from '@components/Store/StoreLanding.tsx';
 
 describe('StoreLanding', () => {
   type AppChildrenTypes = readonly [string, string, string, string, string];
-  // list of children on app component
-  const appChildren: AppChildrenTypes = [
+  // list of children on StoreLanding component
+  const StoreLandingChildren: StoreLandingChildrenTypes = [
     'header',
     'welcome',
     'menu',
@@ -19,7 +19,7 @@ describe('StoreLanding', () => {
 
   it(`Should have ${
     appChildren.length
-  } children, only namely, ${appChildren.join(', ')}`, () => {
+  } children, only namely, ${StoreLandingChildren.join(', ')}`, () => {
     const { getByTestId } = render(<StoreLanding />);
 
     Object.entries(getByTestId('landing').children).forEach((child, i) => {
