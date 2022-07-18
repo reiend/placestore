@@ -25,6 +25,7 @@ describe('App', () => {
     appChildren.forEach(child => {
       const element = getByTestId(child);
       expect(element).toBeInTheDocument();
+      expect(appChildren.length).toBe(5);
     });
   });
 });
