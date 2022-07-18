@@ -5,7 +5,7 @@ import StoreLanding from '@components/Store/StoreLanding.tsx';
 describe('StoreLanding', () => {
   type StoreLandingChildrenTypes = readonly [string, string, string, string, string];
   // list of children on StoreLanding component
-  const StoreLandingChildren: StoreLandingChildrenTypes = [
+  const storeLandingChildren: StoreLandingChildrenTypes = [
     'header',
     'welcome',
     'menu',
@@ -18,12 +18,12 @@ describe('StoreLanding', () => {
   });
 
   it(`Should have ${
-    appChildren.length
-  } children, only namely, ${StoreLandingChildren.join(', ')}`, () => {
+    storeLandingPageChildren.length
+  } children, only namely, ${storeLandingChildren.join(', ')}`, () => {
     const { getByTestId } = render(<StoreLanding />);
 
     Object.entries(getByTestId('landing').children).forEach((child, i) => {
-      expect(child[1].className == StoreLandingChildren[i]);
+      expect(child[1].className == storeLandingChildren[i]);
     });
 
     expect(getByTestId('landing').children).toHaveLength(5);
