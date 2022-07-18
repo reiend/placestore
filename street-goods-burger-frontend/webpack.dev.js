@@ -29,10 +29,7 @@ module.exports = {
       '@components': `${ROOT_PATH.src}/res/components`,
 
       // src
-      "@src": `${ROOT_PATH.src}`,
-
-      // for styling
-      '@reiend/quirk': `@reiend/quirk/index.scss`,
+      '@src': `${ROOT_PATH.src}`,
 
       // libs
       '@libs': `${ROOT_PATH.src}/libs`,
@@ -42,7 +39,6 @@ module.exports = {
 
       // globals
       '@styles': `${ROOT_PATH.src}/res/styles`,
-
 
       // globals
       '@assets': `${ROOT_PATH.src}/../public/assets`,
@@ -80,6 +76,7 @@ module.exports = {
           target: 'es2015', // Syntax to compile to (see options below for possible values)
         },
       },
+
       // {
       //   // transpiler
       //   test: /\.m?(js|jsx)$/,
