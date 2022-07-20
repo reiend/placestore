@@ -10,6 +10,7 @@ describe('StoreLanding', () => {
     string,
     string
   ];
+
   // list of children on app component
   const storeLandingChildren: StoreLandingChildrenTypes = [
     'header',
@@ -27,9 +28,10 @@ describe('StoreLanding', () => {
     storeLandingChildren.length
   } children, only namely, ${storeLandingChildren.join(', ')}`, () => {
     const { getByTestId } = render(<StoreLanding />);
+    const ClassNameIndex = 1;
 
     Object.entries(getByTestId('landing').children).forEach((child, i) => {
-      expect(child[1].className == storeLandingChildren[i]);
+      expect(child[ClassNameIndex].className == storeLandingChildren[i]);
     });
 
     expect(getByTestId('landing').children).toHaveLength(5);
