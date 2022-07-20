@@ -29,11 +29,12 @@ describe('StoreLanding', () => {
   } children, only namely, ${storeLandingChildren.join(', ')}`, () => {
     const { getByTestId } = render(<StoreLanding />);
     const ClassNameIndex = 1;
+    const ChildrenMaxLength = 5;
 
     Object.entries(getByTestId('landing').children).forEach((child, i) => {
       expect(child[ClassNameIndex].className == storeLandingChildren[i]);
     });
 
-    expect(getByTestId('landing').children).toHaveLength(5);
+    expect(getByTestId('landing').children).toHaveLength(ChildrenMaxLength);
   });
 });
