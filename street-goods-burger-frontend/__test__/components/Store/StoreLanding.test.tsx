@@ -20,10 +20,13 @@ describe('StoreLanding', () => {
     'contacts',
   ];
 
+  // Test if the component renders without crashing
   it('Should renders without crashing', () => {
     render(<StoreLanding />);
   });
 
+  // Test if the component has 5 children
+  // Test if the component children has class, header, welcome, menu, about, contacts
   it(`Should have ${
     storeLandingChildren.length
   } children, only namely, ${storeLandingChildren.join(', ')}`, () => {
