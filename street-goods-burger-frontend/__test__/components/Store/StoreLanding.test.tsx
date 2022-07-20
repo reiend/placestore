@@ -3,9 +3,15 @@ import { render } from '@testing-library/react';
 import StoreLanding from '@components/Store/StoreLanding.tsx';
 
 describe('StoreLanding', () => {
-  type AppChildrenTypes = readonly [string, string, string, string, string];
+  type StoreLandingChildrenTypes = readonly [
+    string,
+    string,
+    string,
+    string,
+    string
+  ];
   // list of children on app component
-  const appChildren: AppChildrenTypes = [
+  const storeLandingChildren: StoreLandingChildrenTypes = [
     'header',
     'welcome',
     'menu',
@@ -18,12 +24,12 @@ describe('StoreLanding', () => {
   });
 
   it(`Should have ${
-    appChildren.length
-  } children, only namely, ${appChildren.join(', ')}`, () => {
+    storeLandingChildren.length
+  } children, only namely, ${storeLandingChildren.join(', ')}`, () => {
     const { getByTestId } = render(<StoreLanding />);
 
     Object.entries(getByTestId('landing').children).forEach((child, i) => {
-      expect(child[1].className == appChildren[i]);
+      expect(child[1].className == storeLandingChildren[i]);
     });
 
     expect(getByTestId('landing').children).toHaveLength(5);
