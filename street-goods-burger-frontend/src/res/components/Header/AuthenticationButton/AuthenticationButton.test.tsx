@@ -7,7 +7,7 @@ interface AuthenticationButtonProps {
   role: string;
 }
 
-describe('Header', () => {
+describe('AuthenticationButton', () => {
   const props: AuthenticationButtonProps = {
     title: 'signup-button',
     role: 'signup-button',
