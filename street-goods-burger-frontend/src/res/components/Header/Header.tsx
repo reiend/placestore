@@ -1,5 +1,6 @@
 import React from 'react';
 
+import AuthenticationButton from './AuthenticationButton/index.ts';
 import './Header.scss';
 
 const Header = () => {
@@ -7,8 +8,8 @@ const Header = () => {
     <header className='header'>
       <svg role='store-logo'></svg>
       <div>
-        <button role='signin-button'>signin</button>
-        <button role='signup-button'>signup</button>
+        <AuthenticationButton role='signin-button' title='signin' />
+        <AuthenticationButton role='signup-button' title='signup' />
       </div>
     </header>
   );
