@@ -9,12 +9,12 @@ import './Header.scss';
 const Header = () => {
   return (
     <header className='header'>
-      <Link to='/home' role='link-to-home'>
-        <StoreLogo role='store-logo' className='store-logo' />
+      <Link to='/home' data-testid='link-to-home'>
+        <StoreLogo className='store-logo' data-testid='store-logo' />
       </Link>
       <div>
-        <AuthenticationButton role='signin-button' title='signin' />
-        <AuthenticationButton role='signup-button' title='signup' />
+        <AuthenticationButton title='signin' />
+        <AuthenticationButton title='signup' />
       </div>
     </header>
   );
