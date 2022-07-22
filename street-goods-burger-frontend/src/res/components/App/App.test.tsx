@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import App from '@components/App/index.ts';
+import App from './index.ts';
 
 describe('App', () => {
   // Test if the component renders without crashing
@@ -8,11 +8,11 @@ describe('App', () => {
     render(<App />);
   });
 
-  // Test if the component has landing page component
-  it('Should have a landing page', () => {
+  // Test if the component has home component
+  it('Should have a Home component', () => {
     const { getByTestId } = render(<App />);
 
-    expect(getByTestId('landing')).toBeInTheDocument();
+    expect(getByTestId('home')).toBeInTheDocument();
   });
 
   it('Test1', () => {
