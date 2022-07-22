@@ -1,5 +1,5 @@
 import React from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 
 import './AuthenticationButton.scss';
 
@@ -8,16 +8,13 @@ interface AuthenticationButtonProps {
   role: string;
 }
 
-const AuthenticationButton: React.FC<AuthenticationButtonProps> = ({
-  title,
-  role,
-}) => {
+const AuthenticationButton = ({ role, title }: AuthenticationButtonProps) => {
   return <button role={role}>{title}</button>;
 };
 
-AuthenticationButton.prototype = {
-  title: PropType.string,
-  role: PropType.string,
+AuthenticationButton.propTypes = {
+  title: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
 };
 
 export default AuthenticationButton;
