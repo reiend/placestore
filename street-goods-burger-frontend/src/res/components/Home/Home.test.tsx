@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Home from '@components/Home/index.ts';
+import Home from './index.ts';
 
 describe('Home', () => {
   type HomeChildrenTypes = readonly [string, string, string, string, string];

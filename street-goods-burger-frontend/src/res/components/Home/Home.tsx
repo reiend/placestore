@@ -1,10 +1,12 @@
 import React from 'react';
+
+import Header from '@components/Header/index.ts';
 import './Home.scss';
 
 const Home = () => {
   return (
     <div data-testid='home' className='home'>
-      <div className='header'></div>
+      <Header />
       <div className='welcome'></div>
       <div className='menu'></div>
       <div className='about'></div>
