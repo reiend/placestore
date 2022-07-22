@@ -5,7 +5,7 @@ import './StoreLogo.scss';
 
 interface StoreLogo {
   className?: string;
-  role: string;
+  ['data-testid']: string;
 }
 
 const StoreLogo = (props: StoreLogo) => {
@@ -140,7 +140,7 @@ const StoreLogo = (props: StoreLogo) => {
 
 StoreLogo.propTypes = {
   className: PropTypes.string,
-  role: PropTypes.string.isRequired,
+  ['data-testid']: PropTypes.string.isRequired,
 };
 
 export default StoreLogo;

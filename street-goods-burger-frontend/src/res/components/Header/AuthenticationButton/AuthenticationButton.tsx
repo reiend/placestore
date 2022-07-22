@@ -5,16 +5,14 @@ import './AuthenticationButton.scss';
 
 interface AuthenticationButtonProps {
   title: string;
-  role: string;
 }
 
-const AuthenticationButton = ({ role, title }: AuthenticationButtonProps) => {
-  return <button role={role}>{title}</button>;
+const AuthenticationButton = ({ title }: AuthenticationButtonProps) => {
+  return <button>{title}</button>;
 };
 
 AuthenticationButton.propTypes = {
   title: PropTypes.string.isRequired,
-  role: PropTypes.string.isRequired,
 };
 
 export default AuthenticationButton;
