@@ -33,10 +33,10 @@ module.exports = {
       // globals
       '@globals': `${ROOT_PATH.src}/res/globals`,
 
-      // globals
+      // styles
       '@styles': `${ROOT_PATH.src}/res/styles`,
 
-      // globals
+      // assets
       '@assets': `${ROOT_PATH.src}/../public/assets`,
 
       // resolve naming conflicts using its file extention
@@ -114,7 +114,7 @@ module.exports = {
     new PurgecssPlugin({
       paths: glob.sync(`${ROOT_PATH.src}/**/*`, { nodir: true }),
       defaultExtractor: content =>
-        content.match(/[/@/:\w-/:/-/>]+(?<!:)/g) || [],
+        content.match(/[/@/:\w-/:/-/>]+(?<!:)/g) || [],  // for not purging styles with ->, :, @ 
     }),
   ],
 
