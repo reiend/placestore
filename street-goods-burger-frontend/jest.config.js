@@ -1,7 +1,7 @@
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
   preset: 'ts-jest',
-  roots: ['<rootDir>/src'],
+  roots: ['<rootDir>'],
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
@@ -12,7 +12,8 @@ module.exports = {
   // Test spec file resolution pattern
   // Matches parent folder `__tests__` and filename
   // should contain `test` or `spec`.
-  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
+  // testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
+  testRegex: '(test|spec)\\.tsx?$',
   // rootDir: './__test__/',
 
   // Module file extensions for importing
@@ -23,5 +24,6 @@ module.exports = {
     '\\.(css|less|scss)$': 'identity-obj-proxy',
     '^@src(.*)$': '<rootDir>/src$1',
     '^@components(.*)$': '<rootDir>/src/res/components$1',
+    '^@globals(.*)$': '<rootDir>/src/res/globals$1',
   },
 };
