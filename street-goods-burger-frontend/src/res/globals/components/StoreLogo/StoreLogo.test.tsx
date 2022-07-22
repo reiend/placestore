@@ -1,11 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+
 import StoreLogo from './index.ts';
 
 interface StoreLogoProps {
   className: string;
   role: string;
-  onClick?: () => void;
 }
 
 describe('StoreLogo', () => {
@@ -13,6 +13,7 @@ describe('StoreLogo', () => {
     className: 'store-logo',
     role: 'store-logo',
   };
+
   beforeEach(() => {
     render(<StoreLogo {...props} />);
   });
