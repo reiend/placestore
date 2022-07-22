@@ -14,10 +14,4 @@ describe('App', () => {
 
     expect(getByTestId('home')).toBeInTheDocument();
   });
-
-  it('Test1', () => {
-    const { queryByText } = render(<App />);
-
-    expect(queryByText('Hello')).not.toBeInTheDocument();
-  });
 });
