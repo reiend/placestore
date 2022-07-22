@@ -24,5 +24,6 @@ module.exports = {
     '\\.(css|less|scss)$': 'identity-obj-proxy',
     '^@src(.*)$': '<rootDir>/src$1',
     '^@components(.*)$': '<rootDir>/src/res/components$1',
+    '^@globals(.*)$': '<rootDir>/src/res/globals$1',
   },
 };
