@@ -14,9 +14,17 @@
     "test:watch": "jest --watch",
     "format": "prettier --write --ext .ts,.tsx,.scss,.css,.js,.jsx,.html,.json,.md ."
   },
+  "lint-staged": {
+    "src/**/*.{ts,tsx,js,tsx,json}": [
+      "eslint --fix"
+    ],
+    "src/**/*.{ts,tsx,js,tsx,json,html,css,scss}": [
+      "prettier --write"
+    ]
+  },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "lint-staged"
     }
   },
   "dependencies": {
