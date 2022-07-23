@@ -1,7 +1,6 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import StoreLogo from './index.ts';
+import StoreLogo from './StoreLogo';
 
 interface StoreLogoProps {
   className: string;
@@ -11,7 +10,7 @@ interface StoreLogoProps {
 describe('StoreLogo', () => {
   const props: StoreLogoProps = {
     className: 'store-logo',
-    ['data-testid']: 'store-logo',
+    ['data-testid']: 'store-logo'
   };
 
   beforeEach(() => {
@@ -19,9 +18,6 @@ describe('StoreLogo', () => {
   });
 
   const { className, ['data-testid']: testID } = props;
-
-  // Test if the component renders without crashing
-  it('Should renders without crashing', () => {});
 
   // Test if the component has the same className pass on props
   it('Should have the same classname pass on props', () => {

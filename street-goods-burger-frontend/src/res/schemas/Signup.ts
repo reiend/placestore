@@ -9,7 +9,7 @@ const SigninSchema = object({
     .required('please provide a password'),
   passwordConfirmation: string()
     .oneOf([ref('password'), null], 'passwords must match')
-    .required('please provide a password'),
+    .required('please provide a password')
 });
 
 export default SigninSchema;

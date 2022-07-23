@@ -1,9 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from '@components/App/index.ts';
-import Element from '@libs/reiend/js/element.js';
+import { createRoot } from 'react-dom/client';
+import App from '@components/App';
 
-const app = Element().createElement('div').init();
-Element().queryElement('body').appendChild(app);
+const divElement = document.getElementById('root') as HTMLDivElement;
 
-ReactDOM.render(<App />, app);
+const root = createRoot(divElement);
+
+root.render(<App />);
+
+// this enabled hot reload
+if (module.hot) {
+  module.hot.accept();
+}

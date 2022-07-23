@@ -1,9 +1,7 @@
-import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
 
-import Header from './Header.tsx';
+import Header from './Header';
 
 // wrapped in BrowserRouter cause it renders a Link
 const MockHeader = () => {
@@ -18,8 +16,6 @@ describe('Header', () => {
   beforeEach(() => {
     render(<MockHeader />);
   });
-  // Test if the component renders without crashing
-  it('Should renders without crashing', () => {});
 
   // Test if the component has store logo in the document
   it('Should renders a store logo', () => {
@@ -40,7 +36,7 @@ describe('Header', () => {
   // Test if the component has a signin button document
   it('Should renders a signin button', () => {
     const buttonElement = screen.getByRole('button', {
-      name: 'signin',
+      name: 'signin'
     }) as HTMLButtonElement;
     expect(buttonElement).toBeInTheDocument();
   });
@@ -48,7 +44,7 @@ describe('Header', () => {
   // Test if the component has a signup button document
   it('Should renders a signup button', () => {
     const buttonElement = screen.getByRole('button', {
-      name: 'signup',
+      name: 'signup'
     }) as HTMLButtonElement;
     expect(buttonElement).toBeInTheDocument();
   });

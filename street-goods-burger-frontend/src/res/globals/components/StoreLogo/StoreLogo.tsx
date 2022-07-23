@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 import './StoreLogo.scss';
@@ -140,7 +139,7 @@ const StoreLogo = (props: StoreLogo) => {
 
 StoreLogo.propTypes = {
   className: PropTypes.string,
-  ['data-testid']: PropTypes.string.isRequired,
+  ['data-testid']: PropTypes.string.isRequired
 };
 
 export default StoreLogo;

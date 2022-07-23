@@ -1,2 +1,2 @@
-import StoreLogo from './StoreLogo.tsx';
+import StoreLogo from './StoreLogo';
 export default StoreLogo;
