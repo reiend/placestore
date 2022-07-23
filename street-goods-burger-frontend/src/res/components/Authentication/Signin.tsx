@@ -1,8 +1,5 @@
-import React, { useCallback } from "react";
-import PropTypes from "prop-types";
-
-
-
 const Signin = () => {
-  return <form action=""></form>;
+  return <form action=''></form>;
 };
+
+export default Signin;

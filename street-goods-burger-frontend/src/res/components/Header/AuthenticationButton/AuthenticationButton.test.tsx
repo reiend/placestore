@@ -1,6 +1,5 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import AuthenticationButton from './index.ts';
+import AuthenticationButton from './AuthenticationButton';
 
 interface AuthenticationButtonProps {
   title: string;
@@ -8,7 +7,7 @@ interface AuthenticationButtonProps {
 
 describe('AuthenticationButton', () => {
   const props: AuthenticationButtonProps = {
-    title: 'signup-button',
+    title: 'signup-button'
   };
 
   beforeEach(() => {
@@ -16,9 +15,6 @@ describe('AuthenticationButton', () => {
   });
 
   const { title } = props;
-
-  // Test if the component renders without crashing
-  it('Should renders without crashing', () => {});
 
   // Test if the component has the same title pass on props
   it('Should have the same title pass on props', () => {

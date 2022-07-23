@@ -12,7 +12,7 @@ const AuthenticationButton = ({ title }: AuthenticationButtonProps) => {
 };
 
 AuthenticationButton.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 };
 
 export default AuthenticationButton;
