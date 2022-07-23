@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'blue-koi': '#54A7D6',
-      },
-    },
-  },
+        'blue-koi': '#54A7D6'
+      }
+    }
+  }
 };
