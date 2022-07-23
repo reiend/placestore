@@ -1,2 +1,2 @@
-import Home from './Home.tsx';
+import Home from './Home';
 export default Home;

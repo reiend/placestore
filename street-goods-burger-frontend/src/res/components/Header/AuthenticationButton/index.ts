@@ -1,2 +1,2 @@
-import AuthenticationButton from './AuthenticationButton.tsx';
+import AuthenticationButton from './AuthenticationButton';
 export default AuthenticationButton;

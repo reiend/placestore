@@ -1,7 +1,6 @@
-@use "./core";
-@use "./core/responsive/breakpoints" as *;
-@use "./core/utils/font";
-
+@use './core';
+@use './core/responsive/breakpoints' as *;
+@use './core/utils/font';
 
 .test\:hover-blue {
   background-color: blue;

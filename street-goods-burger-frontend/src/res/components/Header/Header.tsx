@@ -1,5 +1,3 @@
-import React from 'react';
-
 import AuthenticationButton from './AuthenticationButton/index.ts';
 import StoreLogo from '@globals/components/StoreLogo/index.ts';
 import { Link } from 'react-router-dom';

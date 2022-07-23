@@ -1,8 +1,6 @@
-import React, { useCallback } from "react";
-import PropTypes from "prop-types";
-import { useForm, Resolver } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import SigninSchema from "@schemas/Signup";
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import SigninSchema from '@schemas/Signup';
 
 interface SigninInputs {
   firstname: string;
@@ -16,28 +14,28 @@ const Signup = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<SigninInputs>({
-    resolver: yupResolver(SigninSchema),
+    resolver: yupResolver(SigninSchema)
   });
   const onSubmit = (data: SigninInputs) => {
     console.log(data);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="form">
-      <div className="form__inputs">
-        <input {...register("firstname")} placeholder="firstname" />
-        <input {...register("lastname")} placeholder="lastname" />
-        <input {...register("email")} placeholder="e.g. email@gmail.com" />
-        <input {...register("password")} placeholder="password" />
+    <form onSubmit={handleSubmit(onSubmit)} className='form'>
+      <div className='form__inputs'>
+        <input {...register('firstname')} placeholder='firstname' />
+        <input {...register('lastname')} placeholder='lastname' />
+        <input {...register('email')} placeholder='e.g. email@gmail.com' />
+        <input {...register('password')} placeholder='password' />
         <input
-          {...register("passwordConfirmation")}
-          placeholder="password confirmation"
+          {...register('passwordConfirmation')}
+          placeholder='password confirmation'
         />
       </div>
 
-      <div className="form__errors">
+      <div className='form__errors'>
         <p>{errors.firstname?.message}</p>
         <p>{errors.lastname?.message}</p>
         <p>{errors.email?.message}</p>
@@ -45,7 +43,7 @@ const Signup = () => {
         <p>{errors.passwordConfirmation?.message}</p>
       </div>
 
-      <input type="submit" value="Signup" />
+      <input type='submit' value='Signup' />
     </form>
   );
 };

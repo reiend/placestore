@@ -1,8 +1,7 @@
-import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 
-import Home from './index.ts';
+import Home from './Home';
 
 const MockHome = () => {
   return (
@@ -25,11 +24,8 @@ describe('Home', () => {
     'welcome',
     'menu',
     'about',
-    'contacts',
+    'contacts'
   ];
-
-  // Test if the component renders without crashing
-  it('Should renders without crashing', () => {});
 
   // Test if the component has 5 children
   // Test if the component children has class, header, welcome, menu, about, contacts
