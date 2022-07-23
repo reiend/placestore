@@ -35,3 +35,8 @@ declare module '@globals/*' {
   const content: any;
   export default content;
 }
+
+declare module '@libs/*' {
+  const content: any;
+  export default content;
+}

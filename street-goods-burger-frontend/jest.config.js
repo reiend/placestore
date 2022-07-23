@@ -3,8 +3,10 @@ module.exports = {
   preset: 'ts-jest',
   roots: ['<rootDir>'],
   transform: {
-    '^.+\\.tsx?$': 'ts-jest'
+    '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.(js|jsx)?$': 'babel-jest'
   },
+  // ...
   testEnvironment: 'jsdom',
 
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
@@ -25,6 +27,7 @@ module.exports = {
     '\\.(css|less|scss)$': 'identity-obj-proxy',
     '^@src(.*)$': '<rootDir>/src$1',
     '^@components(.*)$': '<rootDir>/src/res/components$1',
-    '^@globals(.*)$': '<rootDir>/src/res/globals$1'
+    '^@globals(.*)$': '<rootDir>/src/res/globals$1',
+    '^@libs(.*)$': '<rootDir>/src/libs$1'
   }
 };
