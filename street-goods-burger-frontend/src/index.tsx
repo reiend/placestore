@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import App from '@components/App/index.ts';
+import App from '@components/App';
 
 const divElement = document.getElementById('root') as HTMLDivElement;
 
