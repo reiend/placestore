@@ -4,7 +4,7 @@ import App from '@components/App/index.ts';
 const divElement = document.getElementById('root') as HTMLDivElement;
 
 const root = createRoot(divElement);
-const test = "qrq";
+const test = 'qrq';
 
 root.render(<App />);
 

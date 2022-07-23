@@ -1,0 +1,23 @@
+{
+  "name": "street-goods-burger",
+  "version": "1.0.0",
+  "description": "under refactoring please view app/controller/v2",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reiend/street-goods-burger.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reiend/street-goods-burger/issues"
+  },
+  "homepage": "https://github.com/reiend/street-goods-burger#readme",
+  "devDependencies": {
+    "husky": "^8.0.0"
+  }
+}
