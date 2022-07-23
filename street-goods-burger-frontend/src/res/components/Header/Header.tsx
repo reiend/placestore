@@ -1,5 +1,6 @@
-import AuthenticationButton from './AuthenticationButton/index.ts';
-import StoreLogo from '@globals/components/StoreLogo/index.ts';
+import AuthenticationButton from './AuthenticationButton';
+import Navbar from './Navbar';
+import StoreLogo from '@globals/components/StoreLogo';
 import { Link } from 'react-router-dom';
 
 import './Header.scss';
@@ -14,6 +15,7 @@ const Header = () => {
         <AuthenticationButton title='signin' />
         <AuthenticationButton title='signup' />
       </div>
+      <Navbar items={['home', 'menu', 'about', 'contacts']} />
     </header>
   );
 };
