@@ -4,10 +4,6 @@ const tailwindcss = require('tailwindcss');
 const MinicssExtractPlugin = require('mini-css-extract-plugin'); /* extracting css from js*/
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-const ROOT_PATH = {
-  src: path.resolve(__dirname, `../src`)
-};
-
 module.exports = {
   mode: 'production',
   devtool: 'source-map',
@@ -45,8 +41,9 @@ module.exports = {
   },
 
   optimization: {
-    minimizer: [new CssMinimizerPlugin()]
+    minimizer: [new CssMinimizerPlugin(), '...']
   },
+
   plugins: [
     // // css extractor from js
     new MinicssExtractPlugin({
