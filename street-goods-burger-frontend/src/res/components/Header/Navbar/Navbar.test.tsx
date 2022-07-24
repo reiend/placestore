@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import Navbar from './Navbar';
 import { NavbarProps } from './utils';
@@ -43,7 +43,7 @@ describe('Navbar', () => {
   it('Should be in order and when click navigate to corresponding element', () => {
     // if array length is 1 when do split meaning it doesn't find doesn't match the item
     const NotFoundArrayLength = 1;
-    items.forEach((item, i) => {
+    items.forEach(item => {
       const linkElement = screen.getByRole('link', {
         name: item
       }) as HTMLLinkElement;
