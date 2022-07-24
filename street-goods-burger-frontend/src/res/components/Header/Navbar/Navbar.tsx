@@ -5,7 +5,7 @@ import uniqueID from '@libs/reiend/js/unique';
 
 import './Navbar.scss';
 
-const Navbar = ({ items }: NavbarProps) => {
+const Navbar = ({ items, ...props }: NavbarProps) => {
   const getUniqueKey = (params: { letters: number; numbers: number }) =>
     uniqueID({ ...params });
 
@@ -19,13 +19,14 @@ const Navbar = ({ items }: NavbarProps) => {
   });
 
   return (
-    <nav>
+    <nav {...props}>
       <ul>{list}</ul>
     </nav>
   );
 };
 
 Navbar.propTypes = {
+  className: Proptypes.string,
   items: Proptypes.array.isRequired
 };
 
