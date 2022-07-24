@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
+
 import AuthenticationButton from './AuthenticationButton';
 import Navbar from './Navbar';
 import Brand from '../../globals/components/Brand'; // for some reason using alias here remove types checking
-import { Link } from 'react-router-dom';
 
 import StreetGoodsBurgerLogoUrl from '@assets/StreetGoodsBurgerLogo.jpg';
 
