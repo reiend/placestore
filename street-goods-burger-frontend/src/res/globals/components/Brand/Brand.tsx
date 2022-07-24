@@ -1,14 +1,8 @@
 import PropTypes from 'prop-types';
 
-import './Brand.scss';
+import { BrandProps } from './utils';
 
-interface BrandProps {
-  className?: string;
-  src: string;
-  alt: string;
-  title: string;
-  ['data-testid']: string;
-}
+import './Brand.scss';
 
 const Brand = ({ src, alt, title, ...props }: BrandProps) => {
   return (

@@ -1,17 +1,10 @@
 import { render, screen } from '@testing-library/react';
 
 import Brand from './Brand';
-
-interface StoreLogoProps {
-  className?: string;
-  src: string;
-  alt: string;
-  title: string;
-  ['data-testid']: string;
-}
+import { BrandProps } from './utils';
 
 describe('StoreLogo', () => {
-  const props: StoreLogoProps = {
+  const props: BrandProps = {
     className: 'store-logo',
     src: 'brandPath',
     alt: 'brand',
@@ -27,9 +20,9 @@ describe('StoreLogo', () => {
 
   // Test if the component has the same className pass on props
   it('Should have the same classname pass on props', () => {
-    const svgElement = screen.getByTestId('store-logo') as HTMLOrSVGElement;
+    const imageElement = screen.getByTestId('store-logo') as HTMLImageElement;
     // if className exist, assert
-    className && expect(svgElement).toHaveClass(className);
+    className && expect(imageElement).toHaveClass(className);
   });
 
   // Test if the component has the same testID pass on props

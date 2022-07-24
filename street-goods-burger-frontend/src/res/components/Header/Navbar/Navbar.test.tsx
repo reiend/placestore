@@ -1,11 +1,9 @@
 import { render, screen } from '@testing-library/react';
 
 import Navbar from './Navbar';
+import { NavbarProps } from './utils';
 
 describe('Navbar', () => {
-  interface NavbarProps {
-    items: readonly [string, string, string, string];
-  }
   // list of possible items on the navbar
   const props: NavbarProps = {
     items: ['home', 'menu', 'about', 'contacts']

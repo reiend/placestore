@@ -1,12 +1,9 @@
 import Proptypes from 'prop-types';
 
+import { NavbarProps } from './utils';
 import uniqueID from '@libs/reiend/js/unique';
 
 import './Navbar.scss';
-
-interface NavbarProps {
-  items: readonly [string, string, string, string];
-}
 
 const Navbar = ({ items }: NavbarProps) => {
   const getUniqueKey = (params: { letters: number; numbers: number }) =>

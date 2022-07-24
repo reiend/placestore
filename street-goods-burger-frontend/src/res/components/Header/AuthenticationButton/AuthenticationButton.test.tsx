@@ -1,9 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import AuthenticationButton from './AuthenticationButton';
 
-interface AuthenticationButtonProps {
-  title: string;
-}
+import { AuthenticationButtonProps } from './utils';
 
 describe('AuthenticationButton', () => {
   const props: AuthenticationButtonProps = {
