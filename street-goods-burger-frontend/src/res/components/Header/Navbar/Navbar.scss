@@ -1,0 +1,27 @@
+@use '~@libs/reiend/scss/core/responsive/breakpoints' as *;
+
+.navbar {
+  & > ul {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+    justify-content: space-around;
+    padding: 2rem 0;
+  }
+
+  & > ul > li {
+    color: var(--color-III);
+    @apply text-lg;
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  @include custom-breakpoint(0) {
+    display: none;
+  }
+
+  @include sm {
+    display: block;
+  }
+}

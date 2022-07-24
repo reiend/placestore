@@ -1,0 +1,35 @@
+%shared-drawer {
+  transition: 100ms border, 100ms border-radius;
+  &:active {
+    border: 5px solid var(--color-II);
+    border-radius: 5px;
+  }
+}
+
+.drawer {
+  & > .line-I,
+  & > .line-II,
+  & > .line-III {
+    content: ' ';
+    width: 100%;
+    height: 5px;
+    background-color: black;
+  }
+  width: 64px;
+  height: 64px;
+
+  cursor: pointer;
+
+  path {
+    stroke: var(--color-II);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @extend %shared-drawer;
+}
+
+.drawer--open {
+  @extend %shared-drawer;
+}

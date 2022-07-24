@@ -1,0 +1,20 @@
+$color-I: #30abe4;
+
+%shared {
+  margin-right: 4rem;
+  border-radius: 5px;
+  padding: 0.2rem 2.4rem;
+  font-size: 1.2rem;
+}
+
+.button-primary--outlined {
+  @extend %shared;
+  border: 1.9px solid $color-I;
+  color: var(--color-II);
+}
+
+.button-primary--solid {
+  @extend %shared;
+  background-color: $color-I;
+  color: white;
+}
