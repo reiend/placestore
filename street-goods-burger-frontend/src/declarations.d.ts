@@ -5,6 +5,16 @@ declare module '*.jpeg' {
   export default content;
 }
 
+declare module '*.png' {
+  const content: any;
+  export default content;
+}
+
+declare module '*.jpg' {
+  const content: any;
+  export default content;
+}
+
 declare module '*.tsx' {
   const content: any;
   export default content;
@@ -37,6 +47,11 @@ declare module '@globals/*' {
 }
 
 declare module '@libs/*' {
+  const content: any;
+  export default content;
+}
+
+declare module '@assets/*' {
   const content: any;
   export default content;
 }

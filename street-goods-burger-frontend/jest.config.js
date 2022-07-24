@@ -28,6 +28,7 @@ module.exports = {
     '^@src(.*)$': '<rootDir>/src$1',
     '^@components(.*)$': '<rootDir>/src/res/components$1',
     '^@globals(.*)$': '<rootDir>/src/res/globals$1',
-    '^@libs(.*)$': '<rootDir>/src/libs$1'
+    '^@libs(.*)$': '<rootDir>/src/libs$1',
+    '^@assets(.*)$': '<rootDir>/public/assets$1'
   }
 };
