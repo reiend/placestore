@@ -1,7 +1,8 @@
+@use 'sass:math';
 // helper function for converting px to em
 // base 16px
 @function pxToEm($px) {
-  @return #{$px / 16px}em;
+  @return #{math.div($px, 16px)}em;
 }
 
 // List of breakpoints

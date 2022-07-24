@@ -5,11 +5,11 @@ import { BrandProps } from './utils';
 
 describe('StoreLogo', () => {
   const props: BrandProps = {
-    className: 'store-logo',
+    className: 'brand',
     src: 'brandPath',
     alt: 'brand',
     title: 'brand',
-    ['data-testid']: 'store-logo'
+    ['data-testid']: 'brand'
   };
 
   beforeEach(() => {
@@ -20,7 +20,7 @@ describe('StoreLogo', () => {
 
   // Test if the component has the same className pass on props
   it('Should have the same classname pass on props', () => {
-    const imageElement = screen.getByTestId('store-logo') as HTMLImageElement;
+    const imageElement = screen.getByTestId('brand') as HTMLImageElement;
     // if className exist, assert
     className && expect(imageElement).toHaveClass(className);
   });
