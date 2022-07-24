@@ -49,6 +49,30 @@ describe('Header', () => {
     expect(buttonElement).toBeInTheDocument();
   });
 
+  // Test if the component when click bring the page to signin
+  it('Should go to signup route when click signin button', () => {
+    const linkElement = screen.getByRole('link', {
+      name: 'signin'
+    }) as HTMLLinkElement;
+    const getCurrentWindowUrl = () => window.location.pathname;
+
+    expect(getCurrentWindowUrl()).not.toBe('/signin');
+    fireEvent.click(linkElement);
+    expect(getCurrentWindowUrl()).toBe('/signin');
+  });
+
+  // Test if the component when click bring the page to signup
+  it('Should go to signup route when click signup button', () => {
+    const linkElement = screen.getByRole('link', {
+      name: 'signup'
+    }) as HTMLLinkElement;
+    const getCurrentWindowUrl = () => window.location.pathname;
+
+    expect(getCurrentWindowUrl()).not.toBe('/signup');
+    fireEvent.click(linkElement);
+    expect(getCurrentWindowUrl()).toBe('/signup');
+  });
+
   // Test if the drawer has the className--open when click
   it(`should have the same className--open pass on props`, () => {
     const svgElement = screen.getByTestId('drawer') as HTMLOrSVGScriptElement;
