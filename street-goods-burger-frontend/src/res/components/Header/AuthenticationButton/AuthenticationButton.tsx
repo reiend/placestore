@@ -1,12 +1,14 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 import { AuthenticationButtonProps } from './utils';
 
 import './AuthenticationButton.scss';
 
-const AuthenticationButton = ({ title }: AuthenticationButtonProps) => {
-  return <button>{title}</button>;
+const AuthenticationButton = ({
+  title,
+  ...props
+}: AuthenticationButtonProps) => {
+  return <button {...props}>{title}</button>;
 };
 
 AuthenticationButton.propTypes = {
