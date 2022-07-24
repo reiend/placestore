@@ -1,4 +1,5 @@
 import Proptypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import Navbar from '../Navbar';
 import Button from '../../../globals/components/Button'; // for some reason using alias here remove types checking
@@ -14,8 +15,12 @@ const DrawerContent = ({ className, ...props }: DrawerContentProps) => {
         items={['home', 'menu', 'about', 'contacts']}
       />
 
-      <Button className={`${className}__signin`} title='signin' />
-      <Button className={`${className}__signup`} title='signup' />
+      <Link to='/signin'>
+        <Button className={`${className}__signin`} title='signin' />
+      </Link>
+      <Link to='/signup'>
+        <Button className={`${className}__signup`} title='signup' />
+      </Link>
     </div>
   );
 };

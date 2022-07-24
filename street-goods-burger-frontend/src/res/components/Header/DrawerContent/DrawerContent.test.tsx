@@ -1,8 +1,18 @@
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 
 import DrawerContent from './DrawerContent';
 import { DrawerContentProps } from './utils';
 import { NavbarProps } from '../Navbar/utils';
+
+// wrapped in BrowserRouter cause it renders a Link
+const MockDrawerContent = (props: DrawerContentProps) => {
+  return (
+    <BrowserRouter>
+      <DrawerContent {...props} />
+    </BrowserRouter>
+  );
+};
 
 describe('DrawerContent', () => {
   const props: DrawerContentProps = {
@@ -15,7 +25,7 @@ describe('DrawerContent', () => {
   };
 
   beforeEach(() => {
-    render(<DrawerContent {...props} />);
+    render(<MockDrawerContent {...props} />);
   });
 
   // Test if the component have a text home, menu, about, contacts

@@ -40,8 +40,12 @@ const Header = () => {
           />
         </Link>
         <div className='header__buttons'>
-          <Button className='signin' title='signin' />
-          <Button className='signup' title='signup' />
+          <Link to='/signin'>
+            <Button className='signin' title='signin' />
+          </Link>
+          <Link to='/signup'>
+            <Button className='signup' title='signup' />
+          </Link>
           <Drawer
             className='drawer'
             open={open}
