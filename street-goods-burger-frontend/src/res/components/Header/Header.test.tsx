@@ -55,4 +55,10 @@ describe('Header', () => {
     fireEvent.click(svgElement);
     expect(svgElement).toHaveClass('drawer--open');
   });
+
+  // Test if the drawer content isn't visible if drawer was clase
+  it(`should not be visible drawer content when drawer is close`, () => {
+    const divElement = screen.queryByTestId('drawer-content') as HTMLDivElement;
+    expect(divElement).toBe(null);
+  });
 });
