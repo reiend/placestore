@@ -39,12 +39,16 @@
 
 // button
 .drawer-content {
+  a {
+    max-width: 250px;
+    @apply w-full;
+  }
+
   %shared {
     border-radius: 5px;
     padding: 0.2rem 2.4rem;
     text-align: center;
     @apply text-2xl my-3 w-full;
-    max-width: 250px;
   }
 
   &__signin {
