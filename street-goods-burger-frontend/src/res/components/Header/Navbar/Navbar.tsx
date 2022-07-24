@@ -1,3 +1,5 @@
+import Proptypes from 'prop-types';
+
 import uniqueID from '@libs/reiend/js/unique';
 
 import './Navbar.scss';
@@ -24,6 +26,10 @@ const Navbar = ({ items }: NavbarProps) => {
       <ul>{list}</ul>
     </nav>
   );
+};
+
+Navbar.propTypes = {
+  items: Proptypes.array.isRequired
 };
 
 export default Navbar;
