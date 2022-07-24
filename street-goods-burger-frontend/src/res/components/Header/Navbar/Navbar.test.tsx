@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import Navbar from './Navbar';
 import { NavbarProps } from './utils';
@@ -37,5 +37,18 @@ describe('Navbar', () => {
     const linkElements = screen.getAllByRole('link');
     const NavbarMaxLink = 4;
     expect(linkElements).toHaveLength(NavbarMaxLink);
+  });
+
+  // Test if the component corresponding element, in order
+  it('Should be in order and when click navigate to corresponding element', () => {
+    // if array length is 1 when do split meaning it doesn't find doesn't match the item
+    const NotFoundArrayLength = 1;
+    items.forEach((item, i) => {
+      const linkElement = screen.getByRole('link', {
+        name: item
+      }) as HTMLLinkElement;
+      const linkArray = linkElement.href.split(`/#${item}`);
+      expect(linkArray).not.toHaveLength(NotFoundArrayLength);
+    });
   });
 });
