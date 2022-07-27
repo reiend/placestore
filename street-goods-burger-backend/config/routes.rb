@@ -87,7 +87,6 @@ Rails.application.routes.draw do
   # store
   scope module: 'v2' do
     scope module: 'stores' do
-      get 'store/foods', to: 'store#food_list'
     end
   end
   # end of store
@@ -96,6 +95,7 @@ Rails.application.routes.draw do
   scope module: 'v2' do
     scope module: 'stores' do
       scope module: 'foods' do
+        get 'store/foods/list', to: 'food#list'
         post 'store/food/create', to: 'food#create'
         put 'store/food/update', to: 'food#update'
         delete 'store/food/delete', to: 'food#destroy'
