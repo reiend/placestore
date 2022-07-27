@@ -82,17 +82,21 @@ Rails.application.routes.draw do
     sessions: 'v2/stores/store_admins/authentication/sessions',
     registrations: 'v2/stores/store_admins/authentication/registrations'
   }
+
+  devise_for :accounts, path: '', path_names: {
+    sign_in: 'account/signin',
+    sign_out: 'account/signout',
+    registration: 'account/signup'
+  }, controllers: {
+    sessions: 'v2/stores/accounts/authentication/sessions',
+    registrations: 'v2/stores/accounts/authentication/registrations'
+  }
   # end of authentication
 
-  # store
   scope module: 'v2' do
     scope module: 'stores' do
     end
-  end
-  # end of store
 
-  # foods
-  scope module: 'v2' do
     scope module: 'stores' do
       scope module: 'foods' do
         get 'store/foods/list', to: 'food#list'
@@ -101,8 +105,6 @@ Rails.application.routes.draw do
         delete 'store/food/delete', to: 'food#destroy'
       end
     end
-  end
-  # end of foods
 
-  # end of v2
+  end
 end
