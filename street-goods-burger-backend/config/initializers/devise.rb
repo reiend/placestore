@@ -312,10 +312,10 @@ Devise.setup do |config|
   config.jwt do |jwt|
     jwt.secret = Rails.application.credentials.fetch(:secret_key_base)
     jwt.dispatch_requests = [
-      ['POST', %r{^/store_customer/signin$}, 'POST', %r{^/store_admin/signin$}]
+      ['POST', %r{^/store_customer/signin$}, 'POST', %r{^/store_admin/signin$}, 'POST', %r{^/account/signin$}]
     ]
     jwt.revocation_requests = [
-      ['DELETE', %r{^/store_customer/signout$}, 'DELETE', %r{^/store_admin/signout$}]
+      ['DELETE', %r{^/store_customer/signout$}, 'DELETE', %r{^/store_admin/signout$}, 'DELETE', %r{^/account/signout$}]
     ]
     jwt.expiration_time = 30.minutes.to_i
   end
