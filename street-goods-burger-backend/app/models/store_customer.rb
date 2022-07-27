@@ -35,8 +35,6 @@ class StoreCustomer < ApplicationRecord
          :jwt_authenticatable,
          jwt_revocation_strategy: self
 
-  private
-
   def add_to_cart(ordered_food:)
     if store_transactions.length.zero?
       return {

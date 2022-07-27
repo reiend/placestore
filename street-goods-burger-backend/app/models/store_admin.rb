@@ -20,8 +20,6 @@ class StoreAdmin < ApplicationRecord
          :jwt_authenticatable,
          jwt_revocation_strategy: self
 
-  private
-
   def view_store_transactions(store_id:)
     store_transactions = StoreTransaction.where(store_id:).map do |transaction|
       store_transaction_id = transaction[:id]
