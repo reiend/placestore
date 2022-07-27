@@ -10,9 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_13_055645) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_27_115801) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.string "role", default: "store_customer", null: false
+    t.boolean "is_ban", default: false, null: false
+    t.integer "warning", default: 0, null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "jti"
+    t.index ["email"], name: "index_accounts_on_email", unique: true
+    t.index ["jti"], name: "index_accounts_on_jti"
+    t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
+  end
 
   create_table "carts", force: :cascade do |t|
     t.string "deliver_address", default: "", null: false
