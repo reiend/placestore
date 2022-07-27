@@ -83,14 +83,6 @@ Rails.application.routes.draw do
     registrations: 'v2/stores/store_admins/authentication/registrations'
   }
 
-  devise_for :accounts, path: '', path_names: {
-    sign_in: 'account/signin',
-    sign_out: 'account/signout',
-    registration: 'account/signup'
-  }, controllers: {
-    sessions: 'v2/stores/accounts/authentication/sessions',
-    registrations: 'v2/stores/accounts/authentication/registrations'
-  }
   # end of authentication
 
   scope module: 'v2' do
@@ -105,6 +97,5 @@ Rails.application.routes.draw do
         delete 'store/food/delete', to: 'food#destroy'
       end
     end
-
   end
 end
