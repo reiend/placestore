@@ -7,7 +7,7 @@ describe('Navbar', () => {
   // list of possible items on the navbar
   const props: NavbarProps = {
     className: 'navbar',
-    items: ['home', 'menu', 'about', 'contacts']
+    items: ['home', 'Stores', 'contacts']
   };
 
   beforeEach(() => {
