@@ -16,16 +16,10 @@ describe('Home', () => {
     render(<MockHome />);
   });
 
-  type HomeChildrenTypes = readonly [string, string, string, string, string];
+  type HomeChildrenTypes = readonly [string, string, string];
 
   // list of children on app component
-  const homeChildren: HomeChildrenTypes = [
-    'header',
-    'welcome',
-    'menu',
-    'about',
-    'contacts'
-  ];
+  const homeChildren: HomeChildrenTypes = ['header', 'stores', 'contacts'];
 
   // Test if the component has 5 children
   // Test if the component children has class, header, welcome, menu, about, contacts
@@ -33,7 +27,7 @@ describe('Home', () => {
     homeChildren.length
   } children, only namely, ${homeChildren.join(', ')}`, () => {
     const ClassNameIndex = 1;
-    const ChildrenMaxLength = 5;
+    const ChildrenMaxLength = 3;
 
     const mainElement = screen.getByTestId('home');
 

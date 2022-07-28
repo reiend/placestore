@@ -5,9 +5,7 @@ const Home = () => {
   return (
     <main data-testid='home' className='home'>
       <Header />
-      <div className='welcome'></div>
-      <div className='menu'></div>
-      <div className='about'></div>
+      <div className='stores'></div>
       <div className='contacts'></div>
     </main>
   );
