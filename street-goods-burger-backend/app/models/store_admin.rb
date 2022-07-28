@@ -2,7 +2,7 @@
 
 # StoreAdmin template
 class StoreAdmin < ApplicationRecord
-  belongs_to :store
+  has_many :stores
 
   validates :email, presence: true,
                     format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i }, # check email format email format
@@ -307,52 +307,70 @@ class StoreAdmin < ApplicationRecord
     picture_url = food_info[:picture]
     category = food_info[:category]
     description = food_info[:description]
+    store_id = food_info[:store_id]
+
+    new_food = Food.create!({
+                              name:,
+                              price:,
+                              category:,
+                              description:,
+                              store_id:
+                            })
 
     # upload image to cloudinary
     image_info = Cloudinary::Uploader.upload(picture_url, use_filename: true, folder: 'store/street-goods-burger')
-    new_food = store.foods.create!({
-                                     name:,
-                                     price:,
-                                     category:,
-                                     description:,
-                                     picture: image_info['url'],
-                                     picture_id: image_info['public_id']
-                                   })
+
+    new_food.update_columns(
+      {
+        picture: image_info['url'],
+        picture_id: image_info['public_id']
+
+      }
+    )
 
     {
-      status: 200,
-      message: 'successfully add new food',
-      data:
-         new_food
+      status: {
+        code: 200,
+        message: 'successfully add new food'
+      },
+      data: new_food
     }
   rescue ActiveRecord::RecordNotFound => e
     {
-      status: 400,
-      message: 'invalid data provided',
-      error: e.message
+      status: {
+        code: 404,
+        message: 'invalid data provided',
+        error: e.message
+      }
     }
   rescue ActiveRecord::RecordInvalid => e
     {
-      status: 422,
-      message: 'invalid data provided',
-      error: e.message
+      status: {
+        code: 422,
+        message: 'invalid data provided',
+        error: e.message
+      }
     }
   rescue NoMethodError => e
     {
-      status: 422,
-      message: "can't do calculations based on data provided",
-      errors: e.message
+      status: {
+        code: 422,
+        message: 'invalid data provided',
+        error: e.message
+      }
     }
   rescue ArgumentError => e
     {
-      status: 422,
-      message: 'please enter valid params',
-      errors: e.message
+      status: {
+        code: 422,
+        message: 'invalid data provided',
+        error: e.message
+      }
     }
   end
 
   def update_food(food_id:, food_info:)
-    food = store.foods.find(food_id)
+    food = Food.find(food_id)
 
     name = food_info[:name]
     price = food_info[:price]
@@ -362,71 +380,91 @@ class StoreAdmin < ApplicationRecord
 
     prev_picture_id = food[:picture_id]
 
-    # updated cloudinary image
-    image_info = Cloudinary::Uploader.upload(picture_url, public_id: prev_picture_id)
-
     food.update_columns({
                           name:,
                           price:,
                           category:,
-                          description:,
+                          description:
+                        })
+
+    # updated cloudinary image
+    image_info = Cloudinary::Uploader.upload(picture_url, public_id: prev_picture_id)
+
+    food.update_columns({
                           picture: image_info['url'],
                           picture_id: image_info['public_id']
                         })
 
     {
-      status: 200,
-      message: 'successfully updated food information',
-      data: store.foods.find(food_id)
-
+      status: {
+        code: 200,
+        message: 'successfully updated food information'
+      },
+      data: Food.find(food_id)
     }
   rescue ActiveRecord::RecordNotFound => e
     {
-      status: 400,
-      message: 'invalid data provided',
-      error: e.message
+      status: {
+        code: 400,
+        message: 'invalid data provided',
+        error: e.message
+      }
     }
   rescue ActiveRecord::RecordInvalid => e
     {
-      status: 422,
-      message: 'invalid data provided',
-      error: e.message
+      status: {
+        code: 422,
+        message: 'invalid data provided',
+        error: e.message
+      }
     }
   rescue NoMethodError => e
     {
-      status: 422,
-      message: "can't do calculations based on data provided",
-      errors: e.message
+      status: {
+        code: 422,
+        message: 'unprocessable entity',
+        error: e.message
+      }
     }
   end
 
   def remove_food(food_id:)
     # if food has reviews delete reviews first
-    store.foods.find(food_id).reviews.where(food_id:).delete_all unless store.foods.find(food_id).reviews.length.zero?
+    Food.find(food_id).reviews.where(food_id:).delete_all unless Food.find(food_id).reviews.length.zero?
 
-    food = store.foods.find(food_id).delete
+    food = Food.find(food_id).delete
+
     {
-      status: 200,
-      message: 'successfully removed food',
+      status: {
+        code: 200,
+        message: 'successfully removed food'
+      },
       data: food
     }
   rescue ActiveRecord::RecordNotFound => e
     {
-      status: 400,
-      message: 'invalid data provided',
-      error: e.message
+      status: {
+        code: 404,
+        message: 'invalid data provided',
+        error: e.message
+      }
     }
   rescue ActiveRecord::RecordInvalid => e
     {
-      status: 422,
-      message: 'invalid data provided',
-      error: e.message
+      status: {
+        code: 422,
+        message: 'invalid data provided',
+        error: e.message
+      },
+      data: food
     }
   rescue NoMethodError => e
     {
-      status: 422,
-      message: "can't do calculations based on data provided",
-      errors: e.message
+      status: {
+        status: 422,
+        message: 'unprocessable entity',
+        error: e.message
+      }
     }
   end
 

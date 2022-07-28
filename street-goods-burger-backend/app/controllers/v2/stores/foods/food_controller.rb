@@ -4,26 +4,36 @@ module V2
   module Stores
     module Foods
       # FoodController Template
-      class FoodController < StoreController
-        before_action :authenticate_store_admin!, except: [:list]
+      class FoodController < ApplicationController
+        before_action :authenticate_store_admin!
 
         # for viewing foods on store
         def list
           # get store foods according to store_id
-          store_foods = Store.find(food_params[:store_id]).foods
+          store = Store.find(food_params[:store_id])
+          foods = store.foods
 
-          render json: {
-            status: 200,
-            message: 'viewing foods',
-            data: {
-              quantity: store_foods.length,
-              store_foods:
+          if store.store_admin.email == current_store_admin.email
+            render json: {
+              status: 200,
+              message: 'viewing foods',
+              data: {
+                store_name: store.name,
+                store_admin: current_store_admin.email,
+                quantity: foods.length,
+                food: {
+                  quantity: foods.length,
+                  list: foods
+                }
+              }
             }
-          }
+          end
         rescue ActiveRecord::RecordNotFound
           render json: {
-            status: 400,
-            message: 'please enter valid params'
+            status: {
+              code: 404,
+              message: 'please enter valid params'
+            }
           }
         end
 
@@ -38,9 +48,11 @@ module V2
           render json: add_new_food_info
         rescue ActionController::ParameterMissing => e
           render json: {
-            status: 400,
-            message: 'invalid parameters',
-            errors: e.message
+            status: {
+              code: 400,
+              message: 'invalid parameters',
+              errors: e.message
+            }
           }
         end
 
@@ -71,9 +83,11 @@ module V2
           render json: update_food_info
         rescue ActionController::ParameterMissing => e
           render json: {
-            status: 400,
-            message: 'invalid parameters',
-            errors: e.message
+            status: {
+              code: 400,
+              message: 'invalid parameters',
+              errors: e.message
+            }
           }
         end
 
@@ -86,9 +100,11 @@ module V2
           render json: remove_food_info
         rescue ActionController::ParameterMissing => e
           render json: {
-            status: 400,
-            message: 'invalid parameters',
-            errors: e.message
+            status: {
+              code: 400,
+              message: 'invalid parameters',
+              errors: e.message
+            }
           }
         end
 
@@ -96,7 +112,7 @@ module V2
 
         def food_params
           params
-            .require(:food)
+            .require(:food_info)
             .permit(:store_id)
         end
 
@@ -108,6 +124,7 @@ module V2
               :category,
               :description,
               :price,
+              :store_id,
               :picture
             )
         end
