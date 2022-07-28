@@ -12,7 +12,7 @@ const DrawerContent = ({ className, ...props }: DrawerContentProps) => {
     <div className={className} {...props}>
       <Navbar
         className={`${className}__navbar`}
-        items={['home', 'menu', 'about', 'contacts']}
+        items={['home', 'stores', 'contacts']}
       />
 
       <Link to='/signin'>

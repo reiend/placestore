@@ -54,10 +54,7 @@ const Header = () => {
           />
         </div>
       </div>
-      <Navbar
-        className='navbar'
-        items={['home', 'menu', 'about', 'contacts']}
-      />
+      <Navbar className='navbar' items={['home', 'stores', 'contacts']} />
       {open && (
         <DrawerContent
           className='drawer-content'
