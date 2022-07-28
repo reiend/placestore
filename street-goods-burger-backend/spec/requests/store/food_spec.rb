@@ -1,87 +1,73 @@
+require 'rails_helper'
+
 RSpec.describe 'FoodController', type: :request do
   let(:store) do
     Store.create(
-      store_name: 'store',
-      address: 'adress'
-    )
-  end
-
-  let(:store_admin) do
-    store.store_admins.create!(
-      email: Faker::Internet.safe_email,
-      password: Faker::Internet.password
+      name: 'store',
+      line1: 'line1',
+      line2: 'line2',
+      postal_code: '4024',
+      city: 'starosa',
+      province: 'laguna'
     )
   end
 
   describe 'Post' do
     before(:each) do
-      @store_admin = store.store_admins.create!(
-        email: Faker::Internet.safe_email,
-        password: Faker::Internet.password
-      )
+      @store_admin = FactoryBot.create :store_admin
     end
-    describe 'store/food/create' do
-      it '1, if food params invalid raise an error' do
-        @store_admin.confirm
-        sign_in @store_admin
+    it '1, if food params is invalid, food shouldn\'t be created' do
+      @store_admin.confirm
+      sign_in @store_admin
 
-        post '/store/food/create'
+      post '/food'
 
-        expect(JSON.parse(response.body)['status']).to (be == 400).or(be == 422)
-      end
-      it '2, if store admin not signin or email are not confirm don\'t create new food' do
-        post '/store/food/create'
+      expect(JSON.parse(response.body)['status']['code']).to (be == 400).or(be == 422)
+      expect(JSON.parse(response.body)['data']).to be_nil
+    end
+    it '2, if store admin not signin raise unauthorized' do
+      post '/food'
 
-        expect(response).to have_http_status(401)
-      end
+      expect(response).to have_http_status(401)
     end
   end
 
   describe 'Put' do
     before(:each) do
-      @store_admin = store.store_admins.create!(
-        email: Faker::Internet.safe_email,
-        password: Faker::Internet.password
-      )
+      @store_admin = FactoryBot.create :store_admin
     end
-    describe 'store/food/update' do
-      it '1, if food params invalid raise an error' do
-        @store_admin.confirm
-        sign_in @store_admin
+    it '1, if food params is invalid, food shouldn\'t be updated ' do
+      @store_admin.confirm
+      sign_in @store_admin
 
-        put '/store/food/update'
+      put '/food'
 
-        expect(JSON.parse(response.body)['status']).to (be == 400).or(be == 422)
-      end
-      it '2, if store admin not signin or email are not confirm don\'t update the food' do
-        post '/store/food/create'
+      expect(JSON.parse(response.body)['status']['code']).to (be == 400).or(be == 422)
+      expect(JSON.parse(response.body)['data']).to be_nil
+    end
+    it '2, if store admin not signin raise unauthorized' do
+      post '/food'
 
-        expect(response).to have_http_status(401)
-      end
+      expect(response).to have_http_status(401)
     end
   end
 
   describe 'Delete' do
     before(:each) do
-      @store_admin = store.store_admins.create!(
-        email: Faker::Internet.safe_email,
-        password: Faker::Internet.password
-      )
+      @store_admin = FactoryBot.create :store_admin
     end
-    describe 'store/food/delete' do
-      it '1, if food params invalid raise an error' do
-        @store_admin.confirm
-        sign_in @store_admin
+    it '1, if food params is invalid, food shouldn\'t be deleted' do
+      @store_admin.confirm
+      sign_in @store_admin
+      delete '/food'
 
-        delete '/store/food/delete'
+      expect(JSON.parse(response.body)['status']['code']).to (be == 400).or(be == 422)
+      expect(JSON.parse(response.body)['data']).to be_nil
+    end
+    it '2, if store admin not signin raise unauthorized' do
+      delete '/food'
 
-        expect(JSON.parse(response.body)['status']).to (be == 400).or(be == 422)
-      end
-      it '2, if store admin not signin or email are not confirm don\'t delete the food' do
-        post '/store/food/create'
-
-        expect(response).to have_http_status(401)
-      end
+      expect(response).to have_http_status(401)
     end
   end
 end
