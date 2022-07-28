@@ -87,14 +87,15 @@ Rails.application.routes.draw do
 
   scope module: 'v2' do
     scope module: 'stores' do
+      post 'store', to: 'store#create'
     end
 
     scope module: 'stores' do
       scope module: 'foods' do
-        get 'store/foods/list', to: 'food#list'
-        post 'store/food/create', to: 'food#create'
-        put 'store/food/update', to: 'food#update'
-        delete 'store/food/delete', to: 'food#destroy'
+        get 'foods', to: 'food#list'
+        post 'food', to: 'food#create'
+        put 'food', to: 'food#update'
+        delete 'food', to: 'food#destroy'
       end
     end
   end
