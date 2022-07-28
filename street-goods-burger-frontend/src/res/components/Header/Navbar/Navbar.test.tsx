@@ -35,7 +35,7 @@ describe('Navbar', () => {
   // Test if the component has the maximum number of links
   it('Should have the same items pass on props ', () => {
     const linkElements = screen.getAllByRole('link');
-    const NavbarMaxLink = 4;
+    const NavbarMaxLink = 3;
     expect(linkElements).toHaveLength(NavbarMaxLink);
   });
 

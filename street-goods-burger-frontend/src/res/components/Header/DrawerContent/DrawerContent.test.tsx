@@ -21,7 +21,7 @@ describe('DrawerContent', () => {
   };
 
   const navbarProps: NavbarProps = {
-    items: ['home', 'menu', 'about', 'contacts']
+    items: ['home', 'stores', 'contacts']
   };
 
   beforeEach(() => {
