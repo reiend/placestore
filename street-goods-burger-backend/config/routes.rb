@@ -82,27 +82,21 @@ Rails.application.routes.draw do
     sessions: 'v2/stores/store_admins/authentication/sessions',
     registrations: 'v2/stores/store_admins/authentication/registrations'
   }
+
   # end of authentication
 
-  # store
   scope module: 'v2' do
     scope module: 'stores' do
-      get 'store/foods', to: 'store#food_list'
+      post 'store', to: 'store#create'
     end
-  end
-  # end of store
 
-  # foods
-  scope module: 'v2' do
     scope module: 'stores' do
       scope module: 'foods' do
-        post 'store/food/create', to: 'food#create'
-        put 'store/food/update', to: 'food#update'
-        delete 'store/food/delete', to: 'food#destroy'
+        get 'foods', to: 'food#list'
+        post 'food', to: 'food#create'
+        put 'food', to: 'food#update'
+        delete 'food', to: 'food#destroy'
       end
     end
   end
-  # end of foods
-
-  # end of v2
 end
