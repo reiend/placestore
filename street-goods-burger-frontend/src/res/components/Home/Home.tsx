@@ -1,7 +1,9 @@
+import MerchantSignin from '../Merchant/MerchantSignin';
+
 const Home = () => {
   return (
-    <div>
-      <h1>hello</h1>
+    <div data-testid='home'>
+      <MerchantSignin />
     </div>
   );
 };
