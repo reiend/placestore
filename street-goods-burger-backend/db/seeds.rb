@@ -8,21 +8,25 @@
 #
 #
 
-Store.create!(store_name: 'Street Goods Burger', address: 'address')
-
-admin = Store
-        .first
-        .store_admins
-        .create!(
-          email: 'admin@gmail.com',
-          password: 'admin12345',
-          password_confirmation: 'admin12345'
-        )
+admin =
+  StoreAdmin
+  .create!(
+    email: 'admin@gmail.com',
+    password: 'admin12345',
+    password_confirmation: 'admin12345'
+  )
 
 admin.confirm
 
-store_customer_one = Store
-                     .first
+store = admin.stores.create!(
+  name: 'Street Goods Burger',
+  line1: 'line1',
+  line2: 'line2',
+  postal_code: '4024',
+  city: 'starosa', province: 'laguna'
+)
+
+store_customer_one = store
                      .store_customers
                      .create!(
                        first_name: 'store1',
@@ -34,8 +38,7 @@ store_customer_one = Store
 
 store_customer_one.confirm
 
-store_customer_second = Store
-                        .first
+store_customer_second = store
                         .store_customers
                         .create!(
                           first_name: 'store2',
