@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, cleanup } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 
 import Signin from './Signin';
@@ -27,7 +27,7 @@ describe('Signin', () => {
   });
 
   // Test if the component prop button text has the same value pass on buttonText prop
-  it('Should have a form', () => {
+  it('Should have the same button text pass on prop', () => {
     render(component);
 
     const buttonElement = screen.getByRole('button', {

@@ -35,7 +35,7 @@ const Signin = ({ onSubmit, buttonText = 'signin' }: SigninProps) => {
         <Icon as={CgProfile} color='teal' mr={'10px'} />{' '}
         <Input
           {...register('email')}
-          id={'email'}
+          id={'signinEmail'}
           type='email'
           placeholder={'email'}
           autoComplete='on'
@@ -58,7 +58,7 @@ const Signin = ({ onSubmit, buttonText = 'signin' }: SigninProps) => {
         <Icon as={CgPassword} color='teal' mr={'10px'} />
         <Input
           {...register('password')}
-          id={'password'}
+          id={'signinPassword'}
           type='password'
           placeholder={'password'}
           autoComplete='on'
