@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import axios from 'axios';
-
 import { FormControl, Alert, Heading } from '@chakra-ui/react';
 
 import Signin from '../../Form/Signin';
@@ -44,14 +43,16 @@ const MerchantSignin = () => {
         const merchantID = data.data.id;
         const merchantEmail = data.data.email;
         const authorization = headers.authorization;
-
-        // reset form
-        e.target.reset();
+        const role = data.data.role;
 
         // store merchant info
         localStorage.setItem('merchantID', merchantID);
         localStorage.setItem('merchantEmail', merchantEmail);
         localStorage.setItem('authorization', authorization);
+        localStorage.setItem('role', role);
+
+        // reset form
+        e.target.reset();
       })
       .catch(error => {
         // show invalid email or password
@@ -75,7 +76,7 @@ const MerchantSignin = () => {
           {requestErrorMessage}
         </Alert>
       )}
-      <Signin onSubmit={onSubmit} />;
+      <Signin onSubmit={onSubmit} />
     </FormControl>
   );
 };
