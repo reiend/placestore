@@ -1,4 +1,4 @@
 class StoreAdminSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :id, :email, :created_at
+  attributes :id, :email, :role, :created_at
 end
