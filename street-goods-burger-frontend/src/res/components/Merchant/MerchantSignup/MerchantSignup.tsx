@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { FormControl, Alert, Heading } from '@chakra-ui/react';
+import { FormControl, Heading, Alert } from '@chakra-ui/react';
 
-import Signin from '../../Form/Signin';
+import Signup from '../../Form/Signup';
 
-interface MerchantSigninProps {
+interface MerchantSignupProps {
   email: string;
   password: string;
+  passwordConfirmation: string;
 }
 
-const merchantSignin = async (
+const merchantSignup = async (
   email: string,
   password: string,
-  url = `${process.env.BASE_URL}store_admin/signin`
+  passwordConfirmation: string,
+  url = `${process.env.BASE_URL}store_admin/signup`
 ) => {
   const response = await axios({
     method: 'post',
@@ -21,50 +23,52 @@ const merchantSignin = async (
     data: JSON.stringify({
       store_admin: {
         email: email,
-        password: password
+        password: password,
+        password_confirmation: passwordConfirmation
       }
     })
   });
   return response;
 };
 
-const MerchantSignin = () => {
+const MerchantSignup = () => {
   const [requestErrorMessage, setRequestErrorMessage] = useState<string>('');
 
   const onSubmit = async (
-    { email, password }: MerchantSigninProps,
+    { email, password, passwordConfirmation }: MerchantSignupProps,
     e: { target: { reset: () => void } }
   ) => {
-    await merchantSignin(email, password)
+    await merchantSignup(email, password, passwordConfirmation)
       .then(res => {
         setRequestErrorMessage('');
+        console.log(res);
         const { data, headers } = res;
 
         const merchantID = data.data.id;
         const merchantEmail = data.data.email;
         const authorization = headers.authorization;
-        const role = data.data.role;
 
         // store merchant info
         localStorage.setItem('merchantID', merchantID);
         localStorage.setItem('merchantEmail', merchantEmail);
         localStorage.setItem('authorization', authorization);
-        localStorage.setItem('role', role);
 
         // reset form
         e.target.reset();
       })
       .catch(error => {
-        // show invalid email or password
-        setRequestErrorMessage(error.response.data);
+        setRequestErrorMessage(
+          error.response.data.status.message.split('.')[1]
+        );
       });
   };
 
   return (
     <FormControl w={'100%'} maxW={'500px'} p={'1rem'}>
       <Heading mb={'20px'} fontSize={'clamp(1rem, 1rem + 0.5vw, 3rem)'}>
-        Signin as Merchant
+        Signup as Merchant
       </Heading>
+
       {requestErrorMessage && (
         <Alert
           data-testID={'requestErrorMessage'}
@@ -76,10 +80,10 @@ const MerchantSignin = () => {
           {requestErrorMessage}
         </Alert>
       )}
-      <Signin onSubmit={onSubmit} />
+      <Signup onSubmit={onSubmit} />
     </FormControl>
   );
 };
 
-export default MerchantSignin;
-export { merchantSignin };
+export default MerchantSignup;
+export { merchantSignup };
