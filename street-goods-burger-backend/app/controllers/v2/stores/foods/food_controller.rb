@@ -118,7 +118,7 @@ module V2
 
         def add_new_food_params
           params
-            .require(:food_info)
+            .require(:food)
             .permit(
               :name,
               :category,
