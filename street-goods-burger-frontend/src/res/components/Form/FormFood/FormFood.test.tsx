@@ -1,35 +1,35 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 
-import FormStore from './FormStore';
+import FormFood from './FormFood';
 
 describe('FormStore', () => {
-  const component = <FormStore onSubmit={jest.fn()} buttonText={'create'} />;
+  const component = <FormFood onSubmit={jest.fn()} buttonText={'create'} />;
   // Test if the component has a form
   it('Should have a form', () => {
     render(component);
-    const formElement = screen.getByTestId('form-store') as HTMLFormElement;
+    const formElement = screen.getByTestId('form-food') as HTMLFormElement;
     expect(formElement).toBeInTheDocument();
   });
 
-  // Test if the form shows error when submit without name, line1, line2, postal code, city, province
+  // Test if the form shows error when submit without name, category, description, price
   it('Should show error messsage when form submit empty inputs ', async () => {
     render(component);
 
-    const formElement = screen.getByTestId('form-store') as HTMLButtonElement;
+    const formElement = screen.getByTestId('form-food') as HTMLButtonElement;
 
     await act(async () => {
       fireEvent.submit(formElement);
     });
 
     expect(screen.getByText('please provide a name')).toBeInTheDocument();
-    expect(screen.getByText('please provide a line1')).toBeInTheDocument();
-    expect(screen.getByText('please provide a line2')).toBeInTheDocument();
+    expect(screen.getByText('please provide a category')).toBeInTheDocument();
     expect(
-      screen.getByText('please provide a postal code')
+      screen.getByText('please provide a description')
     ).toBeInTheDocument();
-    expect(screen.getByText('please provide a city')).toBeInTheDocument();
-    expect(screen.getByText('please provide a province')).toBeInTheDocument();
+    expect(
+      screen.getByText('please provide a valid price')
+    ).toBeInTheDocument();
   });
 
   // Test if the component prop button text has the same value pass on buttonText prop
@@ -53,52 +53,32 @@ describe('FormStore', () => {
     expect(inputElement).toBeInTheDocument();
   });
 
-  // Test if the component have an line1 input
-  it('Should have a line1 input', () => {
+  // Test if the component have an category input
+  it('Should have a category input', () => {
     render(component);
 
     const inputElement = screen.getByPlaceholderText(
-      'line 1'
+      'category'
     ) as HTMLInputElement;
     expect(inputElement).toBeInTheDocument();
   });
 
-  // Test if the component have an line2 input
-  it('Should have a line2 input', () => {
+  // Test if the component have an description input
+  it('Should have a description input', () => {
     render(component);
 
     const inputElement = screen.getByPlaceholderText(
-      'line 2'
+      'description'
     ) as HTMLInputElement;
     expect(inputElement).toBeInTheDocument();
   });
 
-  // Test if the component have an postal code input
-  it('Should have a postal code input', () => {
+  // Test if the component have a price input
+  it('Should have a price code input', () => {
     render(component);
 
     const inputElement = screen.getByPlaceholderText(
-      'postal code'
-    ) as HTMLInputElement;
-    expect(inputElement).toBeInTheDocument();
-  });
-
-  // Test if the component have an city input
-  it('Should have a city input', () => {
-    render(component);
-
-    const inputElement = screen.getByPlaceholderText(
-      'city'
-    ) as HTMLInputElement;
-    expect(inputElement).toBeInTheDocument();
-  });
-
-  // Test if the component have an province input
-  it('Should have a province input', () => {
-    render(component);
-
-    const inputElement = screen.getByPlaceholderText(
-      'province'
+      'price in PHP'
     ) as HTMLInputElement;
     expect(inputElement).toBeInTheDocument();
   });

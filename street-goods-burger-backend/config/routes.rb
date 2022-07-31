@@ -86,7 +86,6 @@ Rails.application.routes.draw do
   # end of authentication
 
   scope module: 'v2' do
-
     scope module: 'stores' do
       post 'store', to: 'store#create'
 
@@ -95,6 +94,10 @@ Rails.application.routes.draw do
         post 'food', to: 'food#create'
         put 'food', to: 'food#update'
         delete 'food', to: 'food#destroy'
+      end
+
+      scope module: 'store_admins' do
+        get 'store_admin/stores', to: 'store_admin#stores'
       end
     end
   end

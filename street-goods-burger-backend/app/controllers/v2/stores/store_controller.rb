@@ -2,7 +2,7 @@ module V2
   module Stores
     # FoodController Template
     class StoreController < ApplicationController
-      before_action :authenticate_store_admin!, only: [:create]
+      before_action :authenticate_store_admin!, only: %i[create]
 
       def create
         store = current_store_admin.stores.create!(store_params)
