@@ -1,5 +1,6 @@
 import MerchantSignin from '../Merchant/MerchantSignin';
 import MerchantSignup from '../Merchant/MerchantSignup';
+import MerchantFoodCreate from '../Merchant/MerchantFoodCreate';
 import StoreCreate from '../Store/StoreCreate';
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
       <MerchantSignin />
       <MerchantSignup />
       <StoreCreate />
+      <MerchantFoodCreate />
     </div>
   );
 };
