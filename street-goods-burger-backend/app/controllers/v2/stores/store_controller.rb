@@ -12,9 +12,7 @@ module V2
             code: 200,
             message: 'successfully created a store'
           },
-          data: {
-            store:
-          }
+          data: store
         }
       rescue ActiveRecord::RecordInvalid => e
         render json: {
