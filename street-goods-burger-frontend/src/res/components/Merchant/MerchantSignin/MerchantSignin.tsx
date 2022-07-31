@@ -48,7 +48,7 @@ const MerchantSignin = () => {
         // store merchant info
         localStorage.setItem('merchantID', merchantID);
         localStorage.setItem('merchantEmail', merchantEmail);
-        localStorage.setItem('authorization', authorization);
+        localStorage.setItem('authorization', JSON.stringify(authorization));
         localStorage.setItem('role', role);
 
         // reset form

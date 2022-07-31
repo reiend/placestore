@@ -86,11 +86,10 @@ Rails.application.routes.draw do
   # end of authentication
 
   scope module: 'v2' do
-    scope module: 'stores' do
-      post 'store', to: 'store#create'
-    end
 
     scope module: 'stores' do
+      post 'store', to: 'store#create'
+
       scope module: 'foods' do
         get 'foods', to: 'food#list'
         post 'food', to: 'food#create'
