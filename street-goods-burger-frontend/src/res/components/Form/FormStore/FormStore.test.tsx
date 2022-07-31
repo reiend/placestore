@@ -12,7 +12,7 @@ describe('FormStore', () => {
     expect(formElement).toBeInTheDocument();
   });
 
-  // Test if the when the form submits without email and password show error messages
+  // Test if the form shows error when submit without name, line1, line2, postal code, city, province
   it('Should show error messsage when form submit empty either email or password', async () => {
     render(component);
 
