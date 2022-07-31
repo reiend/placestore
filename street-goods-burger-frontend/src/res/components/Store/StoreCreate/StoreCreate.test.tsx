@@ -8,7 +8,7 @@ jest.mock('axios');
 
 const mockedAxios = axios as jest.MockedFunction<typeof axios>;
 
-describe('MerchantSignin', () => {
+describe('StoreCreate', () => {
   // Test if store create has been called
   it('Should return a value when store create request call when signin', async () => {
     const res = {
@@ -54,7 +54,7 @@ describe('MerchantSignin', () => {
     expect(data).toEqual(res);
   });
 
-  it('Should have a heading text create a store', async () => {
+  it('Should have a heading text, create a store', async () => {
     render(<StoreCreate />);
 
     expect(

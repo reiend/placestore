@@ -69,7 +69,6 @@ const StoreCreate = () => {
           const messages = res.data.status.errors
             .split('Validation failed:')[1]
             .split(',');
-          console.log(messages);
           setValidationMessages(messages);
         } else {
           setRequestErrorMessage('');
@@ -92,7 +91,7 @@ const StoreCreate = () => {
   return (
     <FormControl w={'100%'} maxW={'500px'} p={'1rem'}>
       <Heading mb={'20px'} fontSize={'clamp(1rem, 1rem + 0.5vw, 3rem)'}>
-        Create a store
+        Create a Store
       </Heading>
 
       {validationMessages.length !== 0 && (
