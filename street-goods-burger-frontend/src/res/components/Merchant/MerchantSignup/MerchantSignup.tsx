@@ -46,7 +46,7 @@ const MerchantSignup = () => {
 
         const merchantID = data.data.id;
         const merchantEmail = data.data.email;
-        const role = data.data.email;
+        const role = data.data.role;
         const authorization = headers.authorization;
 
         // store merchant info
