@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { FormControl, Heading, Alert, Text } from '@chakra-ui/react';
@@ -35,26 +36,17 @@ const merchantSignup = async (
 const MerchantSignup = () => {
   const [requestErrorMessage, setRequestErrorMessage] = useState<string>('');
 
+  const navigate = useNavigate();
+
   const onSubmit = async (
     { email, password, passwordConfirmation }: MerchantSignupProps,
     e: { target: { reset: () => void } }
   ) => {
     await merchantSignup(email, password, passwordConfirmation)
-      .then(res => {
+      .then(() => {
         setRequestErrorMessage('');
-        console.log(res);
-        const { data, headers } = res;
 
-        const merchantID = data.data.id;
-        const merchantEmail = data.data.email;
-        const role = data.data.role;
-        const authorization = headers.authorization;
-
-        // store merchant info
-        localStorage.setItem('merchantID', merchantID);
-        localStorage.setItem('merchantEmail', merchantEmail);
-        localStorage.setItem('authorization', authorization);
-        localStorage.setItem('role', role);
+        navigate('/merchant/signin', { replace: true });
 
         // reset form
         e.target.reset();
