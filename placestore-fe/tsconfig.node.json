@@ -4,10 +4,7 @@
     "module": "esnext",
     "composite": true,
     "moduleResolution": "node",
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "lib": ["dom", "esnext"],
     "jsx": "react-jsx",
     "rootDir": "src",
     "strict": true,
@@ -18,7 +15,5 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": [
-    "vite.config.ts"
-  ]
+  "include": ["vite.config.ts"]
 }

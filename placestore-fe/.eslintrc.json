@@ -32,18 +32,6 @@
   "settings": {
     "react": {
       "version": "detect"
-    },
-    "import/resolver": {
-      "alias": {
-        "map": [
-          ["@components", "./src/res/components"],
-          ["@schemas", "./src/res/schemas"],
-          ["@globals", "./src/res/globals"],
-          ["@libs", "./src/libs"],
-          ["@assets", "./public/assets"]
-        ],
-        "extensions": [".ts", ".tsx", ".js", ".jsx", ".json"]
-      }
     }
   }
 }
