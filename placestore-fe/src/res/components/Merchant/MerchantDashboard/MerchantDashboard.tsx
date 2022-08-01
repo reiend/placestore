@@ -45,18 +45,19 @@ const MerchantDashboard = () => {
             </Text>
           </Link>
 
-          <Text
-            backgroundColor={'white'}
-            padding={'0.5rem'}
-            color={'teal'}
-            borderRadius={'var(--chakra--radii-md)'}
-            mb={'2px'}
-            _hover={{ backgroundColor: 'teal', color: 'white' }}
-            transition={'200ms ease-ing'}
-          >
-            store create
-          </Text>
-
+          <Link to={'/merchant/dashboard/store/create'}>
+            <Text
+              backgroundColor={'white'}
+              padding={'0.5rem'}
+              color={'teal'}
+              borderRadius={'var(--chakra--radii-md)'}
+              mb={'2px'}
+              _hover={{ backgroundColor: 'teal', color: 'white' }}
+              transition={'200ms ease-ing'}
+            >
+              store create
+            </Text>
+          </Link>
           <Text
             backgroundColor={'white'}
             padding={'0.5rem'}
