@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { chakra, Box } from '@chakra-ui/react';
+import { useNavigate, Outlet, Link } from 'react-router-dom';
+import { Box, Flex, Icon, Text } from '@chakra-ui/react';
+import { CgProfile } from 'react-icons/cg';
 
 const MerchantDashboard = () => {
   const navigate = useNavigate();
@@ -15,10 +16,82 @@ const MerchantDashboard = () => {
   });
 
   return (
-    <chakra.div>
-      <Box></Box>
-      <Box></Box>
-    </chakra.div>
+    <Flex bg={'teal.50'} h={'700px'}>
+      <Flex
+        flex={'1'}
+        bg={'teal.500'}
+        m={'2rem'}
+        flexDir={'column'}
+        padding={'2rem'}
+      >
+        <Box alignSelf={'center'} textAlign={'center'} color={'white'}>
+          <Icon as={CgProfile} fontSize={'5rem'} />
+          <Text>{localStorage.getItem('merchantID')}</Text>
+          <Text>{localStorage.getItem('merchantEmail')}</Text>
+        </Box>
+
+        <Box color={'teal.50'} fontSize={'1.5rem'} mt={'2rem'}>
+          <Link to={'/merchant/dashboard'}>
+            <Text
+              backgroundColor={'white'}
+              padding={'0.5rem'}
+              color={'teal'}
+              borderRadius={'var(--chakra--radii-md)'}
+              mb={'2px'}
+              _hover={{ backgroundColor: 'teal', color: 'white' }}
+              transition={'200ms ease-ing'}
+            >
+              store list
+            </Text>
+          </Link>
+
+          <Text
+            backgroundColor={'white'}
+            padding={'0.5rem'}
+            color={'teal'}
+            borderRadius={'var(--chakra--radii-md)'}
+            mb={'2px'}
+            _hover={{ backgroundColor: 'teal', color: 'white' }}
+            transition={'200ms ease-ing'}
+          >
+            store create
+          </Text>
+
+          <Text
+            backgroundColor={'white'}
+            padding={'0.5rem'}
+            color={'teal'}
+            borderRadius={'var(--chakra--radii-md)'}
+            mb={'2px'}
+            _hover={{ backgroundColor: 'teal', color: 'white' }}
+            transition={'200ms ease-ing'}
+          >
+            food list
+          </Text>
+
+          <Text
+            backgroundColor={'white'}
+            padding={'0.5rem'}
+            color={'teal'}
+            borderRadius={'var(--chakra--radii-md)'}
+            mb={'2px'}
+            _hover={{ backgroundColor: 'teal', color: 'white' }}
+            transition={'200ms ease-ing'}
+          >
+            food create
+          </Text>
+        </Box>
+      </Flex>
+      <Box
+        flex={'3'}
+        bg={'blue.50'}
+        display={{ base: 'none', md: 'block' }}
+        mx={'auto'}
+        overflowY={'scroll'}
+      >
+        <Outlet />
+      </Box>
+    </Flex>
   );
 };
 
