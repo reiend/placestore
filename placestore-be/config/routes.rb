@@ -100,6 +100,7 @@ Rails.application.routes.draw do
 
       scope module: 'store_admins' do
         get 'store_admin/stores', to: 'store_admin#stores'
+        get 'store_admin/foods', to: 'store_admin#foods'
       end
     end
   end
