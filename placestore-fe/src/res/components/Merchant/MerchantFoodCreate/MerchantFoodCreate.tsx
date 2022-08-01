@@ -110,7 +110,7 @@ const MerchantFoodCreate = () => {
   };
 
   return (
-    <FormControl w={'100%'} maxW={'500px'} p={'1rem'}>
+    <FormControl w={'100%'} maxW={'500px'} p={'1rem'} mx={'auto'}>
       <Heading mb={'20px'} fontSize={'clamp(1rem, 1rem + 0.5vw, 3rem)'}>
         Create a Food
       </Heading>

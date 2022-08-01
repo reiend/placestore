@@ -5,6 +5,7 @@ import MerchantSignup from '../Merchant/MerchantSignup';
 import MerchantDashboard from '../Merchant/MerchantDashboard';
 import MerchantStores from '../Merchant/MerchantStores';
 import MerchantFoods from '../Merchant/MerchantFoods';
+import MerchantFoodCreate from '../Merchant/MerchantFoodCreate';
 import StoreCreate from '../Store/StoreCreate';
 import AppWIP from './AppWIP';
 
@@ -18,6 +19,7 @@ const AppRoutes = () => {
         <Route index element={<MerchantStores />} />
         <Route path={'store/create'} element={<StoreCreate />} />
         <Route path={'store/foods'} element={<MerchantFoods />} />
+        <Route path={'store/food/create'} element={<MerchantFoodCreate />} />
       </Route>
       <Route path='/wip' element={<AppWIP />} />
     </Routes>
