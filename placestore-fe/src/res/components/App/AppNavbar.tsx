@@ -30,9 +30,11 @@ const AppNavbar = () => {
             merchant
           </Button>
         </Link>
-        <Button variant={'solid'} colorScheme={'teal'}>
-          shopper
-        </Button>
+        <Link to={'/wip'}>
+          <Button variant={'solid'} colorScheme={'teal'}>
+            shopper
+          </Button>
+        </Link>
       </chakra.div>
     </chakra.nav>
   );
