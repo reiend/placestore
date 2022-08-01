@@ -53,8 +53,7 @@ const StoreCreate = () => {
     { name, line1, line2, postalCode, city, province }: StoreCreateFormProps,
     e: { target: { reset: () => void } }
   ) => {
-    const authorization =
-      JSON.stringify(localStorage.getItem('authorization')) || '';
+    const authorization = localStorage.getItem('authorization') || '';
     await storeCreate(
       name,
       line1,
@@ -79,7 +78,7 @@ const StoreCreate = () => {
       })
       .catch(error => {
         if (error.response.status === 401) {
-          setRequestErrorMessage('signup as a merchant to continue');
+          setRequestErrorMessage('signin as a merchant to continue');
         } else {
           setRequestErrorMessage(
             error.response.data.status.message.split('.')[1]

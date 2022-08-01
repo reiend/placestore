@@ -8,6 +8,6 @@ const root = createRoot(divElement);
 root.render(<App />);
 
 // this enabled hot reload
-if (module.hot) {
-  module.hot.accept();
-}
+// if (module.hot) {
+//   module.hot.accept();
+// }
