@@ -45,6 +45,7 @@ const MerchantFoods = () => {
               maxH={'200px'}
               w={'350px'}
               mb={'10px'}
+              loading={'lazy'}
             />
           </Skeleton>
           <SkeletonText mt='4' noOfLines={5} spacing='4' />

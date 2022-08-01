@@ -47,6 +47,7 @@ const MerchantStores = () => {
               objectFit={'cover'}
               maxH={'200px'}
               mb={'10px'}
+              loading={'lazy'}
             />
           </Skeleton>
           <SkeletonText mt='4' noOfLines={5} spacing='4' />
@@ -118,6 +119,7 @@ const MerchantStores = () => {
                 objectFit={'cover'}
                 maxH={'200px'}
                 mb={'10px'}
+                loading={'lazy'}
               />
 
               <Heading
