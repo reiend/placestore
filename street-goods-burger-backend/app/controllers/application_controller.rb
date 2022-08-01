@@ -12,5 +12,11 @@ class ApplicationController < ActionController::API
         :sign_up,
         keys: %i[first_name last_name role]
       )
+
+    devise_parameter_sanitizer
+      .permit(
+        :sign_in,
+        keys: %i[first_name last_name role]
+      )
   end
 end
