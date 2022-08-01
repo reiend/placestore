@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { FormControl, Heading, Alert } from '@chakra-ui/react';
+import { FormControl, Heading, Alert, Text } from '@chakra-ui/react';
 
 import Signup from '../../Form/Signup';
 
@@ -66,8 +67,15 @@ const MerchantSignup = () => {
   };
 
   return (
-    <FormControl w={'100%'} maxW={'500px'} p={'1rem'}>
-      <Heading mb={'20px'} fontSize={'clamp(1rem, 1rem + 0.5vw, 3rem)'}>
+    <FormControl w={'100%'} maxW={'500px'} p={'1rem'} mx={'auto'}>
+      <Heading
+        mb={'20px'}
+        fontSize={'clamp(1rem, 1rem + 0.5vw, 3rem)'}
+        color={'teal'}
+      >
+        Place your Store now
+      </Heading>
+      <Heading mb={'20px'} fontSize={'clamp(0.8rem, 0.8rem + 0.5vw, 3rem)'}>
         Signup as Merchant
       </Heading>
 
@@ -83,6 +91,10 @@ const MerchantSignup = () => {
         </Alert>
       )}
       <Signup onSubmit={onSubmit} />
+
+      <Text _hover={{ color: 'teal' }} mt={'2rem'}>
+        <Link to={'/merchant/signin'}>have an account?</Link>
+      </Text>
     </FormControl>
   );
 };

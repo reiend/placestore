@@ -1,16 +1,11 @@
 import { useState, useEffect } from 'react';
-import { chakra, useDisclosure, Skeleton, Heading  } from '@chakra-ui/react';
-import { Outlet } from 'react-router-dom';
+import { chakra, Skeleton, Heading } from '@chakra-ui/react';
 
-import AppNavbar from '../App/AppNavbar';
-import AppShopperAuthDrawer from '../App/AppShopperAuthDrawer';
+import StoreList from '../Store/StoreList';
 import StoreUrl from '../../../assets/store.jpg';
 
 const Home = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoad, setIsLoad] = useState<boolean>(false);
-
-  const [authForm, setAuthForm] = useState<JSX.Element | string>('');
 
   useEffect(() => {
     setTimeout(() => {
@@ -18,13 +13,8 @@ const Home = () => {
     }, 1000);
   }, []);
 
-  const handleDrawerClick = () => onOpen();
   return (
     <chakra.main data-testid='home'>
-      <AppNavbar
-        handleDrawerClick={handleDrawerClick}
-        setAuthForm={setAuthForm}
-      />
       <Skeleton isLoaded={isLoad}>
         <chakra.div
           my={'5rem'}
@@ -44,16 +34,11 @@ const Home = () => {
             borderRadius={'var(--chakra-radii-md)'}
             padding={'20px'}
           >
-            show your store to the world
+            Store for masses
           </Heading>
         </chakra.div>
       </Skeleton>
-      <Outlet />
-      <AppShopperAuthDrawer
-        isOpen={isOpen}
-        onClose={onClose}
-        authForm={authForm}
-      />
+      <StoreList />
     </chakra.main>
   );
 };
