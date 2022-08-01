@@ -3,14 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const AppNavbar = () => {
   const navigate = useNavigate();
-  const handleMerchantSignout = () => {
+  const handleSignout = () => {
     // remove merchant auth info
     localStorage.removeItem('merchantID');
     localStorage.removeItem('merchantEmail');
     localStorage.removeItem('authorization');
     localStorage.removeItem('role');
 
-    // redirect to home
+    // redirect to home after signout
     navigate('/', { replace: true });
   };
 
@@ -34,9 +34,9 @@ const AppNavbar = () => {
 
       {localStorage.getItem('authorization') == null && (
         <chakra.div
-          display={{ base: 'none', lg: 'flex' }}
+          display={{ base: 'none', sm: 'flex' }}
           justifyContent={'space-between'}
-          flexBasis={'250px'}
+          flexBasis={'225px'}
         >
           <Link to={'/merchant/signin'}>
             <Button variant={'outline'} colorScheme={'teal'}>
@@ -55,9 +55,9 @@ const AppNavbar = () => {
       {localStorage.getItem('authorization') != null &&
         localStorage.getItem('role') === 'store_admin' && (
           <chakra.div
-            display={{ base: 'none', lg: 'flex' }}
+            display={{ base: 'none', sm: 'flex' }}
             justifyContent={'space-between'}
-            flexBasis={'250px'}
+            flexBasis={'225px'}
           >
             <Link to={'/merchant/dashboard'}>
               <Button variant={'outline'} colorScheme={'teal'}>
@@ -66,7 +66,7 @@ const AppNavbar = () => {
             </Link>
 
             <Button
-              onClick={handleMerchantSignout}
+              onClick={handleSignout}
               variant={'solid'}
               colorScheme={'teal'}
             >
