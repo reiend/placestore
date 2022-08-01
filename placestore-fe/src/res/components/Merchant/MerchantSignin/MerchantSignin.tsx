@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FormControl, Alert, Heading, Text } from '@chakra-ui/react';
 
@@ -31,6 +31,7 @@ const merchantSignin = async (
 
 const MerchantSignin = () => {
   const [requestErrorMessage, setRequestErrorMessage] = useState<string>('');
+  const navigate = useNavigate();
 
   const onSubmit = async (
     { email, password }: MerchantSigninProps,
@@ -54,6 +55,8 @@ const MerchantSignin = () => {
 
         // reset form
         e.target.reset();
+
+        navigate('/merchant/dashboard', { replace: true });
       })
       .catch(error => {
         // show invalid email or password
