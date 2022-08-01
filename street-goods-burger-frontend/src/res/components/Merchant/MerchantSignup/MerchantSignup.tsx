@@ -46,12 +46,14 @@ const MerchantSignup = () => {
 
         const merchantID = data.data.id;
         const merchantEmail = data.data.email;
+        const role = data.data.email;
         const authorization = headers.authorization;
 
         // store merchant info
         localStorage.setItem('merchantID', merchantID);
         localStorage.setItem('merchantEmail', merchantEmail);
         localStorage.setItem('authorization', authorization);
+        localStorage.setItem('role', role);
 
         // reset form
         e.target.reset();
