@@ -104,10 +104,10 @@ const StoreList = () => {
               mb={'20px'}
               cursor={'pointer'}
               _hover={{
-                filter:
-                  'invert(37%) sepia(67%) saturate(371%) hue-rotate(132deg) brightness(96%) contrast(92%)'
+                boxShadow: 'xl'
               }}
               transition={'200ms ease-in'}
+              padding={'1rem'}
             >
               <Image
                 src={ImageDefault}
@@ -130,7 +130,7 @@ const StoreList = () => {
                 display={'inline'}
                 textTransform={'capitalize'}
                 fontStyle={'italic'}
-                fontSize={'clamp(0.8rem, 0.2rem + 0.5vw, 1.2rem)'}
+                fontSize={'clamp(0.8rem, 0.2rem + 0.5vw, 1.5rem)'}
               >
                 {store.city},{' '}
               </Text>
@@ -138,7 +138,7 @@ const StoreList = () => {
                 display={'inline'}
                 textTransform={'capitalize'}
                 fontStyle={'italic'}
-                fontSize={'clamp(0.8rem, 0.2rem + 0.5vw, 1.2rem)'}
+                fontSize={'clamp(0.8rem, 0.2rem + 0.5vw, 1.5rem)'}
               >
                 {store.province}
               </Text>
