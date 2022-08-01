@@ -13,16 +13,18 @@ RSpec.describe 'StoreAdminController', type: :request do
   end
 
   describe 'Get' do
-    before(:each) do
-      @store_admin = FactoryBot.create :store_admin
-    end
-    it '1, should be successfully get stores ' do
-      @store_admin.confirm
-      sign_in @store_admin
+    describe '/store_admin/stores' do
+      before(:each) do
+        @store_admin = FactoryBot.create :store_admin
+      end
+      it '1, should be successfully get stores ' do
+        @store_admin.confirm
+        sign_in @store_admin
 
-      get '/store_admin/stores'
+        get '/store_admin/stores'
 
-      expect(response).to have_http_status(200)
+        expect(response).to have_http_status(200)
+      end
     end
   end
 end
