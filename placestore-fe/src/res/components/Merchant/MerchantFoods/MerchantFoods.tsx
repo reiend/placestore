@@ -67,11 +67,11 @@ const MerchantFoods = () => {
         url: `${import.meta.env.VITE_BASE_URL}store_admin/foods`
       })
         .then(res => {
-          console.log(res.data);
           setIsLoad(true);
-          setFoodList(res.data[0]);
+          !(res.data.length === 0) && setFoodList(res.data[0]);
         })
-        .catch(() => {
+        .catch(error => {
+          console.log(error);
           return <div>something went wrong</div>;
         });
     }, 1500);

@@ -50,15 +50,6 @@ const MerchantFoodCreate = () => {
   const [requestErrorMessage, setRequestErrorMessage] = useState<string>('');
   const [validationMessages, setValidationMessages] = useState<string[]>([]);
 
-  // const onSubmit = ({
-  //   name,
-  //   category,
-  //   description,
-  //   price,
-  //   picture
-  //   }: FormFoodInputProps) => {
-
-  // };
   const onSubmit = async (
     { name, category, description, price }: FormFoodInputProps,
     e: {
