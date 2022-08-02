@@ -9,7 +9,8 @@ import {
   Input,
   Alert,
   Textarea,
-  FormLabel
+  FormLabel,
+  Select
 } from '@chakra-ui/react';
 import {
   MdOutlineFoodBank,
@@ -19,6 +20,18 @@ import {
 import { AiFillPicture } from 'react-icons/ai';
 import { ImPriceTag } from 'react-icons/im';
 
+import unique from '../../../../libs/reiend/js/unique';
+
+interface StoreProps {
+  id: string;
+  name: string;
+  line1: string;
+  line2: string;
+  postalCode: string;
+  city: string;
+  province: string;
+}
+
 const FormFoodSchema = object({
   name: string().max(128).required('please provide a name'),
   category: string().max(128).required('please provide a category'),
@@ -26,7 +39,8 @@ const FormFoodSchema = object({
   price: number()
     .required('please provide a price')
     .typeError('please provide a valid price'),
-  picture: string().required('please provide a picture')
+  picture: string().required('please provide a picture'),
+  store_id: string().required('please provice a store')
 });
 
 interface FormFoodInputProps {
@@ -35,14 +49,20 @@ interface FormFoodInputProps {
   description: string;
   price: string;
   picture: string;
+  store_id: string;
 }
 
 interface FormStoreProps {
   onSubmit: (submitProps: FormFoodInputProps, event: any) => void;
   buttonText?: 'edit' | 'create' | 'delete';
+  storeList;
 }
 
-const FormStore = ({ onSubmit, buttonText = 'create' }: FormStoreProps) => {
+const FormStore = ({
+  onSubmit,
+  buttonText = 'create',
+  storeList
+}: FormStoreProps) => {
   const {
     register,
     handleSubmit,
@@ -50,6 +70,10 @@ const FormStore = ({ onSubmit, buttonText = 'create' }: FormStoreProps) => {
   } = useForm<FormFoodInputProps>({
     resolver: yupResolver(FormFoodSchema)
   });
+
+  const getUniqueKey = (letters: number, numbers: number) => {
+    return unique({ letters, numbers });
+  };
 
   return (
     <chakra.form onSubmit={handleSubmit(onSubmit)} data-testid={'form-food'}>
@@ -119,6 +143,33 @@ const FormStore = ({ onSubmit, buttonText = 'create' }: FormStoreProps) => {
           color={'red.900'}
         >
           {errors.price?.message}
+        </Alert>
+      )}
+
+      <Flex align={'flex-start'} fontSize={'2rem'} mb={'10px'}>
+        <Icon as={MdDescription} color='teal' mr={'10px'} />
+
+        <Select
+          {...register('store_id')}
+          id={'food-create-store-id'}
+          placeholder={'select store'}
+          mb={'10px'}
+          _focusVisible={{ borderColor: 'teal' }}
+        >
+          {storeList.map((store: StoreProps) => (
+            <option key={`${getUniqueKey(5, 5)}`}>{store.id}</option>
+          ))}
+        </Select>
+      </Flex>
+
+      {errors.store_id?.message && (
+        <Alert
+          status='error'
+          mb={'10px'}
+          borderRadius={'var(--chakra-radii-md)'}
+          color={'red.900'}
+        >
+          {errors.store_id?.message}
         </Alert>
       )}
 

@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FormControl, Heading, Alert } from '@chakra-ui/react';
+import { FormControl, Heading, Alert, Select } from '@chakra-ui/react';
 
 import FormFood from '../../Form/FormFood';
+import unique from '../../../../libs/reiend/js/unique';
 import blobToBase64 from '../../../../libs/reiend/js/blob';
 
 interface FormFoodInputProps {
@@ -11,6 +12,16 @@ interface FormFoodInputProps {
   description: string;
   price: string;
   picture: string;
+}
+
+interface StoreProps {
+  id: string;
+  name: string;
+  line1: string;
+  line2: string;
+  postalCode: string;
+  city: string;
+  province: string;
 }
 
 const merchantFoodCreate = async (
@@ -49,6 +60,7 @@ const merchantFoodCreate = async (
 const MerchantFoodCreate = () => {
   const [requestErrorMessage, setRequestErrorMessage] = useState<string>('');
   const [validationMessages, setValidationMessages] = useState<string[]>([]);
+  const [storeList, setStoreList] = useState([]);
 
   const onSubmit = async (
     { name, category, description, price }: FormFoodInputProps,
@@ -65,6 +77,7 @@ const MerchantFoodCreate = () => {
     const authorization = localStorage.getItem('authorization') || '';
     const storeID = localStorage.getItem('storeID') || 1;
 
+    // for making image path work
     blobToBase64(imageBlob).then(async (base64String: string) => {
       await merchantFoodCreate(
         name,
@@ -98,14 +111,39 @@ const MerchantFoodCreate = () => {
           }
         });
     });
+
+    // load stores
   };
+
+  const getUniqueKey = (letters: number, numbers: number) => {
+    return unique({ letters, numbers });
+  };
+
+  useEffect(() => {
+    setTimeout(async () => {
+      await axios({
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: JSON.parse(localStorage.getItem('authorization'))
+        },
+        url: `${import.meta.env.VITE_BASE_URL}store_admin/stores`
+      })
+        .then(res => {
+          console.log(res.data);
+          setStoreList(res.data);
+        })
+        .catch(() => {
+          return <div>something went wrong</div>;
+        });
+    }, 1500);
+  }, []);
 
   return (
     <FormControl w={'100%'} maxW={'500px'} p={'1rem'} mx={'auto'}>
       <Heading mb={'20px'} fontSize={'clamp(1rem, 1rem + 0.5vw, 3rem)'}>
         Create a Food
       </Heading>
-
       {validationMessages.length !== 0 && (
         <Alert
           data-testid={'requestErrorMessage'}
@@ -133,11 +171,24 @@ const MerchantFoodCreate = () => {
           {requestErrorMessage}
         </Alert>
       )}
-
-      <FormFood onSubmit={onSubmit} buttonText={'create'} />
+      <FormFood
+        onSubmit={onSubmit}
+        buttonText={'create'}
+        storeList={storeList}
+      />
     </FormControl>
   );
 };
 
 export default MerchantFoodCreate;
 export { merchantFoodCreate };
+// <Select
+//   id={'food-create-store-id'}
+//   placeholder={'select store'}
+//   mb={'10px'}
+//   _focusVisible={{ borderColor: 'teal' }}
+// >
+//   {storeList.map((store: StoreProps) => (
+//     <option key={`${getUniqueKey(5, 5)}`}>{store.id}</option>
+//   ))}
+// </Select>
