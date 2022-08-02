@@ -30,6 +30,5 @@
 # /.env
 
 /config/master.key
-/Gemfile.lock
 /config/master.key
 /config/credentials.yml.enc
