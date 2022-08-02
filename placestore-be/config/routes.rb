@@ -88,8 +88,8 @@ Rails.application.routes.draw do
   scope module: 'v2' do
     scope module: 'stores' do
       post 'store', to: 'store#create'
-      get 'store/find', to: 'store#find'
       get 'store/list', to: 'store#list'
+      get 'store', to: 'store#find'
 
       scope module: 'foods' do
         get 'foods', to: 'food#list'

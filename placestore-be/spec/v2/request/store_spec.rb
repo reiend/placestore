@@ -27,7 +27,7 @@ RSpec.describe 'StoreController', type: :request do
       end
     end
 
-    describe '/store/find' do
+    describe '/store' do
       before(:each) do
         @store_admin = FactoryBot.create :store_admin
       end
@@ -35,7 +35,7 @@ RSpec.describe 'StoreController', type: :request do
         @store_admin.confirm
         sign_in @store_admin
 
-        get '/store/find'
+        get '/store'
 
         expect(JSON.parse(response.body)['status']['code']).to (be == 400).or(be == 422)
       end

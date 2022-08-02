@@ -32,7 +32,8 @@ module V2
       end
 
       def find
-        store = Store.find(find_params[:id])
+        store = Store.find(params[:id])
+
         render json: {
           status: {
             code: 200,
@@ -44,6 +45,14 @@ module V2
           }
         }
       rescue ActiveRecord::RecordInvalid => e
+        render json: {
+          status: {
+            code: 422,
+            message: 'invalid parameters',
+            errors: e.message
+          }
+        }
+      rescue ActiveRecord::RecordNotFound => e
         render json: {
           status: {
             code: 422,
@@ -101,14 +110,6 @@ module V2
             :postal_code,
             :city,
             :province
-          )
-      end
-
-      def find_params
-        params
-          .require(:store)
-          .permit(
-            :id
           )
       end
     end
