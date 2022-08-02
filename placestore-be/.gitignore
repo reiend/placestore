@@ -29,6 +29,8 @@
 # /config/master.key
 # /.env
 
+# /config/master.key
+# /config/master.key
+# /config/credentials.yml.enc
+
 /config/master.key
-/config/master.key
-/config/credentials.yml.enc
