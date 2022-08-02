@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {
   Box,
@@ -27,6 +28,14 @@ interface StoreProps {
 const StoreList = () => {
   const [storeList, setStoreList] = useState([]);
   const [isLoad, setIsLoad] = useState(false);
+  const navigate = useNavigate();
+
+  const handleStoreView = e => {
+    const storeID = e.target.parentElement.id || e.target.id;
+    localStorage.setItem('storeID', JSON.stringify(storeID));
+
+    navigate('/store/foods', { replace: true });
+  };
 
   useEffect(() => {
     setTimeout(async () => {
@@ -108,6 +117,7 @@ const StoreList = () => {
               }}
               transition={'200ms ease-in'}
               padding={'1rem'}
+              onClick={handleStoreView}
             >
               <Image
                 src={ImageDefault}

@@ -7,6 +7,7 @@ import MerchantStores from '../Merchant/MerchantStores';
 import MerchantFoods from '../Merchant/MerchantFoods';
 import MerchantFoodCreate from '../Merchant/MerchantFoodCreate';
 import StoreCreate from '../Store/StoreCreate';
+import StoreFoods from '../Store/StoreFoods';
 import AppWIP from './AppWIP';
 
 const AppRoutes = () => {
@@ -22,6 +23,7 @@ const AppRoutes = () => {
         <Route path={'store/food/create'} element={<MerchantFoodCreate />} />
       </Route>
       <Route path='/wip' element={<AppWIP />} />
+      <Route path='/store/foods' element={<StoreFoods />} />
     </Routes>
   );
 };

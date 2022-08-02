@@ -9,24 +9,24 @@ import {
   SkeletonText,
   Image
 } from '@chakra-ui/react';
-import { RiStore3Fill } from 'react-icons/ri';
+import { MdOutlineFoodBank } from 'react-icons/md';
+import FoodImageDefault from '../../../../assets/FoodImageDefault.png';
 
 import unique from '../../../../libs/reiend/js/unique';
-import ImageDefault from '../../../../assets/ImageDefault.jpg';
 
-interface StoreProps {
+interface FoodProps {
   id: string;
   name: string;
-  line1: string;
-  line2: string;
-  postalCode: string;
-  city: string;
-  province: string;
+  description: string;
+  category: string;
+  picture: string;
+  price: string;
 }
 
-const MerchantStores = () => {
-  const [storeList, setStoreList] = useState([]);
-  const [isLoad, setIsLoad] = useState(false);
+const StoreFoods = () => {
+  const [foodList, setFoodList] = useState([]);
+  const [isLoad, setIsLoad] = useState<boolean>(false);
+  const [storeName, setStoreName] = useState<string>('noName');
 
   const getUniqueKey = (letters: number, numbers: number) => {
     return unique({ letters, numbers });
@@ -40,12 +40,11 @@ const MerchantStores = () => {
         <Box mb={'20px'} key={getUniqueKey(5, 5)}>
           <Skeleton isLoaded={isLoad}>
             <Image
-              src={ImageDefault}
+              src={FoodImageDefault}
               alt={'no image'}
-              w={'100%'}
-              maxW={'350px'}
               objectFit={'cover'}
               maxH={'200px'}
+              w={'350px'}
               mb={'10px'}
               loading={'lazy'}
             />
@@ -58,20 +57,21 @@ const MerchantStores = () => {
     return skeletonContainer;
   };
 
-
   useEffect(() => {
+    const storeID = JSON.parse(localStorage.getItem('storeID'));
     setTimeout(async () => {
       await axios({
         method: 'get',
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: JSON.parse(localStorage.getItem('authorization'))
+          'Content-Type': 'application/json'
         },
-        url: `${import.meta.env.VITE_BASE_URL}store_admin/stores`
+        url: `${import.meta.env.VITE_BASE_URL}store/?id=${storeID}`
       })
         .then(res => {
           setIsLoad(true);
-          setStoreList(res.data);
+          setStoreName(res.data.data.store.name);
+          !(res.data.data.foods.length === 0) &&
+            setFoodList(res.data.data.foods);
         })
         .catch(() => {
           return <div>something went wrong</div>;
@@ -81,27 +81,29 @@ const MerchantStores = () => {
 
   return (
     <Box maxW={'1200px'} mx={'auto'}>
-      <Flex
-        align={'center'}
-        color={'teal'}
-        borderBottom={'2px solid teal'}
-        mb={'20px'}
-      >
-        <RiStore3Fill fontSize={'5rem'} />
-        <Heading color={'teal'} ml={'10px'}>
-          Merchant Stores
-        </Heading>
-      </Flex>
+      <Skeleton isLoaded={isLoad}>
+        <Flex
+          align={'center'}
+          color={'teal'}
+          borderBottom={'2px solid teal'}
+          mb={'20px'}
+        >
+          <MdOutlineFoodBank fontSize={'5rem'} />
+          <Heading color={'teal'} ml={'10px'}>
+            {storeName}&apos;s foods
+          </Heading>
+        </Flex>
+      </Skeleton>
       {!isLoad ? (
         <Flex wrap={'wrap'} gap={'50px'} justify={'center'}>
           {skeletons(9)}
         </Flex>
-      ) : storeList.length !== 0 ? (
+      ) : foodList.length !== 0 ? (
         <Flex wrap={'wrap'} gap={'50px'} justify={'center'}>
-          {storeList.map((store: StoreProps) => (
+          {foodList.map((food: FoodProps) => (
             <Box
               key={`${getUniqueKey(5, 5)}`}
-              id={store.id}
+              id={food.id}
               borderRadius={'var(--chakra-radii-md)'}
               overflow={'hidden'}
               mb={'20px'}
@@ -113,14 +115,13 @@ const MerchantStores = () => {
               padding={'1rem'}
             >
               <Image
-                src={ImageDefault}
-                alt={'no image'}
-                w={'100%'}
-                maxW={'350px'}
-                objectFit={'cover'}
-                maxH={'200px'}
+                src={`${food.picture || FoodImageDefault}`}
+                alt={food.name}
+                objectFit={'contain'}
                 mb={'10px'}
+                maxH={'200px'}
                 loading={'lazy'}
+                w={'300px'}
               />
 
               <Heading
@@ -128,7 +129,7 @@ const MerchantStores = () => {
                 textTransform={'capitalize'}
                 mb={'0'}
               >
-                {store.name}
+                {food.name}
               </Heading>
               <Text
                 display={'inline'}
@@ -136,7 +137,7 @@ const MerchantStores = () => {
                 fontStyle={'italic'}
                 fontSize={'clamp(0.8rem, 0.2rem + 0.5vw, 1.5rem)'}
               >
-                {store.city},{' '}
+                {food.category},{' '}
               </Text>
               <Text
                 display={'inline'}
@@ -144,16 +145,29 @@ const MerchantStores = () => {
                 fontStyle={'italic'}
                 fontSize={'clamp(0.8rem, 0.2rem + 0.5vw, 1.5rem)'}
               >
-                {store.province}
+                {food.price} PHP
+              </Text>
+
+              <Text
+                mt={'2rem'}
+                display={'block'}
+                textTransform={'capitalize'}
+                fontSize={'clamp(0.8rem, 0.2rem + 0.5vw, 1.5rem)'}
+              >
+                {food.description}
               </Text>
             </Box>
           ))}
         </Flex>
       ) : (
-        <Heading textAlign={'center'}>you don&rsquo;t have any stores </Heading>
+        <Skeleton isLoaded={isLoad}>
+          <Heading textAlign={'center'}>
+            {storeName} doesn&apos;t have any food yet
+          </Heading>
+        </Skeleton>
       )}
     </Box>
   );
 };
 
-export default MerchantStores;
+export default StoreFoods;

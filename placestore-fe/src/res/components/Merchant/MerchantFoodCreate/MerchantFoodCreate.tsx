@@ -130,7 +130,6 @@ const MerchantFoodCreate = () => {
         url: `${import.meta.env.VITE_BASE_URL}store_admin/stores`
       })
         .then(res => {
-          console.log(res.data);
           setStoreList(res.data);
         })
         .catch(() => {
