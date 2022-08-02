@@ -157,7 +157,7 @@ const FormStore = ({
           _focusVisible={{ borderColor: 'teal' }}
         >
           {storeList.map((store: StoreProps) => (
-            <option key={`${getUniqueKey(5, 5)}`}>{store.id}</option>
+            <option key={`${getUniqueKey(5, 5)}`}>{store.name}</option>
           ))}
         </Select>
       </Flex>
