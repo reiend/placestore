@@ -43,8 +43,6 @@ gem 'fast_jsonapi'
 gem 'dotenv'
 gem 'dotenv-rails'
 
-# for catching emails
-gem 'mailcatcher'
 
 # for image uploads
 gem 'carrierwave'
@@ -58,6 +56,8 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 6.0.0.pre'
+  # for catching emails
+  gem 'mailcatcher'
 end
 
 group :development do
